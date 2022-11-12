@@ -37,17 +37,21 @@ class Dashboard extends StatelessWidget {
       print(responseData["results"]);
 
       Provider.of<UserData>(context, listen: false).setUserDataForAdmin(
-          responseData["results"]["userId"],
-          responseData["results"]["name"],
-          responseData["results"]["email"],
-          responseData["results"]["customerId"],
-          responseData["results"]["accountId"],
-          responseData["results"]["balance"],
-          responseData["results"]["cardActivatedDate"].toString(),
-          responseData["results"]["sourceOfSignUp"],
-          responseData["results"]["basisUserSince"].toString(),
-          responseData["results"]["totalMerchantTransactionsValue"],
-          responseData["results"]["totalWalletTransactionsValue"]);
+        responseData["results"]["userId"],
+        responseData["results"]["name"],
+        responseData["results"]["email"],
+        responseData["results"]["customerId"],
+        responseData["results"]["accountId"],
+        responseData["results"]["balance"],
+        responseData["results"]["cardActivatedDate"].toString(),
+        responseData["results"]["sourceOfSignUp"],
+        responseData["results"]["basisUserSince"].toString(),
+        responseData["results"]["totalMerchantTransactionsValue"],
+        responseData["results"]["totalWalletTransactionsValue"],
+        responseData["results"]["totalCashbackValue"],
+        responseData["results"]["cardId"],
+        responseData["results"]["creditCardState"],
+      );
       ;
 
       // +

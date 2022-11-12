@@ -10,8 +10,12 @@ import 'package:fl_chart/fl_chart.dart';
 class SearchResults extends StatelessWidget {
   const SearchResults({Key? key}) : super(key: key);
 
-  Widget cardTemplate(user, icon) {
-    return SearchResultsDataCard(user: user, icon: icon);
+  Widget cardTemplate(user, icon, showCopyIcon) {
+    return SearchResultsDataCard(
+      user: user,
+      icon: icon,
+      showCopy: showCopyIcon,
+    );
   }
 
   @override
@@ -29,16 +33,18 @@ class SearchResults extends StatelessWidget {
           body: Card(
               child: Column(
             children: [
-              cardTemplate(user.id, Icons.perm_identity),
-              cardTemplate(user.name, Icons.note),
-              cardTemplate(user.email, Icons.email),
+              cardTemplate(user.id, Icons.perm_identity, true),
+              cardTemplate(user.name, Icons.note, true),
+              cardTemplate(user.email, Icons.email, true),
+              cardTemplate(user.accountId, Icons.account_box, true),
+              cardTemplate(user.customerId, Icons.woman, true),
+              cardTemplate(user.cardId, Icons.credit_card, true),
               cardTemplate(
-                  'Rs. ${user.balance.toString()}', Icons.currency_rupee),
-              cardTemplate(user.accountId, Icons.account_box),
-              cardTemplate(user.customerId, Icons.woman),
-              cardTemplate(user.cardActivationDate, Icons.credit_score_sharp),
-              cardTemplate(user.sourceOfSignUp, Icons.mobile_friendly),
-              cardTemplate(user.basisUserSince, Icons.login),
+                  user.creditCardState, Icons.tab_unselected_rounded, false),
+              cardTemplate(user.cardActivationDate,
+                  Icons.calendar_month_outlined, false),
+              cardTemplate(user.sourceOfSignUp, Icons.mobile_friendly, false),
+              cardTemplate(user.basisUserSince, Icons.login, false),
               const Divider(
                 height: 40,
                 thickness: 40,
@@ -53,25 +59,53 @@ class SearchResults extends StatelessWidget {
               SizedBox(
                 height: 200,
                 child: Stack(children: [
-                  PieChart(PieChartData(centerSpaceRadius: 70, sections: [
-                    PieChartSectionData(
-                        color: const Color(0xFF26E5FF),
-                        value: user.totalMerchantTransactionsValue,
-                        title:
-                            'Merchant Txns\n ₹${user.totalMerchantTransactionsValue}',
-                        radius: 40),
-                    PieChartSectionData(
-                        color: const Color(0xFFFFCF26),
-                        value: user.totalWalletTransactionsValue,
-                        title:
-                            'Wallet Txns\n ₹${user.totalWalletTransactionsValue}',
-                        radius: 26),
-                  ])),
+                  PieChart(PieChartData(
+                      centerSpaceRadius: 70,
+                      startDegreeOffset: -90,
+                      sections: [
+                        PieChartSectionData(
+                            color: const Color(0xFF26E5FF),
+                            value: user.totalMerchantTransactionsValue,
+                            title:
+                                'Merchant Txns\n ₹${user.totalMerchantTransactionsValue}',
+                            titleStyle: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            titlePositionPercentageOffset: 0.99,
+                            radius: 40),
+                        PieChartSectionData(
+                            color: const Color(0xFFFFCF26),
+                            value: user.totalWalletTransactionsValue,
+                            title:
+                                'Wallet Txns\n ₹${user.totalWalletTransactionsValue}',
+                            titleStyle: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            titlePositionPercentageOffset: 0.99,
+                            radius: 30),
+                        PieChartSectionData(
+                            color: const Color(0xFFEE2727),
+                            value: user.totalCashbackValue,
+                            title:
+                                'Cashbacks Earned\n ₹${user.totalCashbackValue}',
+                            titleStyle: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            titlePositionPercentageOffset: 0.99,
+                            radius: 20),
+                      ])),
                   Positioned.fill(
                       child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Current Balance"),
+                      const Text(
+                        "Balance",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
                       Text(
                         '₹ ${user.balance.toString()}',
                         style: const TextStyle(fontWeight: FontWeight.bold),
@@ -81,21 +115,7 @@ class SearchResults extends StatelessWidget {
                 ]),
               ),
             ],
-          )
-              // child: Column(
-              //   children: [
-              //     Text(user.name),
-              //     Text(user.id),
-              //     Text(user.email),
-              //     Text(user.balance.toString()),
-              //     Text(user.accountId),
-              //     Text(user.customerId),
-              //     Text(user.cardActivationDate),
-              //     Text(user.sourceOfSignUp),
-              //     Text(user.basisUserSince)
-              //   ],
-              // ),
-              ),
+          )),
         ),
       );
     });
