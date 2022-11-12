@@ -4,12 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_6_provider/post.dart';
 import 'package:flutter_application_6_provider/user.dart';
+import 'package:flutter_application_6_provider/userdata.dart';
 import 'package:flutter_application_6_provider/webview.dart';
 
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -22,6 +24,38 @@ class Dashboard extends StatelessWidget {
     String token = data["userData"]["token"];
     String userId = data["userData"]["_id"];
     String authToken = '$userId,$token';
+    var searchController = TextEditingController();
+
+    void getUserDataForAdmin() async {
+      var uri = Uri.parse(
+          "https://api.getbasis.co/v6.4//admins/check/user/data?field=" +
+              searchController.text.toString());
+      var response =
+          await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
+
+      Map responseData = jsonDecode(response.body);
+      print(responseData["results"]);
+
+      Provider.of<UserData>(context, listen: false).setUserDataForAdmin(
+          responseData["results"]["userId"],
+          responseData["results"]["name"],
+          responseData["results"]["email"],
+          responseData["results"]["customerId"],
+          responseData["results"]["accountId"],
+          responseData["results"]["balance"],
+          responseData["results"]["cardActivatedDate"].toString(),
+          responseData["results"]["sourceOfSignUp"],
+          responseData["results"]["basisUserSince"].toString(),
+          responseData["results"]["totalMerchantTransactionsValue"],
+          responseData["results"]["totalWalletTransactionsValue"]);
+      ;
+
+      // +
+      //     responseData["email"] +
+      //     responseData["customerId"] +
+      //     responseData["balance"]);
+      Navigator.pushNamed(context, "/search");
+    }
 
     void getPosts() async {
       var uri = Uri.parse("https://api.getbasis.co/v7/posts");
@@ -41,12 +75,29 @@ class Dashboard extends StatelessWidget {
       Navigator.pushNamed(context, "/post");
     }
 
-    void accessDevTo() {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  const WebViewPage("https://dev.to/", "DEV")));
+    void getMasterClassRegistrantsCSV() async {
+      String token = data["userData"]["token"];
+      String userId = data["userData"]["_id"];
+      String authToken = '$userId,$token';
+
+      print(authToken);
+
+      var uri = Uri.parse(
+          'https://api.getbasis.co/v6.4/users/$userId/mail/masterclass/registrants');
+
+      print(uri);
+      var response =
+          await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
+
+      Map responseData = jsonDecode(response.body);
+      // Fluttertoast.showToast(
+      //     msg: "Registrants List emailed successfully",
+      //     toastLength: Toast.LENGTH_LONG,
+      //     gravity: ToastGravity.BOTTOM,
+      //     timeInSecForIosWeb: 2,
+      //     backgroundColor: const Color(0xff36c182),
+      //     textColor: Colors.white,
+      //     fontSize: 16.0);
     }
 
     void accessBasisWebApp() {
@@ -58,17 +109,21 @@ class Dashboard extends StatelessWidget {
     }
 
     void accessPWA() async {
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setString(authToken, authToken);
+      // final prefs = await SharedPreferences.getInstance();
+      // prefs.setString(authToken, authToken);
 
+      String token = data["userData"]["token"];
+      String userId = data["userData"]["_id"];
+      String authToken = '$userId,$token';
       // print("authToken" + authToken);
       var uri =
-          Uri.parse("https://api.getbasis.co/v6.4/bpcards?isfromweb=true");
+          Uri.parse("https://api.getbasis.co/v6.4/prepaidcards?isfromweb=true");
       var response =
           await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
 
       Map responseData = jsonDecode(response.body);
-      String pwaUrl = responseData["results"]["url"];
+      print(responseData);
+      String pwaUrl = responseData["results"][0]["url"];
 
       Navigator.push(
           context,
@@ -105,18 +160,7 @@ class Dashboard extends StatelessWidget {
               const Text("First name",
                   style: TextStyle(color: Colors.grey, letterSpacing: 2.0)),
               Text(
-                user.firstName,
-                style: const TextStyle(
-                    fontSize: 24,
-                    color: Colors.amberAccent,
-                    letterSpacing: 2.0,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 32),
-              const Text("Last NAME",
-                  style: TextStyle(color: Colors.grey, letterSpacing: 2.0)),
-              Text(
-                user.lastName,
+                user.firstName + " " + user.lastName,
                 style: const TextStyle(
                     fontSize: 24,
                     color: Colors.amberAccent,
@@ -148,23 +192,33 @@ class Dashboard extends StatelessWidget {
               const SizedBox(height: 32),
               ElevatedButton.icon(
                   onPressed: () {
-                    getPosts();
-                  },
-                  style: ElevatedButton.styleFrom(),
-                  icon: const Icon(Icons.post_add),
-                  label: const Text("Get Post")),
-              ElevatedButton.icon(
-                  onPressed: () {
-                    accessBasisWebApp();
+                    getMasterClassRegistrantsCSV();
                   },
                   icon: const Icon(CupertinoIcons.rocket),
-                  label: const Text("Get Basis")),
-              ElevatedButton.icon(
-                  onPressed: () {
-                    accessDevTo();
-                  },
-                  icon: const Icon(CupertinoIcons.rocket),
-                  label: const Text("Access dev.to")),
+                  label: const Text("Get Masterclass registrants")),
+              const SizedBox(
+                height: 32,
+              ),
+              TextField(
+                controller: searchController,
+                textAlign: TextAlign.center,
+                onSubmitted: (String value) {
+                  getUserDataForAdmin();
+                },
+                decoration: InputDecoration(
+                    hintText: "Search using userId, email, cstId, acId",
+                    // icon: Icon(Icons.search),
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8))),
+                    suffixIcon: Container(
+                        // padding: const EdgeInsets.all(),
+                        // decoration: BoxDecoration(color: Colors.blue[200]),
+                        child: const Icon(
+                      Icons.search,
+                    )),
+                    fillColor: Color.fromARGB(255, 142, 140, 140),
+                    filled: true),
+              )
             ],
           ),
         ),
