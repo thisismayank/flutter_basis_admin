@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:flutter_application_6_provider/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OTP extends StatelessWidget {
   const OTP({Key? key}) : super(key: key);
@@ -11,6 +12,8 @@ class OTP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)?.settings.arguments as Map;
+    print('otp');
+    print(data);
 
     var otpController = TextEditingController();
 
@@ -35,6 +38,13 @@ class OTP extends StatelessWidget {
         responseData["results"]["user"]["avatar"],
         responseData["results"]["user"]["creditCardState"],
       );
+
+      final sharedPreferenceInstance = await SharedPreferences.getInstance();
+      await sharedPreferenceInstance.setString(
+          "userId", responseData["results"]["user"]["_id"]);
+      await sharedPreferenceInstance.setString(
+          "token", responseData["results"]["user"]["token"]);
+
       Navigator.pushNamed(context, "/dashboard",
           arguments: {"userData": responseData["results"]["user"]});
     }

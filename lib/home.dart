@@ -4,27 +4,77 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_6_provider/user.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    super.initState();
+    checkIfLoggedIn();
+  }
+
+  void checkIfLoggedIn() async {
+    super.initState();
+    final sharedPreferenceInstance = await SharedPreferences.getInstance();
+
+    String? userId = sharedPreferenceInstance.getString("userId");
+    String? tokenT = sharedPreferenceInstance.getString("token");
+    String token = tokenT != null ? tokenT.toString() : "";
+    print(userId);
+    print(token);
+    if (userId?.length == 24) {
+      String authToken = '$userId,$token';
+      var uri = Uri.parse('https://api.getbasis.co/v6.4/users/$userId');
+      var response =
+          await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
+      Map responseData = jsonDecode(response.body);
+      print(responseData["results"]["user"]["creditCardState"]);
+      print(responseData["results"]["user"]["firstName"]);
+      print(responseData["results"]["user"]["lastName"]);
+      print(responseData["results"]["user"]["_id"]);
+      print(responseData["results"]["user"]["avatar"]);
+
+      // print(responseData["results"]["user"]["token"]);
+
+      Provider.of<User>(context, listen: false).setUserData(
+        responseData["results"]["user"]["_id"],
+        responseData["results"]["user"]["firstName"],
+        responseData["results"]["user"]["lastName"],
+        token.toString(),
+        responseData["results"]["user"]["avatar"],
+        responseData["results"]["user"]["creditCardState"],
+      );
+
+      Navigator.pushNamed(context, "/dashboard",
+          arguments: {"userData": responseData["results"]["user"]});
+    }
+  }
+
   Widget build(BuildContext context) {
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
 
     void submitEmail() async {
+      print('yaha');
       var uri = Uri.parse("https://api.getbasis.co/v6.4/users/email");
       var response = await http
           .post(uri, body: {"email": emailController.text.toString()});
 
       Map responseData = jsonDecode(response.body);
+      print('responseData');
+      print(responseData);
 
       Navigator.pushNamed(context, "/otp", arguments: {
         "email": emailController.text.toString(),
         "token": responseData["results"]["token"]
       });
-      print(responseData);
     }
 
     return Scaffold(

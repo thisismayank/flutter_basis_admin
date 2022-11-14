@@ -20,15 +20,24 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)?.settings.arguments as Map;
 
-    // print(data);
-    String token = data["userData"]["token"];
+    print(data["userData"]["token"]);
+    String token = data["userData"]["token"] ?? "";
+    print(token);
+
+    if (token.isEmpty) {
+      Navigator.pop(context);
+      Navigator.pushNamed(context, "/");
+    }
     String userId = data["userData"]["_id"];
+    print(token);
+    print(userId);
+
     String authToken = '$userId,$token';
     var searchController = TextEditingController();
 
     void getUserDataForAdmin() async {
       var uri = Uri.parse(
-          "https://api.getbasis.co/v6.4//admins/check/user/data?field=" +
+          "https://api.getbasis.co/v6.4/admins/check/user/data?field=" +
               searchController.text.toString());
       var response =
           await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
