@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_6_provider/globalanalytics.dart';
 import 'package:flutter_application_6_provider/post.dart';
 import 'package:flutter_application_6_provider/user.dart';
 import 'package:flutter_application_6_provider/userdata.dart';
+
 import 'package:flutter_application_6_provider/webview.dart';
 
 import 'package:provider/provider.dart';
@@ -25,6 +27,34 @@ class Dashboard extends StatelessWidget {
     String userId = data["userData"]["_id"];
     String authToken = '$userId,$token';
     var searchController = TextEditingController();
+
+    void getAnalyticsDataForAdmin() async {
+      var uri = Uri.parse(
+          "https://api.getbasis.co/v6.4//admins/global/analytics/data");
+      var response =
+          await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
+      Map responseData = jsonDecode(response.body);
+      print(responseData);
+      Provider.of<GlobalAnalytics>(context, listen: false)
+          .setGlobalDataForAdmin(
+        responseData["results"]["creditCardUserStatesAnalytics"]["activated"],
+        responseData["results"]["creditCardUserStatesAnalytics"]["inProgress"],
+        responseData["results"]["creditCardUserStatesAnalytics"]["manualCheck"],
+        responseData["results"]["rewardStatusAnalytics"]["redeemed"],
+        responseData["results"]["rewardStatusAnalytics"]["locked"],
+        responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
+            ["walletTransactions"],
+        responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
+            ["transactions"],
+        responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
+            ["cashbacks"],
+        responseData["results"]["creditCardUserStatesAnalytics"]["total"],
+        responseData["results"]["rewardStatusAnalytics"]["total"],
+        responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
+            ["total"],
+      );
+      Navigator.pushNamed(context, "/global");
+    }
 
     void getUserDataForAdmin() async {
       var uri = Uri.parse(
@@ -200,6 +230,16 @@ class Dashboard extends StatelessWidget {
                   },
                   icon: const Icon(CupertinoIcons.rocket),
                   label: const Text("Get Masterclass registrants")),
+              const SizedBox(
+                height: 32,
+              ),
+              const SizedBox(height: 32),
+              ElevatedButton.icon(
+                  onPressed: () {
+                    getAnalyticsDataForAdmin();
+                  },
+                  icon: const Icon(CupertinoIcons.chart_pie_fill),
+                  label: const Text("Get Global Analytics")),
               const SizedBox(
                 height: 32,
               ),

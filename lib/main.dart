@@ -1,7 +1,7 @@
-// import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_6_provider/dashboard.dart';
+import 'package:flutter_application_6_provider/globalanalytics.dart';
+import 'package:flutter_application_6_provider/globalanalyticspage.dart';
 import 'package:flutter_application_6_provider/home.dart';
 import 'package:flutter_application_6_provider/otp.dart';
 import 'package:flutter_application_6_provider/post.dart';
@@ -17,7 +17,8 @@ void main() {
     providers: [
       ChangeNotifierProvider(create: (_) => User()),
       ChangeNotifierProvider(create: (_) => Post()),
-      ChangeNotifierProvider(create: (_) => UserData())
+      ChangeNotifierProvider(create: (_) => UserData()),
+      ChangeNotifierProvider(create: (_) => GlobalAnalytics())
     ],
     child: MaterialApp(
       initialRoute: "/",
@@ -26,7 +27,8 @@ void main() {
         "/otp": (context) => const OTP(),
         "/dashboard": (context) => const Dashboard(),
         "/post": (context) => const PostCard(),
-        "/search": (context) => const SearchResults()
+        "/search": (context) => const SearchResults(),
+        "/global": (context) => const GlobalAnalyticsPage()
       },
     ),
   ));
