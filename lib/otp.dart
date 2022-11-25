@@ -44,6 +44,16 @@ class OTP extends StatelessWidget {
           "userId", responseData["results"]["user"]["_id"]);
       await sharedPreferenceInstance.setString(
           "token", responseData["results"]["user"]["token"]);
+      await sharedPreferenceInstance.setString(
+          "avatar", responseData["results"]["user"]["avatar"]);
+      await sharedPreferenceInstance.setString("creditCardState",
+          responseData["results"]["user"]["creditCardState"]);
+      await sharedPreferenceInstance.setString(
+          "firstName", responseData["results"]["user"]["firstName"]);
+      await sharedPreferenceInstance.setString(
+          "lastName", responseData["results"]["user"]["lastName"]);
+      await sharedPreferenceInstance.setString(
+          "email", responseData["results"]["user"]["email"]);
 
       Navigator.pushNamed(context, "/dashboard",
           arguments: {"userData": responseData["results"]["user"]});

@@ -21,40 +21,59 @@ class _HomeState extends State<Home> {
   }
 
   void checkIfLoggedIn() async {
-    super.initState();
+    // super.initState();
+
     final sharedPreferenceInstance = await SharedPreferences.getInstance();
 
     String? userId = sharedPreferenceInstance.getString("userId");
     String? tokenT = sharedPreferenceInstance.getString("token");
+    String? avatar = sharedPreferenceInstance.getString("avatar");
+    String? creditCardState =
+        sharedPreferenceInstance.getString("creditCardState");
+    String? firstName = sharedPreferenceInstance.getString("firstName");
+    String? lastName = sharedPreferenceInstance.getString("lastName");
+    String? email = sharedPreferenceInstance.getString("email");
+
     String token = tokenT != null ? tokenT.toString() : "";
-    print(userId);
-    print(token);
+
     if (userId?.length == 24) {
-      String authToken = '$userId,$token';
-      var uri = Uri.parse('https://api.getbasis.co/v6.4/users/$userId');
-      var response =
-          await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
-      Map responseData = jsonDecode(response.body);
-      print(responseData["results"]["user"]["creditCardState"]);
-      print(responseData["results"]["user"]["firstName"]);
-      print(responseData["results"]["user"]["lastName"]);
-      print(responseData["results"]["user"]["_id"]);
-      print(responseData["results"]["user"]["avatar"]);
+      //   String authToken = '$userId,$token';
+      //   var uri = Uri.parse('https://api.getbasis.co/v6.4/users/$userId');
+      //   var response =
+      //       await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
+      //   Map responseData = jsonDecode(response.body);
+      //   print(responseData["results"]["user"]["creditCardState"]);
+      //   print(responseData["results"]["user"]["firstName"]);
+      //   print(responseData["results"]["user"]["lastName"]);
+      //   print(responseData["results"]["user"]["_id"]);
+      //   print(responseData["results"]["user"]["avatar"]);
 
-      // print(responseData["results"]["user"]["token"]);
-
+      //   // print(responseData["results"]["user"]["token"]);
+      //   if (token != "") {
       Provider.of<User>(context, listen: false).setUserData(
-        responseData["results"]["user"]["_id"],
-        responseData["results"]["user"]["firstName"],
-        responseData["results"]["user"]["lastName"],
+        userId.toString(),
+        firstName.toString(),
+        lastName.toString(),
         token.toString(),
-        responseData["results"]["user"]["avatar"],
-        responseData["results"]["user"]["creditCardState"],
+        avatar.toString(),
+        creditCardState.toString(),
       );
 
-      Navigator.pushNamed(context, "/dashboard",
-          arguments: {"userData": responseData["results"]["user"]});
+      Provider.of<User>(context, listen: false).signIn(email.toString(), "");
+      Navigator.pushNamed(context, "/dashboard", arguments: {
+        "userData": {
+          "token": token,
+          "_id": userId,
+          "avatar": avatar,
+          "firstName": firstName,
+          "lastName": lastName,
+          "email": email
+        }
+      });
     }
+
+    // }
+    // }
   }
 
   Widget build(BuildContext context) {
