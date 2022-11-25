@@ -82,7 +82,7 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                                                     value: analyticsData
                                                         .ipBasicDetails,
                                                     title:
-                                                        'Basic Details \n ${analyticsData.ipBasicDetails}',
+                                                        'Basic Details \n ${analyticsData.ipBasicDetails.toInt()}',
                                                     titleStyle: const TextStyle(
                                                       fontSize: 12,
                                                       fontWeight:
@@ -96,7 +96,7 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                                                         const Color(0xFFAADEA7),
                                                     value: analyticsData.ipPan,
                                                     title:
-                                                        'PAN\n ${analyticsData.ipPan}',
+                                                        'PAN\n ${analyticsData.ipPan.toInt()}',
                                                     titleStyle: const TextStyle(
                                                         fontSize: 12,
                                                         fontWeight:
@@ -113,7 +113,7 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                                                     value:
                                                         analyticsData.ipAddress,
                                                     title:
-                                                        'Address\n ${analyticsData.ipAddress}',
+                                                        'Address\n ${analyticsData.ipAddress.toInt()}',
                                                     titleStyle: const TextStyle(
                                                         fontSize: 12,
                                                         fontWeight:
@@ -129,7 +129,7 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                                                         const Color(0xFF2D87BB),
                                                     value: analyticsData.ipOtp,
                                                     title:
-                                                        'OTP\n ${analyticsData.ipOtp}',
+                                                        'OTP\n ${analyticsData.ipOtp.toInt()}',
                                                     titleStyle: const TextStyle(
                                                         fontSize: 12,
                                                         fontWeight:
@@ -152,7 +152,7 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                                           // crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
                                             Text(
-                                              'In Progress\n${analyticsData.ccStateInProgress}',
+                                              'In Progress\n${analyticsData.ccStateInProgress.toInt()}',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold),
@@ -183,7 +183,7 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                             color: const Color(0xFFF2BC5E),
                             value: analyticsData.ccStateActivated,
                             title:
-                                'Activated \n ${analyticsData.ccStateActivated}',
+                                'Activated \n ${analyticsData.ccStateActivated.toInt()}',
                             titleStyle: TextStyle(
                                 fontSize: touchedIndex == 0 ? 16 : 12,
                                 fontWeight: FontWeight.bold,
@@ -194,7 +194,7 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                             color: Color.fromARGB(255, 252, 241, 23),
                             value: analyticsData.ccPhysicallyActivated,
                             title:
-                                'Physically Activated \n ${analyticsData.ccPhysicallyActivated}',
+                                'Physically Activated \n ${analyticsData.ccPhysicallyActivated.toInt()}',
                             titleStyle: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
@@ -205,7 +205,7 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                           color: Color.fromARGB(255, 94, 164, 230),
                           value: analyticsData.ccStateInProgress,
                           title:
-                              'In Progress\n ${analyticsData.ccStateInProgress}',
+                              'In Progress\n ${analyticsData.ccStateInProgress.toInt()}',
                           titleStyle: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
@@ -215,10 +215,10 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                           radius: 30,
                         ),
                         PieChartSectionData(
-                            color: const Color(0xFF633EBB),
+                            color: Color.fromARGB(255, 187, 62, 62),
                             value: analyticsData.ccStateManualCheck,
                             title:
-                                'Manual\n ${analyticsData.ccStateManualCheck}',
+                                'Manual\n ${analyticsData.ccStateManualCheck.toInt()}',
                             titleStyle: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
@@ -235,7 +235,7 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                         // crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            'Users\n${analyticsData.totalStates}',
+                            'Users\n${analyticsData.totalStates.toInt()}',
                             textAlign: TextAlign.center,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
@@ -268,7 +268,8 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                           PieChartSectionData(
                               color: const Color(0xFFEA5F89),
                               value: analyticsData.rewardLocked,
-                              title: 'Locked \n ${analyticsData.rewardLocked}',
+                              title:
+                                  'Locked \n ${analyticsData.rewardLocked.toInt()}',
                               titleStyle: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
@@ -280,7 +281,7 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                               color: const Color(0xFFF7B7A3),
                               value: analyticsData.rewardRedeemed,
                               title:
-                                  'Redeemed\n ${analyticsData.rewardRedeemed}',
+                                  'Redeemed\n ${analyticsData.rewardRedeemed.toInt()}',
                               titleStyle: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
@@ -299,7 +300,7 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                     // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Rewards\n${analyticsData.totalRewards}',
+                        'Rewards\n${analyticsData.totalRewards.toInt()}',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
