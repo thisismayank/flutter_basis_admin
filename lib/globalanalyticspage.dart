@@ -61,16 +61,119 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                   PieChart(PieChartData(
                       pieTouchData: PieTouchData(
                         touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                          setState(() {
-                            if (!event.isInterestedForInteractions ||
-                                pieTouchResponse == null ||
-                                pieTouchResponse.touchedSection == null) {
-                              touchedIndex = -1;
-                              return;
-                            }
-                            touchedIndex = pieTouchResponse
-                                .touchedSection!.touchedSectionIndex;
-                          });
+                          if (pieTouchResponse
+                                  ?.touchedSection!.touchedSectionIndex ==
+                              2) {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return SizedBox(
+                                      height: 400,
+                                      width: 100,
+                                      child: Stack(children: [
+                                        PieChart(
+                                          PieChartData(
+                                              centerSpaceRadius: 70,
+                                              startDegreeOffset: -90,
+                                              sections: [
+                                                PieChartSectionData(
+                                                    color:
+                                                        const Color(0xFFE6F69D),
+                                                    value: analyticsData
+                                                        .ipBasicDetails,
+                                                    title:
+                                                        'Basic Details \n ${analyticsData.ipBasicDetails}',
+                                                    titleStyle: const TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                    titlePositionPercentageOffset:
+                                                        0.99,
+                                                    radius: 50),
+                                                PieChartSectionData(
+                                                    color:
+                                                        const Color(0xFFAADEA7),
+                                                    value: analyticsData.ipPan,
+                                                    title:
+                                                        'PAN\n ${analyticsData.ipPan}',
+                                                    titleStyle: const TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        backgroundColor:
+                                                            Color.fromARGB(124,
+                                                                255, 255, 255)),
+                                                    titlePositionPercentageOffset:
+                                                        0.99,
+                                                    radius: 40),
+                                                PieChartSectionData(
+                                                    color:
+                                                        const Color(0xFF64C2A6),
+                                                    value:
+                                                        analyticsData.ipAddress,
+                                                    title:
+                                                        'Address\n ${analyticsData.ipAddress}',
+                                                    titleStyle: const TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        backgroundColor:
+                                                            Color.fromARGB(124,
+                                                                255, 255, 255)),
+                                                    titlePositionPercentageOffset:
+                                                        0.99,
+                                                    radius: 30),
+                                                PieChartSectionData(
+                                                    color:
+                                                        const Color(0xFF2D87BB),
+                                                    value: analyticsData.ipOtp,
+                                                    title:
+                                                        'OTP\n ${analyticsData.ipOtp}',
+                                                    titleStyle: const TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        backgroundColor:
+                                                            Color.fromARGB(124,
+                                                                255, 255, 255)),
+                                                    titlePositionPercentageOffset:
+                                                        0.99,
+                                                    radius: 30),
+                                              ]),
+                                          swapAnimationDuration: Duration(
+                                              milliseconds: 150), // Optional
+                                          swapAnimationCurve: Curves.linear,
+                                        ),
+                                        Positioned.fill(
+                                            child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          // crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'In Progress\n${analyticsData.ccStateInProgress}',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            )
+                                          ],
+                                        ))
+                                      ])
+                                      // ],
+                                      );
+                                });
+                          }
+                          // setState(() {
+                          //   if (!event.isInterestedForInteractions ||
+                          //       pieTouchResponse == null ||
+                          //       pieTouchResponse.touchedSection == null) {
+                          //     touchedIndex = -1;
+                          //     return;
+                          //   }
+                          //   touchedIndex = pieTouchResponse
+                          //       .touchedSection!.touchedSectionIndex;
+                          // });
                         },
                       ),
                       centerSpaceRadius: 70,
