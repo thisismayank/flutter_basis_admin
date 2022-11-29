@@ -197,6 +197,7 @@ class Dashboard extends StatelessWidget {
     return Consumer<User>(builder: (context, user, child) {
       return MaterialApp(
           home: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.grey[850],
         appBar: AppBar(
           centerTitle: true,
@@ -205,112 +206,117 @@ class Dashboard extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(user.avatar),
-                  radius: 40,
-                ),
-              ),
-              const SizedBox(height: 24),
-              const Divider(
-                height: 10,
-                color: Colors.grey,
-              ),
-              const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text("First name",
-                          style: TextStyle(
-                              color: Colors.grey, letterSpacing: 2.0)),
-                      Text(
-                        user.firstName + " " + user.lastName,
-                        style: const TextStyle(
-                            fontSize: 24,
-                            color: Colors.amberAccent,
-                            letterSpacing: 2.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(user.avatar),
+                    radius: 40,
                   ),
-                  IconButton(
-                    icon: Icon(Icons.power_settings_new_outlined),
-                    onPressed: (() => logoutUser()),
-                    color: Colors.white,
-                    hoverColor: Colors.red,
-                    iconSize: 32,
-                  )
-                ],
-              ),
-              const SizedBox(height: 32),
-              const Text("Email",
-                  style: TextStyle(color: Colors.grey, letterSpacing: 2.0)),
-              Text(
-                user.email,
-                style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.amberAccent,
-                    letterSpacing: 2.0,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 32),
-              const Text("Credit Card State",
-                  style: TextStyle(color: Colors.grey, letterSpacing: 2.0)),
-              Text(
-                user.creditCardState,
-                style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.amberAccent,
-                    letterSpacing: 2.0,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 32),
-              ElevatedButton.icon(
-                  onPressed: () {
-                    getMasterClassRegistrantsCSV();
-                  },
-                  icon: const Icon(CupertinoIcons.rocket),
-                  label: const Text("Get Masterclass registrants")),
-              const SizedBox(
-                height: 32,
-              ),
-              const SizedBox(height: 8),
-              ElevatedButton.icon(
-                  onPressed: () {
-                    getAnalyticsDataForAdmin();
-                  },
-                  icon: const Icon(CupertinoIcons.chart_pie_fill),
-                  label: const Text("Get Global Analytics")),
-              const SizedBox(
-                height: 32,
-              ),
-              TextField(
-                controller: searchController,
-                textAlign: TextAlign.center,
-                onSubmitted: (String value) {
-                  getUserDataForAdmin();
-                },
-                decoration: InputDecoration(
-                    hintText: "Search using userId, email, cstId, acId",
-                    // icon: Icon(Icons.search),
-                    border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8))),
-                    suffixIcon: Container(
-                        // padding: const EdgeInsets.all(),
-                        // decoration: BoxDecoration(color: Colors.blue[200]),
-                        child: const Icon(
-                      Icons.search,
-                    )),
-                    fillColor: Color.fromARGB(255, 142, 140, 140),
-                    filled: true),
-              )
-            ],
+                ),
+                const SizedBox(height: 24),
+                const Divider(
+                  height: 10,
+                  color: Colors.grey,
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text("First name",
+                            style: TextStyle(
+                                color: Colors.grey, letterSpacing: 2.0)),
+                        Text(
+                          user.firstName + " " + user.lastName,
+                          style: const TextStyle(
+                              fontSize: 24,
+                              color: Colors.amberAccent,
+                              letterSpacing: 2.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.power_settings_new_outlined),
+                      onPressed: (() => logoutUser()),
+                      color: Colors.white,
+                      hoverColor: Colors.red,
+                      iconSize: 32,
+                    )
+                  ],
+                ),
+                const SizedBox(height: 32),
+                const Text("Email",
+                    style: TextStyle(color: Colors.grey, letterSpacing: 2.0)),
+                Text(
+                  user.email,
+                  style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.amberAccent,
+                      letterSpacing: 2.0,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 32),
+                const Text("Credit Card State",
+                    style: TextStyle(color: Colors.grey, letterSpacing: 2.0)),
+                Text(
+                  user.creditCardState,
+                  style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.amberAccent,
+                      letterSpacing: 2.0,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 32),
+                ElevatedButton.icon(
+                    onPressed: () {
+                      getMasterClassRegistrantsCSV();
+                    },
+                    icon: const Icon(CupertinoIcons.rocket),
+                    label: const Text("Get Masterclass registrants")),
+                const SizedBox(
+                  height: 32,
+                ),
+                const SizedBox(height: 8),
+                ElevatedButton.icon(
+                    onPressed: () {
+                      getAnalyticsDataForAdmin();
+                    },
+                    icon: const Icon(CupertinoIcons.chart_pie_fill),
+                    label: const Text("Get Global Analytics")),
+                const SizedBox(
+                  height: 32,
+                ),
+                SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: TextField(
+                    controller: searchController,
+                    textAlign: TextAlign.center,
+                    onSubmitted: (String value) {
+                      getUserDataForAdmin();
+                    },
+                    decoration: InputDecoration(
+                        hintText: "Search using userId, email, cstId, acId",
+                        // icon: Icon(Icons.search),
+                        border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.search),
+                          onPressed: () {
+                            getUserDataForAdmin();
+                          },
+                        ),
+                        fillColor: Color.fromARGB(255, 255, 253, 253),
+                        filled: true),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(
