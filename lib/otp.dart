@@ -18,8 +18,8 @@ class OTP extends StatelessWidget {
     var otpController = TextEditingController();
 
     void verifyOtp(email, token) async {
-      print(email);
-      print(token);
+      // print(email);
+      // print(token);
       var uri = Uri.parse("https://api.getbasis.co/v6.4/users/email/verify");
       var response = await http.put(uri, body: {
         "email": data["email"].toString(),
@@ -93,6 +93,9 @@ class OTP extends StatelessWidget {
                 ),
                 TextField(
                   controller: otpController,
+                  onSubmitted: (String value) {
+                    verifyOtp();
+                  },
                   textAlign: TextAlign.center,
                   decoration: const InputDecoration(
                       hintText: "Enter OTP",
