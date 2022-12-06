@@ -21,14 +21,16 @@ class SearchResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UserData>(builder: (context, user, child) {
-      print(user.balance);
-      print(user.balance > 0.0);
       return MaterialApp(
         home: Scaffold(
           backgroundColor: Colors.black,
           appBar: AppBar(
             centerTitle: true,
-            title: const Text('Search Results'),
+            title: Text(
+              user.name.toUpperCase(),
+              style: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.bold),
+            ),
             backgroundColor: const Color(0xff36c182),
           ),
           body: Card(
