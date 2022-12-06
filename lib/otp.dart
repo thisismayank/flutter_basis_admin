@@ -94,7 +94,7 @@ class OTP extends StatelessWidget {
                 TextField(
                   controller: otpController,
                   onSubmitted: (String value) {
-                    verifyOtp();
+                    verifyOtp(data["email"], data["token"]);
                   },
                   textAlign: TextAlign.center,
                   decoration: const InputDecoration(
