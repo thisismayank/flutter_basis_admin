@@ -12,8 +12,6 @@ class OTP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)?.settings.arguments as Map;
-    print('otp');
-    print(data);
 
     var otpController = TextEditingController();
 
@@ -37,6 +35,7 @@ class OTP extends StatelessWidget {
         responseData["results"]["user"]["token"],
         responseData["results"]["user"]["avatar"],
         responseData["results"]["user"]["creditCardState"],
+        responseData["results"]["user"]["email"],
       );
 
       final sharedPreferenceInstance = await SharedPreferences.getInstance();
@@ -91,18 +90,23 @@ class OTP extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                TextField(
-                  autofocus: true,
-                  controller: otpController,
-                  onSubmitted: (String value) {
-                    verifyOtp(data["email"], data["token"]);
-                  },
-                  textAlign: TextAlign.center,
-                  decoration: const InputDecoration(
-                      hintText: "Enter OTP",
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff36c182)))),
-                ),
+                Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: const Color.fromRGBO(230, 243, 243, 1)),
+                    child: TextField(
+                      autofocus: true,
+                      controller: otpController,
+                      onSubmitted: (String value) {
+                        verifyOtp(data["email"], data["token"]);
+                      },
+                      textAlign: TextAlign.center,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Enter OTP",
+                      ),
+                    )),
                 const SizedBox(
                   height: 16,
                 ),

@@ -308,7 +308,10 @@ class Dashboard extends StatelessWidget {
                         border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8))),
                         suffixIcon: IconButton(
-                          icon: const Icon(Icons.search),
+                          icon: const Icon(
+                            Icons.search,
+                            color: Colors.black87,
+                          ),
                           onPressed: () {
                             getUserDataForAdmin();
                           },

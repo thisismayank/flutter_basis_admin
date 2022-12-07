@@ -18,13 +18,14 @@ class User extends ChangeNotifier {
   }
 
   void setUserData(String _idT, String firstNameT, String lastNameT,
-      String tokenT, String avatarT, String creditCardStateT) {
+      String tokenT, String avatarT, String creditCardStateT, String emailT) {
     id = _idT;
     firstName = firstNameT;
     lastName = lastNameT;
     token = tokenT;
     avatar = avatarT;
     creditCardState = creditCardStateT;
+    email = emailT;
     notifyListeners();
   }
 }

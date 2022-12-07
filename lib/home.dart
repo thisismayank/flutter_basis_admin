@@ -52,13 +52,13 @@ class _HomeState extends State<Home> {
       //   // print(responseData["results"]["user"]["token"]);
       //   if (token != "") {
       Provider.of<User>(context, listen: false).setUserData(
-        userId.toString(),
-        firstName.toString(),
-        lastName.toString(),
-        token.toString(),
-        avatar.toString(),
-        creditCardState.toString(),
-      );
+          userId.toString(),
+          firstName.toString(),
+          lastName.toString(),
+          token.toString(),
+          avatar.toString(),
+          creditCardState.toString(),
+          email.toString());
 
       Provider.of<User>(context, listen: false).signIn(email.toString(), "");
       Navigator.pushNamed(context, "/dashboard", arguments: {
@@ -127,7 +127,7 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Color.fromARGB(0, 177, 23, 23)),
+                    color: const Color.fromRGBO(230, 243, 243, 1)),
                 child: TextField(
                   autofocus: true,
                   controller: emailController,
