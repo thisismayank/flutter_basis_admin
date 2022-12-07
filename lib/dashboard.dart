@@ -24,18 +24,13 @@ class Dashboard extends StatelessWidget {
 
     print(data);
 
-    print(data["userData"]);
-    print(data["userData"]["token"]);
     String token = data["userData"]["token"] ?? "";
-    print(token);
 
     if (token.isEmpty) {
       Navigator.pop(context);
       Navigator.pushNamed(context, "/");
     }
     String userId = data["userData"]["_id"];
-    print(token);
-    print(userId);
 
     String authToken = '$userId,$token';
     var searchController = TextEditingController();
@@ -85,25 +80,32 @@ class Dashboard extends StatelessWidget {
           await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
 
       Map responseData = jsonDecode(response.body);
+      print('Res $responseData');
+      // print('Res ${responseData["results"]["customerId"]}');
 
       Provider.of<UserData>(context, listen: false).setUserDataForAdmin(
-        responseData["results"]["userId"],
-        responseData["results"]["name"],
-        responseData["results"]["email"],
-        responseData["results"]["customerId"],
-        responseData["results"]["accountId"],
-        responseData["results"]["balance"],
-        responseData["results"]["cardActivatedDate"].toString(),
-        responseData["results"]["sourceOfSignUp"],
-        responseData["results"]["basisUserSince"].toString(),
-        responseData["results"]["totalMerchantTransactionsValue"],
-        responseData["results"]["totalWalletTransactionsValue"],
-        responseData["results"]["totalCashbackValue"],
-        responseData["results"]["cardId"],
-        responseData["results"]["creditCardState"],
-      );
+          responseData["results"]["userId"],
+          responseData["results"]["name"],
+          responseData["results"]["email"],
+          responseData["results"]["customerId"],
+          responseData["results"]["accountId"],
+          responseData["results"]["balance"],
+          responseData["results"]["cardActivatedDate"].toString(),
+          responseData["results"]["sourceOfSignUp"],
+          responseData["results"]["basisUserSince"].toString(),
+          responseData["results"]["totalMerchantTransactionsValue"],
+          responseData["results"]["totalWalletTransactionsValue"],
+          responseData["results"]["totalCashbackValue"],
+          responseData["results"]["cardId"],
+          responseData["results"]["creditCardState"],
+          responseData["results"]["reason"],
+          responseData["results"]["nameCheck"]);
 
-      Navigator.pushNamed(context, "/search");
+      Navigator.pushNamed(context, "/search", arguments: {
+        "userId": userId,
+        "authToken": authToken,
+        "fetchedUserId": responseData["results"]["userId"]
+      });
     }
 
     void getPosts() async {

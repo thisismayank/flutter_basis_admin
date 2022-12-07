@@ -25,16 +25,20 @@ class SearchResultsDataCard extends StatelessWidget {
             size: 14,
           ),
         ),
-        Container(
-          padding: const EdgeInsets.all(4.0),
-          child: Text(
-            user,
-            style: showCopy
-                ? const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)
-                : const TextStyle(fontWeight: FontWeight.w300),
-            overflow: TextOverflow.fade,
-          ),
-        ),
+        Expanded(
+            child: Column(
+          // padding: const EdgeInsets.all(4.0),
+          children: [
+            Text(
+              user,
+              style: showCopy
+                  ? const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)
+                  : const TextStyle(fontWeight: FontWeight.w300),
+              // overflow: TextOverflow.fade,
+              maxLines: 3,
+            )
+          ],
+        )),
         showCopy
             ? Container(
                 padding: const EdgeInsets.only(right: 8.0),

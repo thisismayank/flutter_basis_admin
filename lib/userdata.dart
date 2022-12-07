@@ -16,6 +16,8 @@ class UserData extends ChangeNotifier {
   double totalCashbackValue = 0.0;
   String cardId = "";
   String creditCardState = "";
+  String reason = "";
+  bool nameCheck = false;
 
   void setUserDataForAdmin(
       String idT,
@@ -31,7 +33,9 @@ class UserData extends ChangeNotifier {
       String totalWalletTransactionsValueT,
       String totalCashbackValueT,
       String cardIdT,
-      String creditCardStateT) {
+      String creditCardStateT,
+      String reasonT,
+      bool nameCheckT) {
     id = idT;
     name = nameT;
     email = emailT;
@@ -47,6 +51,8 @@ class UserData extends ChangeNotifier {
         double.parse(totalMerchantTransactionsValueT);
     totalWalletTransactionsValue = double.parse(totalWalletTransactionsValueT);
     totalCashbackValue = double.parse(totalCashbackValueT);
+    reason = reasonT;
+    nameCheck = nameCheckT;
 
     notifyListeners();
   }

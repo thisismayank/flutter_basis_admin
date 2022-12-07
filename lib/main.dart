@@ -42,7 +42,7 @@ void main() {
         "/otp": (context) => const OTP(),
         "/dashboard": (context) => const Dashboard(),
         "/post": (context) => const PostCard(),
-        "/search": (context) => const SearchResults(),
+        "/search": (context) => SearchResults(),
         "/global": (context) => const GlobalAnalyticsPage(),
         "/prepaid": ((context) => const PrepaidDataTable())
       },
