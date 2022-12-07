@@ -92,6 +92,7 @@ class OTP extends StatelessWidget {
                   height: 16,
                 ),
                 TextField(
+                  autofocus: true,
                   controller: otpController,
                   onSubmitted: (String value) {
                     verifyOtp(data["email"], data["token"]);

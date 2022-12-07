@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_application_6_provider/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_application_6_provider/google_sign_in.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -118,20 +119,28 @@ class _HomeState extends State<Home> {
               //   "Enter your email address",
               //   style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
               // ),
+              // GoogleSignInWidget(),
               const SizedBox(
                 height: 16,
               ),
-              TextField(
-                controller: emailController,
-                onSubmitted: (String value) {
-                  submitEmail();
-                },
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontWeight: FontWeight.w500),
-                decoration: const InputDecoration(
+              Container(
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Color.fromARGB(0, 177, 23, 23)),
+                child: TextField(
+                  autofocus: true,
+                  controller: emailController,
+                  onSubmitted: (String value) {
+                    submitEmail();
+                  },
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontWeight: FontWeight.w500),
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
                     hintText: "Please enter your email address",
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xff36c182)))),
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 16,
