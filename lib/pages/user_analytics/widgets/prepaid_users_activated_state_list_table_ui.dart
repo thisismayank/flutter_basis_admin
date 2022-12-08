@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
@@ -47,10 +48,11 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
                 children: [
                   Center(
                     child: DataTable(
-                        columnSpacing: 20,
+                        columnSpacing: 16,
                         headingRowColor: MaterialStateProperty.all(
-                            const Color.fromARGB(255, 171, 235, 173)),
+                            Color.fromARGB(255, 217, 236, 217)),
                         columns: [
+                          DataColumn(label: Text('', style: titles)),
                           DataColumn(label: Text('Name', style: titles)),
                           DataColumn(
                               label: Expanded(
@@ -63,14 +65,32 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
                         rows: prepaidData.allUsersWhoActivatedCardList
                             .map((prepaidUserdData) => DataRow(cells: [
                                   DataCell(
+                                      CircleAvatar(
+                                        radius: 15,
+                                        child: Text(
+                                            '${prepaidUserdData["firstName"].substring(0, 1).toUpperCase()}',
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white)),
+                                        backgroundColor: Colors.primaries[
+                                            Random().nextInt(
+                                                Colors.primaries.length)],
+                                      ),
+                                      onTap: () => userPrepaidCardData
+                                          .getUserPrepaidData(
+                                              prepaidUserdData["_id"],
+                                              userId,
+                                              authToken,
+                                              contextRoot)),
+                                  DataCell(
                                       ConstrainedBox(
                                           constraints: const BoxConstraints(
                                               maxWidth: 80),
                                           child: Text(
                                               '${prepaidUserdData["firstName"]}',
                                               style: const TextStyle(
-                                                  fontWeight:
-                                                      FontWeight.bold))),
+                                                fontWeight: FontWeight.bold,
+                                              ))),
                                       onTap: () => userPrepaidCardData
                                           .getUserPrepaidData(
                                               prepaidUserdData["_id"],
