@@ -30,7 +30,7 @@ class _SearchResultsState extends State<SearchResults> {
   @override
   Widget build(BuildContext context) {
     final passedData = ModalRoute.of(context)?.settings.arguments as Map;
-    print("passed data $passedData");
+
     String authToken = passedData["authToken"];
     String userId = passedData["userId"];
     String fetchedUserId = passedData["fetchedUserId"];

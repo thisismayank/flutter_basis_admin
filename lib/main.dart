@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_6_provider/pages/dashboard/widgets/dashboard.dart';
 import 'package:flutter_application_6_provider/models/global_analytics.dart';
-import 'package:flutter_application_6_provider/pages/global_analytics/widgets/prepaid_card_user_analytics.dart';
-import 'package:flutter_application_6_provider/pages/global_analytics/widgets/global_analytics_page.dart';
+import 'package:flutter_application_6_provider/pages/global_analytics/widgets/prepaid_card_user_analytics_ui.dart';
+import 'package:flutter_application_6_provider/pages/global_analytics/widgets/global_analytics_page_ui.dart';
+import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_activated_state_list_table_ui.dart';
 import 'package:flutter_application_6_provider/pages/user_authentication/widgets/email.dart';
 import 'package:flutter_application_6_provider/pages/user_authentication/widgets/otp.dart';
 import 'package:flutter_application_6_provider/models/post.dart';
 import 'package:flutter_application_6_provider/pages/post/widgets/post_card.dart';
-import 'package:flutter_application_6_provider/prepaiddatastore.dart';
+import 'package:flutter_application_6_provider/models/prepaid_user_data_list.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_list_table.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/search_results.dart';
 import 'package:flutter_application_6_provider/models/user_authentication.dart';
@@ -44,14 +45,9 @@ void main() {
         "/dashboard": (context) => const Dashboard(),
         "/post": (context) => const PostCard(),
         "/search": (context) => SearchResults(),
-        "/global": (context) {
-          print("ISKE ANDAR");
-          return const GlobalAnalyticsPage();
-        },
-        "/prepaid": ((context) {
-          print("INSIDE");
-          return const PrepaidDataTable();
-        })
+        "/global": (context) => const GlobalAnalyticsPage(),
+        "/prepaid": (context) => const PrepaidDataTable(),
+        // "/prepaid/activated": (context) => const PrepaidCardActivatedDataTable()
       },
     ),
   ));

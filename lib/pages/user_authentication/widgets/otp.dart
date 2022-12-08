@@ -16,8 +16,6 @@ class OTP extends StatelessWidget {
     var otpController = TextEditingController();
 
     void verifyOtp(email, token) async {
-      // print(email);
-      // print(token);
       var uri = Uri.parse("https://api.getbasis.co/v6.4/users/email/verify");
       var response = await http.put(uri, body: {
         "email": data["email"].toString(),
@@ -25,8 +23,6 @@ class OTP extends StatelessWidget {
         "verificationCode": otpController.text.toString()
       });
       Map responseData = jsonDecode(response.body);
-
-      // print(responseData);
 
       Provider.of<User>(context, listen: false).setUserData(
         responseData["results"]["user"]["_id"],

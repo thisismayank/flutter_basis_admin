@@ -19,10 +19,7 @@ class Dashboard extends StatelessWidget {
   const Dashboard({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    print("DASHBOARD");
     final data = ModalRoute.of(context)?.settings.arguments as Map;
-
-    print(data);
 
     String token = data["userData"]["token"] ?? "";
 
@@ -80,8 +77,6 @@ class Dashboard extends StatelessWidget {
           await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
 
       Map responseData = jsonDecode(response.body);
-      print('Res $responseData');
-      // print('Res ${responseData["results"]["customerId"]}');
 
       Provider.of<UserData>(context, listen: false).setUserDataForAdmin(
           responseData["results"]["userId"],
@@ -113,7 +108,7 @@ class Dashboard extends StatelessWidget {
 
       var response =
           await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
-      // print(response.body);
+
       Map responseData = jsonDecode(response.body);
 
       Provider.of<Post>(context, listen: false).setAPost(
@@ -163,14 +158,14 @@ class Dashboard extends StatelessWidget {
       String token = data["userData"]["token"];
       String userId = data["userData"]["_id"];
       String authToken = '$userId,$token';
-      // print("authToken" + authToken);
+
       var uri =
           Uri.parse("https://api.getbasis.co/v6.4/prepaidcards?isfromweb=true");
       var response =
           await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
 
       Map responseData = jsonDecode(response.body);
-      print(responseData);
+
       String pwaUrl = responseData["results"][0]["url"];
 
       Navigator.push(

@@ -83,14 +83,11 @@ class _HomeState extends State<Home> {
     var passwordController = TextEditingController();
 
     void submitEmail() async {
-      // print('yaha');
       var uri = Uri.parse("https://api.getbasis.co/v6.4/users/email");
       var response = await http
           .post(uri, body: {"email": emailController.text.toString()});
 
       Map responseData = jsonDecode(response.body);
-      // print('responseData');
-      // print(responseData);
 
       Navigator.pushNamed(context, "/otp", arguments: {
         "email": emailController.text.toString(),

@@ -1,11 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_6_provider/pages/global_analytics/widgets/prepaid_card_user_analytics.dart';
-import 'package:flutter_application_6_provider/prepaiddatastore.dart';
+import 'package:flutter_application_6_provider/pages/global_analytics/widgets/prepaid_card_user_analytics_ui.dart';
+import 'package:flutter_application_6_provider/models/prepaid_user_data_list.dart';
 import 'package:flutter_application_6_provider/models/global_analytics.dart';
 
-import 'package:flutter_application_6_provider/pages/global_analytics/widgets/rewards_analytics.dart';
-import 'package:flutter_application_6_provider/pages/global_analytics/widgets/transactions_analytics.dart';
+import 'package:flutter_application_6_provider/pages/global_analytics/widgets/rewards_analytics_ui.dart';
+import 'package:flutter_application_6_provider/pages/global_analytics/widgets/transactions_analytics_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
@@ -17,6 +17,8 @@ class GlobalAnalyticsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final passedData = ModalRoute.of(context)?.settings.arguments as Map;
+
+    String userId = passedData["userData"]["userData"]["_id"];
     String authToken = passedData["authToken"];
     return Consumer<GlobalAnalytics>(builder: (context, analyticsData, child) {
       return MaterialApp(
@@ -31,13 +33,14 @@ class GlobalAnalyticsPage extends StatelessWidget {
                 child: CarouselSlider(
                   items: [
                     PrepaidCardUserAnalyticsPage(
-                      authToken: authToken,
-                      context: context,
-                    ),
+                        authToken: authToken, context: context, userId: ""),
                     TransactionssAnalytics(),
                     RewardsAnalytics(),
                   ],
-                  options: CarouselOptions(),
+                  options: CarouselOptions(
+                    viewportFraction: 2.0,
+                    height: MediaQuery.of(context).size.height,
+                  ),
                 ),
               )));
     });

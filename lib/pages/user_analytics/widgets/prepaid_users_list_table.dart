@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_6_provider/pages/dashboard/widgets/dashboard.dart';
-import 'package:flutter_application_6_provider/prepaiddatastore.dart';
+import 'package:flutter_application_6_provider/models/prepaid_user_data_list.dart';
 import 'package:flutter_application_6_provider/models/user_prepaid_card_data.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -15,9 +15,9 @@ class PrepaidDataTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final passedData = ModalRoute.of(context)?.settings.arguments as Map;
     String authToken = passedData["authToken"];
+
+    print('pa $passedData');
     void getUserDataForAdmin(userId) async {
-      print('INSIDE');
-      print(userId);
       var uri = Uri.parse(
           "https://api.getbasis.co/v6.4/admins/check/user/data?field=" +
               userId.toString());
@@ -26,7 +26,6 @@ class PrepaidDataTable extends StatelessWidget {
 
       Map responseData = jsonDecode(response.body);
 
-      print('REs $responseData');
       Provider.of<UserData>(context, listen: false).setUserDataForAdmin(
           responseData["results"]["userId"],
           responseData["results"]["name"],
