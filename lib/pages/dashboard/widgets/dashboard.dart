@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_6_provider/globalanalytics.dart';
-import 'package:flutter_application_6_provider/post.dart';
-import 'package:flutter_application_6_provider/user.dart';
-import 'package:flutter_application_6_provider/userdata.dart';
+import 'package:flutter_application_6_provider/models/global_analytics.dart';
+import 'package:flutter_application_6_provider/models/post.dart';
+import 'package:flutter_application_6_provider/models/user_authentication.dart';
+import 'package:flutter_application_6_provider/models/user_prepaid_card_data.dart';
 
-import 'package:flutter_application_6_provider/webview.dart';
+import 'package:flutter_application_6_provider/pages/webview/widgets/webview.dart';
 
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;

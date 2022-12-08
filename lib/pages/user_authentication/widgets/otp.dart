@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:flutter_application_6_provider/user.dart';
+import 'package:flutter_application_6_provider/models/user_authentication.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OTP extends StatelessWidget {

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_6_provider/post.dart';
-import 'package:flutter_application_6_provider/userdata.dart';
-import 'package:flutter_application_6_provider/fetcheduserdetails.dart';
+import 'package:flutter_application_6_provider/models/post.dart';
+import 'package:flutter_application_6_provider/models/user_prepaid_card_data.dart';
+import 'package:flutter_application_6_provider/pages/user_analytics/widgets/fetched_prepaid_user_data_card.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +30,7 @@ class _SearchResultsState extends State<SearchResults> {
   @override
   Widget build(BuildContext context) {
     final passedData = ModalRoute.of(context)?.settings.arguments as Map;
+    print("passed data $passedData");
     String authToken = passedData["authToken"];
     String userId = passedData["userId"];
     String fetchedUserId = passedData["fetchedUserId"];

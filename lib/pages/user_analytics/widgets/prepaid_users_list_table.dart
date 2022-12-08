@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_6_provider/dashboard.dart';
+import 'package:flutter_application_6_provider/pages/dashboard/widgets/dashboard.dart';
 import 'package:flutter_application_6_provider/prepaiddatastore.dart';
-import 'package:flutter_application_6_provider/userdata.dart';
+import 'package:flutter_application_6_provider/models/user_prepaid_card_data.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,6 +26,7 @@ class PrepaidDataTable extends StatelessWidget {
 
       Map responseData = jsonDecode(response.body);
 
+      print('REs $responseData');
       Provider.of<UserData>(context, listen: false).setUserDataForAdmin(
           responseData["results"]["userId"],
           responseData["results"]["name"],
@@ -44,7 +45,11 @@ class PrepaidDataTable extends StatelessWidget {
           responseData["results"]["reason"],
           responseData["results"]["nameCheck"]);
 
-      Navigator.pushNamed(context, "/search");
+      Navigator.pushNamed(context, "/search", arguments: {
+        "userId": userId,
+        "authToken": authToken,
+        "fetchedUserId": responseData["results"]["userId"]
+      });
     }
 
     TextStyle titles = const TextStyle(

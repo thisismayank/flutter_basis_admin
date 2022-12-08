@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_application_6_provider/user.dart';
+import 'package:flutter_application_6_provider/models/user_authentication.dart';
 import 'package:http/http.dart' as http;
+
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_application_6_provider/google_sign_in.dart';
+import 'package:flutter_application_6_provider/pages/user_authentication/widgets/google_sign_in.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
