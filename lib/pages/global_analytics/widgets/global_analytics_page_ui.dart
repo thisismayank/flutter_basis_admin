@@ -11,15 +11,21 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class GlobalAnalyticsPage extends StatelessWidget {
+class GlobalAnalyticsPage extends StatefulWidget {
   const GlobalAnalyticsPage({Key? key}) : super(key: key);
 
+  @override
+  State<GlobalAnalyticsPage> createState() => _GlobalAnalyticsPageState();
+}
+
+class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
   @override
   Widget build(BuildContext context) {
     final passedData = ModalRoute.of(context)?.settings.arguments as Map;
 
     String userId = passedData["userData"]["userData"]["_id"];
     String authToken = passedData["authToken"];
+    print('user $userId');
     return Consumer<GlobalAnalytics>(builder: (context, analyticsData, child) {
       return MaterialApp(
           home: Scaffold(
@@ -33,13 +39,19 @@ class GlobalAnalyticsPage extends StatelessWidget {
                 child: CarouselSlider(
                   items: [
                     PrepaidCardUserAnalyticsPage(
-                        authToken: authToken, context: context, userId: ""),
+                        authToken: authToken, context: context, userId: userId),
                     TransactionssAnalytics(),
                     RewardsAnalytics(),
                   ],
                   options: CarouselOptions(
                     viewportFraction: 2.0,
                     height: MediaQuery.of(context).size.height,
+                    scrollDirection: Axis.horizontal,
+                    // onPageChanged: (index, reason) {
+                    //   return setState(() {
+                    //     _current = index;
+                    //   });
+                    // },
                   ),
                 ),
               )));

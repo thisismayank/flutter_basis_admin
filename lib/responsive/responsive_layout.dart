@@ -6,15 +6,17 @@ class ResponsiveLayout extends StatelessWidget {
   final Widget myMobileBody;
   final Widget myDesktopBody;
 
-  ResponsiveLayout({required this.myDesktopBody, required this.myMobileBody});
+  const ResponsiveLayout(
+      {Key? key, required this.myDesktopBody, required this.myMobileBody})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       if (constraints.maxWidth > 600) {
-        return myMobileBody;
-      } else {
         return myDesktopBody;
+      } else {
+        return myMobileBody;
       }
     });
   }

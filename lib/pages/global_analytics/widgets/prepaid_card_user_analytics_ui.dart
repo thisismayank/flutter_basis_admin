@@ -52,7 +52,7 @@ class _PrepaidCardUserAnalyticsPageState
 
     // final passedData = ModalRoute.of(context)?.settings.arguments as Map;
     // String authToken = passedData["authToken"];
-    void getPrepaidStoreData() async {
+    void getPrepaidStoreData(userId) async {
       var uri =
           Uri.parse("https://api.getbasis.co/v6.4/admins/prepaid/user/data");
       var response = await http
@@ -62,8 +62,11 @@ class _PrepaidCardUserAnalyticsPageState
       Provider.of<PrepaidDataStore>(context, listen: false)
           .setDataToPrepaidStore(responseData["results"]);
 
-      Navigator.pushNamed(widget.context, "/prepaid",
-          arguments: {"authToken": widget.authToken});
+      Navigator.pushNamed(widget.context, "/prepaid", arguments: {
+        "authToken": widget.authToken,
+        "userId": widget.userId,
+        "context": widget.context
+      });
     }
 
     return Consumer<GlobalAnalytics>(builder: (context, analyticsData, child) {
@@ -244,7 +247,7 @@ class _PrepaidCardUserAnalyticsPageState
                 Positioned.fill(
                     child: Center(
                   child: GestureDetector(
-                    onTap: () => {getPrepaidStoreData()},
+                    onTap: () => {getPrepaidStoreData(widget.userId)},
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       // crossAxisAlignment: CrossAxisAlignment.center,

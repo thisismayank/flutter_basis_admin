@@ -11,9 +11,6 @@ import 'package:flutter_application_6_provider/models/user_prepaid_card_data.dar
 class UserPrepaidCardData {
   Future<Map> getUserPrepaidData(
       selectedUserId, userId, authToken, context) async {
-    print("selecte $selectedUserId");
-    print("authToken $authToken");
-
     var uri = Uri.parse(
         "https://api.getbasis.co/v6.4/admins/check/user/data?field=" +
             selectedUserId.toString());
