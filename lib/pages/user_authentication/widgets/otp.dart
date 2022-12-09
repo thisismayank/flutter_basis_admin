@@ -11,7 +11,9 @@ class OTP extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("HERRERE");
     final data = ModalRoute.of(context)?.settings.arguments as Map;
+    print("Hiiiiii");
 
     var otpController = TextEditingController();
 
@@ -55,42 +57,39 @@ class OTP extends StatelessWidget {
     }
 
     return Consumer<User>(builder: (context, user, _) {
-      return MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text("OTP"),
-            centerTitle: true,
-            backgroundColor: const Color(0xff36c182),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.network(
-                    "https://res.cloudinary.com/basis-static/image/upload/v1659020646/dev/undraw_setup_wizard_re_nday_1.png"),
-                const SizedBox(
-                  height: 32,
-                ),
-                const Text(
-                  "Verify Your Email Address",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                const Text(
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+        child: Expanded(
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.network(
+                  "https://res.cloudinary.com/basis-static/image/upload/v1659020646/dev/undraw_setup_wizard_re_nday_1.png"),
+              const SizedBox(
+                height: 32,
+              ),
+              const Text(
+                "Verify Your Email Address",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Expanded(
+                child: const Text(
                   "Enter the OTP received via email",
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: const Color.fromRGBO(230, 243, 243, 1)),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Container(
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: const Color.fromRGBO(230, 243, 243, 1)),
+                  child: Expanded(
                     child: TextField(
                       autofocus: true,
                       controller: otpController,
@@ -102,21 +101,21 @@ class OTP extends StatelessWidget {
                         border: InputBorder.none,
                         hintText: "Enter OTP",
                       ),
-                    )),
-                const SizedBox(
-                  height: 16,
-                ),
-                ElevatedButton.icon(
-                    onPressed: () {
-                      verifyOtp(data["email"], data["token"]);
-                    },
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: const Size.fromHeight(40),
-                        primary: const Color(0xff36c182)),
-                    icon: const Icon(Icons.password),
-                    label: const Text("Verify"))
-              ],
-            ),
+                    ),
+                  )),
+              const SizedBox(
+                height: 16,
+              ),
+              ElevatedButton.icon(
+                  onPressed: () {
+                    verifyOtp(data["email"], data["token"]);
+                  },
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(40),
+                      primary: const Color(0xff36c182)),
+                  icon: const Icon(Icons.password),
+                  label: const Text("Verify"))
+            ],
           ),
         ),
       );

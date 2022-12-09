@@ -13,6 +13,8 @@ import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prep
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/search_results.dart';
 import 'package:flutter_application_6_provider/models/user_authentication.dart';
 import 'package:flutter_application_6_provider/models/user_prepaid_card_data.dart';
+import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
+import 'package:flutter_application_6_provider/responsive/widget_tree.dart';
 
 import 'package:provider/provider.dart';
 
@@ -42,7 +44,7 @@ void main() {
       routes: {
         "/": (context) => const Home(),
         "/otp": (context) => const OTP(),
-        "/dashboard": (context) => const Dashboard(),
+        "/dashboard": (context) => const WidgetTree(),
         "/post": (context) => const PostCard(),
         "/search": (context) => SearchResults(),
         "/global": (context) => const GlobalAnalyticsPage(),

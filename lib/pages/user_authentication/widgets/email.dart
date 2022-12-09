@@ -95,73 +95,79 @@ class _HomeState extends State<Home> {
       });
     }
 
+    print("IT IT");
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home"),
-        centerTitle: true,
-        backgroundColor: const Color(0xff36c182),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
-        child: Center(
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.network(
-                  "https://res.cloudinary.com/basis-static/image/upload/v1659020646/dev/undraw_setup_wizard_re_nday_1.png"),
-              const SizedBox(
-                height: 32,
-              ),
-              // const Text(
-              //   "Enter your email address",
-              //   style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
-              // ),
-              // GoogleSignInWidget(),
-              const SizedBox(
-                height: 16,
-              ),
-              Container(
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: const Color.fromRGBO(230, 243, 243, 1)),
-                child: TextField(
-                  autofocus: true,
-                  controller: emailController,
-                  onSubmitted: (String value) {
-                    submitEmail();
-                  },
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontWeight: FontWeight.w500),
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Please enter your email address",
+      body: SizedBox(
+        height: 600,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+          child: Center(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                    child: Column(children: [
+                  Expanded(
+                    child: Image.network(
+                        "https://res.cloudinary.com/basis-static/image/upload/v1659020646/dev/undraw_setup_wizard_re_nday_1.png"),
                   ),
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              ElevatedButton.icon(
-                  onPressed: () {
-                    Provider.of<User>(context, listen: false).signIn(
-                        emailController.text.toString(),
-                        passwordController.text.toString());
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  // const Text(
+                  //   "Enter your email address",
+                  //   style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
+                  // ),
+                  // GoogleSignInWidget(),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: const Color.fromRGBO(230, 243, 243, 1)),
+                      child: TextField(
+                        autofocus: true,
+                        controller: emailController,
+                        onSubmitted: (String value) {
+                          submitEmail();
+                        },
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Please enter your email address",
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  ElevatedButton.icon(
+                      onPressed: () {
+                        Provider.of<User>(context, listen: false).signIn(
+                            emailController.text.toString(),
+                            passwordController.text.toString());
 
-                    submitEmail();
-                    // Navigator.pushNamed(context, "/dashboard");
-                  },
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(40),
-                      primary: const Color(0xff36c182)),
-                  icon: const Icon(Icons.login),
-                  label: const Text("Continue")),
-              const SizedBox(
-                height: 16,
-              ),
-              const Text("Need help? Contact support@getbasis.co")
-            ],
+                        submitEmail();
+                        // Navigator.pushNamed(context, "/dashboard");
+                      },
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: const Size.fromHeight(40),
+                          primary: const Color(0xff36c182)),
+                      icon: const Icon(Icons.login),
+                      label: const Text("Continue")),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  const Text("Need help? Contact support@getbasis.co")
+                ]))
+              ],
+            ),
           ),
         ),
       ),
