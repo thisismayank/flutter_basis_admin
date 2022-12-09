@@ -8,14 +8,14 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_application_6_provider/pages/user_authentication/widgets/google_sign_in.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class Email extends StatefulWidget {
+  const Email({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Email> createState() => _EmailState();
 }
 
-class _HomeState extends State<Home> {
+class _EmailState extends State<Email> {
   @override
   void initState() {
     super.initState();
@@ -89,65 +89,71 @@ class _HomeState extends State<Home> {
 
       Map responseData = jsonDecode(response.body);
 
+      print("res $responseData");
       Navigator.pushNamed(context, "/otp", arguments: {
         "email": emailController.text.toString(),
         "token": responseData["results"]["token"]
       });
     }
 
-    print("IT IT");
     return Scaffold(
-      body: SizedBox(
-        height: 600,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
-          child: Center(
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                    child: Column(children: [
-                  Expanded(
-                    child: Image.network(
-                        "https://res.cloudinary.com/basis-static/image/upload/v1659020646/dev/undraw_setup_wizard_re_nday_1.png"),
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  // const Text(
-                  //   "Enter your email address",
-                  //   style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
-                  // ),
-                  // GoogleSignInWidget(),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: const Color.fromRGBO(230, 243, 243, 1)),
-                      child: TextField(
-                        autofocus: true,
-                        controller: emailController,
-                        onSubmitted: (String value) {
-                          submitEmail();
-                        },
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Please enter your email address",
-                        ),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+        child: Center(
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                  child: Column(children: [
+                const Spacer(
+                  flex: 2,
+                ),
+                Image.network(
+                  "https://res.cloudinary.com/basis-static/image/upload/v1659020646/dev/undraw_setup_wizard_re_nday_1.png",
+                  scale: 0.8,
+                ),
+
+                const Spacer(
+                  flex: 3,
+                ),
+                // const Text(
+                //   "Enter your email address",
+                //   style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
+                // ),
+                // GoogleSignInWidget(),
+                const SizedBox(
+                  height: 16,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: const Color.fromRGBO(230, 243, 243, 1)),
+                  child: SizedBox(
+                    width: 600,
+                    child: TextField(
+                      autofocus: true,
+                      controller: emailController,
+                      onSubmitted: (String value) {
+                        submitEmail();
+                      },
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontWeight: FontWeight.w500),
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Please enter your email address",
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  ElevatedButton.icon(
+                ),
+
+                const SizedBox(
+                  height: 16,
+                ),
+                SizedBox(
+                  width: 300,
+                  child: ElevatedButton.icon(
                       onPressed: () {
                         Provider.of<User>(context, listen: false).signIn(
                             emailController.text.toString(),
@@ -161,13 +167,14 @@ class _HomeState extends State<Home> {
                           primary: const Color(0xff36c182)),
                       icon: const Icon(Icons.login),
                       label: const Text("Continue")),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const Text("Need help? Contact support@getbasis.co")
-                ]))
-              ],
-            ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const Text("Need help? Contact support@getbasis.co"),
+                const Spacer(flex: 2)
+              ]))
+            ],
           ),
         ),
       ),

@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_application_6_provider/models/user_prepaid_card_data.dart';
+import 'package:flutter_application_6_provider/pages/dashboard/widgets/search_bar_for_user_data.dart';
 import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
+import 'package:provider/provider.dart';
 
 class AppBarWidget extends StatefulWidget {
-  const AppBarWidget({Key? key}) : super(key: key);
+  const AppBarWidget(
+      {Key? key,
+      required this.userData,
+      required this.authToken,
+      required this.rootContext,
+      required this.userId})
+      : super(key: key);
 
+  final Map userData;
+  final String authToken;
+  final BuildContext rootContext;
+  final String userId;
   @override
   State<AppBarWidget> createState() => _AppBarWidgetState();
 }
@@ -30,7 +43,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
             child: CircleAvatar(
               backgroundColor: Colors.pink,
               radius: 30,
-              child: Image.asset("assets/images/google.png"),
+              child: Image.network(widget.userData["avatar"]),
             ),
           )
         else
@@ -45,11 +58,11 @@ class _AppBarWidgetState extends State<AppBarWidget> {
           width: 30,
         ),
         Spacer(),
-        IconButton(
-          color: Colors.white,
-          iconSize: 30,
-          onPressed: () {},
-          icon: Icon(Icons.search),
+        Expanded(
+          child: SearchBarForUserData(
+              userId: widget.userId,
+              authToken: widget.authToken,
+              rootContext: widget.rootContext),
         ),
         Stack(children: [
           IconButton(
@@ -83,7 +96,9 @@ class _AppBarWidgetState extends State<AppBarWidget> {
             child: CircleAvatar(
               backgroundColor: Colors.pink,
               radius: 30,
-              child: Image.asset("assets/images/google.png"),
+              backgroundImage: NetworkImage(
+                widget.userData["avatar"],
+              ),
             ),
           )
       ]),

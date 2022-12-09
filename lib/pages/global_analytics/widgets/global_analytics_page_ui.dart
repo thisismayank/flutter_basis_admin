@@ -12,8 +12,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class GlobalAnalyticsPage extends StatefulWidget {
-  const GlobalAnalyticsPage({Key? key}) : super(key: key);
+  const GlobalAnalyticsPage(
+      {Key? key, required this.userId, required this.authToken})
+      : super(key: key);
 
+  final String userId;
+  final String authToken;
   @override
   State<GlobalAnalyticsPage> createState() => _GlobalAnalyticsPageState();
 }
@@ -21,11 +25,11 @@ class GlobalAnalyticsPage extends StatefulWidget {
 class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
   @override
   Widget build(BuildContext context) {
-    final passedData = ModalRoute.of(context)?.settings.arguments as Map;
+    print('user ${widget.userId} token ${widget.authToken}');
+    // final passedData = ModalRoute.of(context)?.settings.arguments as Map;
 
-    String userId = passedData["userData"]["userData"]["_id"];
-    String authToken = passedData["authToken"];
-    print('user $userId');
+    // String userId = passedData["userData"]["userData"]["_id"];
+    // String authToken = passedData["authToken"];
     return Consumer<GlobalAnalytics>(builder: (context, analyticsData, child) {
       return MaterialApp(
           home: Scaffold(
@@ -39,7 +43,9 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                 child: CarouselSlider(
                   items: [
                     PrepaidCardUserAnalyticsPage(
-                        authToken: authToken, context: context, userId: userId),
+                        authToken: widget.authToken,
+                        context: context,
+                        userId: widget.userId),
                     TransactionssAnalytics(),
                     RewardsAnalytics(),
                   ],

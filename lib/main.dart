@@ -42,12 +42,15 @@ void main() {
     child: MaterialApp(
       initialRoute: "/",
       routes: {
-        "/": (context) => const Home(),
+        "/": (context) => const Email(),
         "/otp": (context) => const OTP(),
         "/dashboard": (context) => const WidgetTree(),
         "/post": (context) => const PostCard(),
         "/search": (context) => SearchResults(),
-        "/global": (context) => const GlobalAnalyticsPage(),
+        "/global": (context) => const GlobalAnalyticsPage(
+              userId: "",
+              authToken: "",
+            ),
         "/prepaid": (context) => const PrepaidDataTable(),
         // "/prepaid/activated": (context) => const PrepaidCardActivatedDataTable()
       },
