@@ -35,15 +35,16 @@ class _AppBarWidgetState extends State<AppBarWidget> {
             height: double.infinity,
             decoration: const BoxDecoration(boxShadow: [
               BoxShadow(
-                  color: Colors.black45,
+                  color: Colors.white,
                   offset: Offset(0, 0),
                   spreadRadius: 1,
                   blurRadius: 10)
             ], shape: BoxShape.circle),
             child: CircleAvatar(
-              backgroundColor: Colors.pink,
-              radius: 30,
-              child: Image.network(widget.userData["avatar"]),
+              backgroundColor: Color.fromARGB(0, 236, 236, 236),
+              radius: 60,
+              child: Image.network(
+                  "https://res.cloudinary.com/basis-static/image/upload/v1569408913/logos/basis-text-logo.png"),
             ),
           )
         else
@@ -64,40 +65,40 @@ class _AppBarWidgetState extends State<AppBarWidget> {
               authToken: widget.authToken,
               rootContext: widget.rootContext),
         ),
-        Stack(children: [
-          IconButton(
-              color: Colors.white,
-              iconSize: 30,
-              onPressed: () {},
-              icon: Icon(Icons.notifications_none_outlined)),
-          const Positioned(
-              right: 6,
-              top: 6,
-              child: CircleAvatar(
-                backgroundColor: Colors.pink,
-                radius: 8,
-                child: Text(
-                  "3",
-                  style: TextStyle(fontSize: 10, color: Colors.white),
-                ),
-              ))
-        ]),
+        // Stack(children: [
+        //   IconButton(
+        //       color: Colors.white,
+        //       iconSize: 30,
+        //       onPressed: () {},
+        //       icon: Icon(Icons.notifications_none_outlined)),
+        //   const Positioned(
+        //       right: 6,
+        //       top: 6,
+        //       child: CircleAvatar(
+        //         backgroundColor: Colors.pink,
+        //         radius: 8,
+        //         child: Text(
+        //           "3",
+        //           style: TextStyle(fontSize: 10, color: Colors.white),
+        //         ),
+        //       ))
+        // ]),
         if (!ResponsiveLayout.isPhone((context)))
           Container(
             margin: EdgeInsets.all(16),
             height: double.infinity,
             decoration: const BoxDecoration(boxShadow: [
               BoxShadow(
-                  color: Colors.black45,
+                  color: Color.fromARGB(134, 255, 255, 255),
                   offset: Offset(0, 0),
                   spreadRadius: 1,
                   blurRadius: 10)
             ], shape: BoxShape.circle),
             child: CircleAvatar(
-              backgroundColor: Colors.pink,
-              radius: 30,
-              backgroundImage: NetworkImage(
-                widget.userData["avatar"],
+              backgroundColor: Color.fromARGB(0, 255, 255, 255),
+              radius: 50,
+              child: Image.network(
+                "https://res.cloudinary.com/basis-static/image/upload/v1669194594/Power%20Card/New_Onboarding_1.png",
               ),
             ),
           )

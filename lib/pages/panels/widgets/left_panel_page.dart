@@ -19,10 +19,10 @@ class _LeftPanelPageState extends State<LeftPanelPage> {
       if (ResponsiveLayout.isComputer(context))
         Container(
           color: Color(0xff26c182),
-          width: 500,
+          width: 50,
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.purple[500],
+                color: Color.fromARGB(255, 255, 255, 255),
                 borderRadius:
                     const BorderRadius.only(topLeft: Radius.circular(50))),
           ),

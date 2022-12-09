@@ -29,29 +29,24 @@ class _CenterPanelPageState extends State<CenterPanelPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(children: [
-          if (ResponsiveLayout.isComputer(context))
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(16),
-                    child: SizedBox(
-                      height: 600,
-                      width: double.infinity,
-                      child: Dashboard(
-                        rootContext: widget.rootContext,
-                        userId: widget.userData["_id"],
-                        authToken: widget.authToken,
-                      ),
-                    ),
+        backgroundColor: Color.fromARGB(255, 253, 251, 251),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(16),
+                child: SizedBox(
+                  height: 600,
+                  width: double.infinity,
+                  child: Dashboard(
+                    rootContext: widget.rootContext,
+                    userId: widget.userData["_id"],
+                    authToken: widget.authToken,
                   ),
-                ],
+                ),
               ),
-            )
-        ]),
-      ),
-    );
+            ],
+          ),
+        ));
   }
 }

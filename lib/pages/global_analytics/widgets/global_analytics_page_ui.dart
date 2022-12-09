@@ -25,7 +25,6 @@ class GlobalAnalyticsPage extends StatefulWidget {
 class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
   @override
   Widget build(BuildContext context) {
-    print('user ${widget.userId} token ${widget.authToken}');
     // final passedData = ModalRoute.of(context)?.settings.arguments as Map;
 
     // String userId = passedData["userData"]["userData"]["_id"];

@@ -5,6 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_6_provider/apis/prepaid_card_data_api.dart';
 import 'package:flutter_application_6_provider/models/user_authentication.dart';
 import 'package:flutter_application_6_provider/pages/dashboard/widgets/search_bar_for_user_data.dart';
+import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
+import 'package:flutter_application_6_provider/utils/widgets/lib/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoggedInUserData extends StatelessWidget {
   const LoggedInUserData(
@@ -32,6 +35,7 @@ class LoggedInUserData extends StatelessWidget {
           userId, searchController.text.toString(), authToken, rootContext);
     }
 
+    UserUtilsLib userUtils = UserUtilsLib();
     return Scaffold(
       backgroundColor: backgroundColor,
       resizeToAvoidBottomInset: true,
@@ -58,14 +62,15 @@ class LoggedInUserData extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("First name",
-                        style:
-                            TextStyle(color: Colors.grey, letterSpacing: 2.0)),
+                    const Text("Name",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 190, 190, 190),
+                            letterSpacing: 2.0)),
                     Text(
                       user.firstName + " " + user.lastName,
                       style: const TextStyle(
                           fontSize: 24,
-                          color: Colors.amberAccent,
+                          color: Colors.white,
                           letterSpacing: 2.0,
                           fontWeight: FontWeight.bold),
                     ),
@@ -73,10 +78,10 @@ class LoggedInUserData extends StatelessWidget {
                 ),
                 IconButton(
                   icon: Icon(Icons.power_settings_new_outlined),
-                  onPressed: (() => {}),
+                  onPressed: (() => userUtils.logoutUser(rootContext)),
                   color: Colors.white,
                   hoverColor: Colors.red,
-                  iconSize: 16,
+                  iconSize: 24,
                 )
               ],
             ),
@@ -103,42 +108,47 @@ class LoggedInUserData extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            ElevatedButton.icon(
-                onPressed: () {
-                  // getMasterClassRegistrantsCSV();
-                },
-                icon: const Icon(CupertinoIcons.rocket),
-                label: const Text("Get Masterclass registrants")),
+            if ((!ResponsiveLayout.isComputer(context)))
+              ElevatedButton.icon(
+                  onPressed: () {
+                    // getMasterClassRegistrantsCSV();
+                  },
+                  icon: const Icon(CupertinoIcons.rocket),
+                  label: const Text("Get Masterclass registrants")),
             const SizedBox(
               height: 16,
             ),
             const SizedBox(height: 8),
-            ElevatedButton.icon(
-                onPressed: () {
-                  // getAnalyticsDataForAdmin();
-                },
-                icon: const Icon(CupertinoIcons.chart_pie_fill),
-                label: const Text("Get Global Analytics")),
+            if ((!ResponsiveLayout.isComputer(context)))
+              ElevatedButton.icon(
+                  onPressed: () {
+                    // getAnalyticsDataForAdmin();
+                  },
+                  icon: const Icon(CupertinoIcons.chart_pie_fill),
+                  label: const Text("Get Global Analytics")),
             const SizedBox(
               height: 16,
             ),
-            SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: SearchBarForUserData(
-                    userId: userId,
-                    authToken: authToken,
-                    rootContext: rootContext))
+            if ((!ResponsiveLayout.isComputer(context)))
+              SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: SearchBarForUserData(
+                      userId: userId,
+                      authToken: authToken,
+                      rootContext: rootContext))
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // accessPWA();
-        },
-        backgroundColor: const Color(0xff36c182),
-        icon: const Icon(Icons.credit_card),
-        label: const Text("Go to Power Card"),
-      ),
+      floatingActionButton: !ResponsiveLayout.isComputer(context)
+          ? FloatingActionButton.extended(
+              onPressed: () {
+                // accessPWA();
+              },
+              backgroundColor: const Color(0xff36c182),
+              icon: const Icon(Icons.credit_card),
+              label: const Text("Go to Power Card"),
+            )
+          : Container(),
     );
   }
 }

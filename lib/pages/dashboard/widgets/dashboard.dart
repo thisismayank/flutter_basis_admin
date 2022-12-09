@@ -8,6 +8,7 @@ import 'package:flutter_application_6_provider/models/post.dart';
 import 'package:flutter_application_6_provider/models/user_authentication.dart';
 import 'package:flutter_application_6_provider/models/user_prepaid_card_data.dart';
 import 'package:flutter_application_6_provider/pages/dashboard/widgets/logged_in_user_ui.dart';
+import 'package:flutter_application_6_provider/pages/global_analytics/widgets/prepaid_card_user_analytics_ui.dart';
 
 import 'package:flutter_application_6_provider/pages/webview/widgets/webview.dart';
 
@@ -197,31 +198,11 @@ class _DashboardState extends State<Dashboard> {
               builder: (context) => WebViewPage(pwaUrl, "Basis Power Card")));
     }
 
-    void logoutUser() async {
-      try {
-        final sharedPreferenceInstance = await SharedPreferences.getInstance();
-        await sharedPreferenceInstance.remove("userId");
-        await sharedPreferenceInstance.remove("token");
-        await sharedPreferenceInstance.remove("avatar");
-        await sharedPreferenceInstance.remove("creditCardState");
-        await sharedPreferenceInstance.remove("firstName");
-        await sharedPreferenceInstance.remove("lastName");
-        await sharedPreferenceInstance.remove("email");
-
-        Navigator.pushNamed(context, "/");
-      } catch (error) {
-        print('logout $error');
-      }
-    }
-
     return Consumer<User>(builder: (context, user, child) {
-      return LoggedInUserData(
-        userId: widget.userId,
-        user: user,
-        authToken: widget.authToken,
-        rootContext: widget.rootContext,
-        backgroundColor: Colors.black87,
-      );
+      return PrepaidCardUserAnalyticsPage(
+          authToken: widget.authToken,
+          context: widget.rootContext,
+          userId: widget.userId);
     });
   }
 }

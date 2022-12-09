@@ -47,13 +47,12 @@ class _WidgetTreeState extends State<WidgetTree> {
             ),
             computer: Row(
               children: [
-                Expanded(
-                    child: DrawerPage(
+                DrawerPage(
                   userData: userDataPassed["userData"],
                   rootContext: context,
                   authToken: authToken,
-                )),
-                Expanded(child: LeftPanelPage()),
+                ),
+                SizedBox(width: 50, child: LeftPanelPage()),
                 Expanded(
                     child: CenterPanelPage(
                   userData: userDataPassed["userData"],

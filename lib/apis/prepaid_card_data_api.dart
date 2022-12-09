@@ -25,39 +25,37 @@ class PrepaidCardData {
   }
 
   Future<Map> getGlobalAnalyticsDataForAdmin(authToken, context) async {
-    print("HELO");
     var uri =
         Uri.parse("https://api.getbasis.co/v6.4/admins/global/analytics/data");
     var response =
         await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
     Map responseData = jsonDecode(response.body);
-    print('RES $responseData');
-
-    //   Provider.of<GlobalAnalytics>(context, listen: false).setGlobalDataForAdmin(
-    //     responseData["results"]["creditCardUserStatesAnalytics"]["activated"],
-    //     responseData["results"]["creditCardUserStatesAnalytics"]
-    //         ["yesterdayUsers"],
-    //     responseData["results"]["creditCardUserStatesAnalytics"]["inProgress"],
-    //     responseData["results"]["creditCardUserStatesAnalytics"]["manualCheck"],
-    //     responseData["results"]["creditCardUserStatesAnalytics"]
-    //         ["physicallyActivatedCards"],
-    //     responseData["results"]["rewardStatusAnalytics"]["redeemed"],
-    //     responseData["results"]["rewardStatusAnalytics"]["locked"],
-    //     responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
-    //         ["walletTransactions"],
-    //     responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
-    //         ["transactions"],
-    //     responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
-    //         ["cashbacks"],
-    //     responseData["results"]["creditCardUserStatesAnalytics"]["total"],
-    //     responseData["results"]["rewardStatusAnalytics"]["total"],
-    //     responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
-    //         ["total"],
-    //     responseData["results"]["inProgressExactStepAnalytics"]["basicDetails"],
-    //     responseData["results"]["inProgressExactStepAnalytics"]["pan"],
-    //     responseData["results"]["inProgressExactStepAnalytics"]["address"],
-    //     responseData["results"]["inProgressExactStepAnalytics"]["otp"],
-    //   );
+    print('res $responseData');
+    Provider.of<GlobalAnalytics>(context, listen: false).setGlobalDataForAdmin(
+      responseData["results"]["creditCardUserStatesAnalytics"]["activated"],
+      responseData["results"]["creditCardUserStatesAnalytics"]
+          ["yesterdayUsers"],
+      responseData["results"]["creditCardUserStatesAnalytics"]["inProgress"],
+      responseData["results"]["creditCardUserStatesAnalytics"]["manualCheck"],
+      responseData["results"]["creditCardUserStatesAnalytics"]
+          ["physicallyActivatedCards"],
+      responseData["results"]["rewardStatusAnalytics"]["redeemed"],
+      responseData["results"]["rewardStatusAnalytics"]["locked"],
+      responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
+          ["walletTransactions"],
+      responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
+          ["transactions"],
+      responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
+          ["cashbacks"],
+      responseData["results"]["creditCardUserStatesAnalytics"]["total"],
+      responseData["results"]["rewardStatusAnalytics"]["total"],
+      responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
+          ["total"],
+      responseData["results"]["inProgressExactStepAnalytics"]["basicDetails"],
+      responseData["results"]["inProgressExactStepAnalytics"]["pan"],
+      responseData["results"]["inProgressExactStepAnalytics"]["address"],
+      responseData["results"]["inProgressExactStepAnalytics"]["otp"],
+    );
 
     //   if (ResponsiveLayout.isPhone(context)) {
     //     Navigator.pushNamed(context, "/global",
@@ -69,7 +67,6 @@ class PrepaidCardData {
   }
 
   void getUserDataForAdmin(userId, userInformation, authToken, context) async {
-    print('userId $userId token $userInformation');
     var uri = Uri.parse(
         "https://api.getbasis.co/v6.4/admins/check/user/data?field=" +
             userInformation.toString());
@@ -78,7 +75,6 @@ class PrepaidCardData {
 
     Map responseData = jsonDecode(response.body);
 
-    print('response user $responseData');
     Provider.of<UserData>(context, listen: false).setUserDataForAdmin(
         responseData["results"]["userId"],
         responseData["results"]["name"],

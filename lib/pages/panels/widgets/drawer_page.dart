@@ -24,17 +24,18 @@ class DrawerPage extends StatefulWidget {
 class _DrawerPageState extends State<DrawerPage> {
   @override
   Widget build(BuildContext context) {
-    print('auth ${widget.authToken} userId ${widget.userData["_id"]}');
-    print('userdata ${widget.userData}');
     return Consumer<User>(builder: (context, user, child) {
-      return Drawer(
-          backgroundColor: Color(0xff36c182),
-          child: LoggedInUserData(
-              userId: widget.userData["_id"],
-              authToken: widget.authToken,
-              rootContext: widget.rootContext,
-              user: user,
-              backgroundColor: Color(0xff36c182)));
+      return Container(
+        width: 300,
+        child: Drawer(
+            backgroundColor: Color(0xff36c182),
+            child: LoggedInUserData(
+                userId: widget.userData["_id"],
+                authToken: widget.authToken,
+                rootContext: widget.rootContext,
+                user: user,
+                backgroundColor: Color(0xff36c182))),
+      );
     });
   }
 }
