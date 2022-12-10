@@ -22,6 +22,8 @@ class GlobalAnalytics extends ChangeNotifier {
 
   List walletTransactions = [];
   List merchantTransactions = [];
+  List xAxisTitles = [];
+  double maxYCoordinate = 0.0;
 
   void setGlobalDataForAdmin(
     String ccStateActivatedT,
@@ -63,9 +65,12 @@ class GlobalAnalytics extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setBarChartData(List walletTransactionsT, List merchantTransactionsT) {
+  void setBarChartData(List walletTransactionsT, List merchantTransactionsT,
+      List xAxisTitlesT, double maxYCoordinateT) {
     walletTransactions = walletTransactionsT;
     merchantTransactions = merchantTransactionsT;
+    xAxisTitles = xAxisTitlesT;
+    maxYCoordinate = maxYCoordinateT;
 
     notifyListeners();
   }

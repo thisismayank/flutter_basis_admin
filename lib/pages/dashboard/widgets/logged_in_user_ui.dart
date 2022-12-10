@@ -37,9 +37,8 @@ class LoggedInUserData extends StatelessWidget {
     }
 
     void getBarChartData() async {
-      print("COME");
       PrepaidCardData prepaidCardData = PrepaidCardData();
-      prepaidCardData.barGraphData(authToken, rootContext);
+      // prepaidCardData.barGraphData(authToken, rootContext);
     }
 
     UserUtilsLib userUtils = UserUtilsLib();
@@ -115,27 +114,27 @@ class LoggedInUserData extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            // if ((!ResponsiveLayout.isComputer(context)))
-            ElevatedButton.icon(
-                onPressed: () {
-                  getBarChartData();
-                },
-                icon: const Icon(CupertinoIcons.rocket),
-                label: const Text("Get Masterclass registrants")),
+            if ((!ResponsiveLayout.isComputer(context)))
+              ElevatedButton.icon(
+                  onPressed: () {
+                    getBarChartData();
+                  },
+                  icon: const Icon(CupertinoIcons.rocket),
+                  label: const Text("Get Masterclass registrants")),
             const SizedBox(
               height: 16,
             ),
             const SizedBox(height: 8),
-            // if ((!ResponsiveLayout.isComputer(context)))
-            ElevatedButton.icon(
-                onPressed: () {
-                  print("INSIDE");
-                  getBarChartData();
+            if ((!ResponsiveLayout.isComputer(context)))
+              ElevatedButton.icon(
+                  onPressed: () {
+                    print("INSIDE");
+                    getBarChartData();
 
-                  // getAnalyticsDataForAdmin();
-                },
-                icon: const Icon(CupertinoIcons.chart_pie_fill),
-                label: const Text("Get Global Analytics")),
+                    // getAnalyticsDataForAdmin();
+                  },
+                  icon: const Icon(CupertinoIcons.chart_pie_fill),
+                  label: const Text("Get Global Analytics")),
             const SizedBox(
               height: 16,
             ),
@@ -154,7 +153,7 @@ class LoggedInUserData extends StatelessWidget {
               onPressed: () {
                 // accessPWA();
               },
-              backgroundColor: const Color(0xff36c182),
+              backgroundColor: const Color(0xff5ECD9B),
               icon: const Icon(Icons.credit_card),
               label: const Text("Go to Power Card"),
             )

@@ -22,43 +22,33 @@ class BarGraphWrapper extends StatefulWidget {
 }
 
 class _BarGraphWrapperState extends State<BarGraphWrapper> {
+  bool barGraphGlobalData = false;
   @override
-  void initState() {
-    // TODO: implement initState
-    // getBarChartData();
-    super.initState();
-  }
 
-  void getBarChartData() async {
-    print("COME");
-    PrepaidCardData prepaidCardData = PrepaidCardData();
-    prepaidCardData.barGraphData(widget.authToken, widget.rootContext);
-  }
+  // void getBarChartData() async {
+  //   print("COME");
+  //   PrepaidCardData prepaidCardData = PrepaidCardData();
+  //   prepaidCardData.barGraphData(widget.authToken, widget.rootContext);
+  // }
 
-  Future<Widget> getActivatedUsersData() async {
-    PrepaidCardData prepaidCardData = PrepaidCardData();
-    await prepaidCardData.barGraphData(widget.authToken, widget.rootContext);
-    return Container();
-  }
+  // Future<Widget> getBarGraphData() async {
+  //   print("barGraphGlobalData $barGraphGlobalData");
+  //   if (!barGraphGlobalData) {
+  //     PrepaidCardData prepaidCardData = PrepaidCardData();
+  //     await prepaidCardData.barGraphData(widget.authToken, widget.rootContext);
+  //   }
+  //   return Container();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalAnalytics>(builder: (context, barGraphData, child) {
       print('wrapper $barGraphData');
-      return FutureBuilder<Widget?>(
-          future: getActivatedUsersData(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Container(
-                  child: BarChartSample2(
-                      walletTransactions: barGraphData.walletTransactions,
-                      merchantTransactions: barGraphData.merchantTransactions));
-            } else {
-              return const CircularProgressIndicator(
-                color: Colors.green,
-              );
-            }
-          });
+      return BarChartSample2(
+          walletTransactions: barGraphData.walletTransactions,
+          merchantTransactions: barGraphData.merchantTransactions,
+          xAxisTitles: barGraphData.xAxisTitles,
+          maxYCoordinate: barGraphData.maxYCoordinate);
     });
   }
 }

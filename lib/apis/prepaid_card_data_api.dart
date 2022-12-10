@@ -187,11 +187,13 @@ class PrepaidCardData {
           await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
 
       Map responseData = jsonDecode(response.body);
-      print('res ${responseData["results"]["merchantTransactions"]}');
-      print('res ${responseData["results"]["walletTransactions"]}');
+
       Provider.of<GlobalAnalytics>(context, listen: false).setBarChartData(
-          responseData["results"]["merchantTransactions"],
-          responseData["results"]["walletTransactions"]);
+        responseData["results"]["merchantTransactions"],
+        responseData["results"]["walletTransactions"],
+        responseData["results"]["xAxisTitles"],
+        responseData["results"]["maxYCoordinate"],
+      );
       return responseData;
     } catch (error) {
       print("Here $error");

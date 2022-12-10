@@ -28,13 +28,13 @@ class _DrawerPageState extends State<DrawerPage> {
       return Container(
         width: 300,
         child: Drawer(
-            backgroundColor: Color(0xff36c182),
+            backgroundColor: Color(0xff5ECD9B),
             child: LoggedInUserData(
                 userId: widget.userData["_id"],
                 authToken: widget.authToken,
                 rootContext: widget.rootContext,
                 user: user,
-                backgroundColor: Color(0xff36c182))),
+                backgroundColor: Color(0xff5ECD9B))),
       );
     });
   }
