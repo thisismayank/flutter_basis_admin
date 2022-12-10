@@ -41,25 +41,48 @@ class _PrepaidCardUserAnalyticsPageState
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalAnalytics>(builder: (context, analyticsData, child) {
-      return Container(
-        margin: EdgeInsets.fromLTRB(70, 0, 70, 0),
+      return Expanded(
         child: Column(
           children: [
-            SizedBox(
-                height: 300,
-                width: MediaQuery.of(context).size.width,
+            const Spacer(
+              flex: 1,
+            ),
+            Flexible(
+              flex: 4,
+              child: Container(
+                padding: EdgeInsets.all(32),
                 child: PpcUserStatsPieChart(
                     authToken: widget.authToken,
                     userId: widget.userId,
-                    rootContext: widget.rootContext)),
-            SizedBox(
-              height: 300,
-              // width: MediaQuery.of(context).size.width,
-              child: PrepaidCardActivatedDataTable(
-                  authToken: widget.authToken,
-                  userId: widget.userId,
-                  rootContext: widget.rootContext),
-            )
+                    rootContext: widget.rootContext),
+              ),
+            ),
+            const Spacer(
+              flex: 2,
+            ),
+            Flexible(
+              flex: 10,
+              child: Container(
+                margin: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: const [
+                      BoxShadow(
+                          blurRadius: 4,
+                          offset: Offset(-4, 4),
+                          color: Color.fromARGB(0, 255, 255, 255)),
+                      BoxShadow(
+                          blurRadius: 4,
+                          offset: Offset(8, 8),
+                          color: Color.fromARGB(48, 0, 0, 0))
+                    ]),
+                child: PrepaidCardActivatedDataTable(
+                    authToken: widget.authToken,
+                    userId: widget.userId,
+                    rootContext: widget.rootContext),
+              ),
+            ),
           ],
         ),
       );

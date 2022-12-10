@@ -46,7 +46,12 @@ void main() {
         "/otp": (context) => const OTP(),
         "/dashboard": (context) => const WidgetTree(),
         "/post": (context) => const PostCard(),
-        "/search": (context) => SearchResults(),
+        "/search": (context) => SearchResults(
+              authToken: '',
+              userData: {},
+              userInformation: 0,
+              rootContext: context,
+            ),
         "/global": (context) => const GlobalAnalyticsPage(
               userId: "",
               authToken: "",

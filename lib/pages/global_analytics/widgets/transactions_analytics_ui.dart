@@ -15,7 +15,7 @@ class TransactionssAnalytics extends StatelessWidget {
           child: Stack(children: [
             PieChart(PieChartData(
                 centerSpaceRadius: 70,
-                startDegreeOffset: -90,
+                startDegreeOffset: -50,
                 sections: [
                   PieChartSectionData(
                       color: const Color(0xFF26E5FF),

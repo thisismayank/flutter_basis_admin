@@ -30,11 +30,11 @@ class LoggedInUserData extends StatelessWidget {
     var searchController = TextEditingController();
     PrepaidCardData prepaidCardData = PrepaidCardData();
 
-    void getPrepaidDataOfUser() async {
-      // PrepaidCardData prepaidCardData = PrepaidCardData();
-      prepaidCardData.getUserDataForAdmin(
-          userId, searchController.text.toString(), authToken, rootContext);
-    }
+    // void getPrepaidDataOfUser() async {
+    //   // PrepaidCardData prepaidCardData = PrepaidCardData();
+    //   prepaidCardData.getUserDataForAdmin(
+    //       userId, searchController.text.toString(), authToken, rootContext);
+    // }
 
     void getBarChartData() async {
       PrepaidCardData prepaidCardData = PrepaidCardData();
@@ -138,13 +138,13 @@ class LoggedInUserData extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            if ((!ResponsiveLayout.isComputer(context)))
-              SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: SearchBarForUserData(
-                      userId: userId,
-                      authToken: authToken,
-                      rootContext: rootContext))
+            // if ((!ResponsiveLayout.isComputer(context)))
+            // SingleChildScrollView(
+            //     physics: const BouncingScrollPhysics(),
+            //     child: SearchBarForUserData(
+            //         userId: userId,
+            //         authToken: authToken,
+            //         rootContext: rootContext))
           ],
         ),
       ),

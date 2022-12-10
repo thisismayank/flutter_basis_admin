@@ -28,11 +28,11 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xff5ECD9B),
+      color: const Color(0xff5ECD9B),
       child: Row(children: [
         if (ResponsiveLayout.isComputer(context))
           Container(
-            margin: EdgeInsets.all(16),
+            margin: const EdgeInsets.all(16),
             height: double.infinity,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(50)),
@@ -50,7 +50,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                 Container(
                   height: 100.0,
                   width: 100.0,
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   // color: Color.fromARGB(0, 188, 178, 178),
                   // decoration: BoxDecoration(
                   //   shape: BoxShape.rectangle,
@@ -83,6 +83,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
         const Spacer(),
         Expanded(
           child: SearchBarForUserData(
+              userData: widget.userData,
               userId: widget.userId,
               authToken: widget.authToken,
               rootContext: widget.rootContext),
@@ -119,7 +120,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
             child: Stack(
               children: [
                 CircleAvatar(
-                  backgroundColor: Color.fromARGB(0, 255, 255, 255),
+                  backgroundColor: const Color.fromARGB(0, 255, 255, 255),
                   radius: 50,
                   child: Lottie.network(
                     "https://res.cloudinary.com/basis-static/raw/upload/v1661928856/Power%20Card/card_going_up.json",

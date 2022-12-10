@@ -49,35 +49,31 @@ class _CenterPanelPageState extends State<CenterPanelPage> {
     }
     return Consumer<User>(builder: (context, user, child) {
       return Scaffold(
-        backgroundColor: Color.fromARGB(255, 253, 251, 251),
-        body: Stack(children: [
+        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           if (ResponsiveLayout.isComputer(context))
             Container(
-              color: Color(0xff26c182),
+              color: const Color(0xff5ECD9B),
               width: 30,
               height: 30,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 255, 255, 255),
                     borderRadius:
-                        const BorderRadius.only(topLeft: Radius.circular(50))),
+                        BorderRadius.only(topLeft: Radius.circular(50))),
               ),
             ),
           SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 600,
-                  width: double.infinity,
-                  child: PrepaidCardUserAnalyticsPage(
-                    rootContext: widget.rootContext,
-                    userId: widget.userData["_id"],
-                    authToken: widget.authToken,
-                  ),
-                ),
-              ],
+              child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - 140,
+            // child: Expanded(
+            child: PrepaidCardUserAnalyticsPage(
+              rootContext: widget.rootContext,
+              userId: widget.userData["_id"],
+              authToken: widget.authToken,
             ),
-          )
+            // ),
+          ))
         ]),
       );
     });

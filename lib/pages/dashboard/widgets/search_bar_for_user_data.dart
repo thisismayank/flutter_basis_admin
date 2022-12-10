@@ -10,11 +10,13 @@ class SearchBarForUserData extends StatelessWidget {
       {Key? key,
       required this.userId,
       required this.authToken,
-      required this.rootContext})
+      required this.rootContext,
+      required this.userData})
       : super(key: key);
   final String userId;
   final String authToken;
   final BuildContext rootContext;
+  final Map userData;
   @override
   Widget build(BuildContext context) {
     var searchController = TextEditingController();
@@ -42,7 +44,7 @@ class SearchBarForUserData extends StatelessWidget {
               color: Colors.black87,
             ),
             onPressed: () {
-              prepaidCardData.getUserDataForAdmin(userId,
+              prepaidCardData.getUserDataForAdmin(userId, userData,
                   searchController.text.toString(), authToken, rootContext);
             },
           ),

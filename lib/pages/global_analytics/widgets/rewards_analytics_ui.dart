@@ -14,9 +14,8 @@ class RewardsAnalytics extends StatelessWidget {
           width: 100,
           child: Stack(children: [
             PieChart(
-              PieChartData(
-                  centerSpaceRadius: 50,
-                  startDegreeOffset: -90,
+              PieChartData(centerSpaceRadius: 50,
+                  // startDegreeOffset: -20,
                   sections: [
                     PieChartSectionData(
                         color: const Color(0xFFEA5F89),

@@ -12,7 +12,17 @@ import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
 class SearchResults extends StatefulWidget {
-  const SearchResults({Key? key}) : super(key: key);
+  const SearchResults(
+      {Key? key,
+      required this.userData,
+      required this.authToken,
+      required this.rootContext,
+      required this.userInformation})
+      : super(key: key);
+  final Map userData;
+  final BuildContext rootContext;
+  final String authToken;
+  final int userInformation;
 
   @override
   State<SearchResults> createState() => _SearchResultsState();
@@ -29,6 +39,7 @@ class _SearchResultsState extends State<SearchResults> {
 
   @override
   Widget build(BuildContext context) {
+    print("HELLO SEARCH RESULTS");
     final passedData = ModalRoute.of(context)?.settings.arguments as Map;
 
     String authToken = passedData["authToken"];
@@ -65,18 +76,28 @@ class _SearchResultsState extends State<SearchResults> {
           await http.post(uri, body: {"email": nameController.text.toString()});
     }
 
+    void takeToDashboard() {
+      Navigator.pop(widget.rootContext);
+    }
+
     return Consumer<UserData>(builder: (context, user, child) {
+      print("HERRE IN SEARCH RESULTS");
       return MaterialApp(
         home: Scaffold(
           backgroundColor: Colors.black,
           appBar: AppBar(
+            leading: IconButton(
+                onPressed: () {
+                  takeToDashboard();
+                },
+                icon: Icon(Icons.close)),
             centerTitle: true,
             title: Text(
               user.name.toUpperCase(),
               style: const TextStyle(
                   color: Colors.white, fontWeight: FontWeight.bold),
             ),
-            backgroundColor: const Color(0xff36c182),
+            backgroundColor: Color.fromARGB(108, 230, 249, 241),
           ),
           body: Card(
               // physics: const BouncingScrollPhysics(),
@@ -143,75 +164,86 @@ class _SearchResultsState extends State<SearchResults> {
                       ),
                 user.cardId == ""
                     ? Container()
-                    : const Text(
-                        "Transactions Breakdown",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                const SizedBox(
-                  height: 20,
-                ),
-                user.cardId == ""
-                    ? Container()
-                    : SizedBox(
-                        height: 200,
-                        child: Stack(children: [
-                          PieChart(PieChartData(
-                              centerSpaceRadius: 70,
-                              startDegreeOffset: -45,
-                              sections: [
-                                PieChartSectionData(
-                                    color: const Color(0xFF26E5FF),
-                                    value: user.totalMerchantTransactionsValue,
-                                    title:
-                                        'Merchant Txns\n ₹${user.totalMerchantTransactionsValue}',
-                                    titleStyle: const TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    titlePositionPercentageOffset: 0.99,
-                                    radius: 40),
-                                PieChartSectionData(
-                                    color: const Color(0xFFFFCF26),
-                                    value: user.totalWalletTransactionsValue,
-                                    title:
-                                        'Wallet Txns\n ₹${user.totalWalletTransactionsValue}',
-                                    titleStyle: const TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    titlePositionPercentageOffset: 0.99,
-                                    radius: 30),
-                                PieChartSectionData(
-                                    color: const Color(0xFFEE2727),
-                                    value: user.totalCashbackValue,
-                                    title:
-                                        'Cashbacks Earned\n ₹${user.totalCashbackValue}',
-                                    titleStyle: const TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    titlePositionPercentageOffset: 0.99,
-                                    radius: 60),
-                              ])),
-                          Positioned.fill(
-                              child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Balance",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
-                              ),
-                              Text(
-                                '₹ ${user.balance.toString()}',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ))
-                        ]),
-                      ),
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                            const Text(
+                              "Transactions Breakdown",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            user.cardId == ""
+                                ? Container()
+                                : SizedBox(
+                                    height: 400,
+                                    child: Stack(children: [
+                                      PieChart(PieChartData(
+                                          centerSpaceRadius: 70,
+                                          startDegreeOffset: -45,
+                                          sections: [
+                                            PieChartSectionData(
+                                                color: const Color(0xFF26E5FF),
+                                                value: user
+                                                    .totalMerchantTransactionsValue,
+                                                title:
+                                                    'Merchant Txns\n ₹${user.totalMerchantTransactionsValue}',
+                                                titleStyle: const TextStyle(
+                                                  backgroundColor: Colors.white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                                titlePositionPercentageOffset:
+                                                    0.99,
+                                                radius: 40),
+                                            PieChartSectionData(
+                                                color: const Color(0xFFFFCF26),
+                                                value: user
+                                                    .totalWalletTransactionsValue,
+                                                title:
+                                                    'Wallet Txns\n ₹${user.totalWalletTransactionsValue}',
+                                                titleStyle: const TextStyle(
+                                                  backgroundColor: Colors.white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                                titlePositionPercentageOffset:
+                                                    0.99,
+                                                radius: 30),
+                                            PieChartSectionData(
+                                                color: const Color(0xFFEE2727),
+                                                value: user.totalCashbackValue,
+                                                title:
+                                                    'Cashbacks Earned\n ₹${user.totalCashbackValue}',
+                                                titleStyle: const TextStyle(
+                                                  backgroundColor: Colors.white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                                titlePositionPercentageOffset:
+                                                    0.99,
+                                                radius: 60),
+                                          ])),
+                                      Positioned.fill(
+                                          child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Text(
+                                            "Balance",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20),
+                                          ),
+                                          Text(
+                                            '₹ ${user.balance.toString()}',
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        ],
+                                      ))
+                                    ]),
+                                  ),
+                          ])
               ],
             ),
           )),

@@ -22,9 +22,16 @@ class WidgetTree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userDataPassed = ModalRoute.of(context)?.settings.arguments as Map;
+    print("userDataPassed $userDataPassed");
+    print("userDataPassed ${userDataPassed['screen']}");
 
-    String authToken =
-        '${userDataPassed["userData"]["_id"]},${userDataPassed["userData"]["token"]}';
+    int whichScreenToDisplayInRightPanel =
+        userDataPassed.isNotEmpty && userDataPassed["screen"] == 1 ? 1 : 0;
+    print('whichScreenToDisplayInRightPanel $whichScreenToDisplayInRightPanel');
+    String authToken = userDataPassed.isNotEmpty
+        ? '${userDataPassed["userData"]["_id"]},${userDataPassed["userData"]["token"]}'
+        : "";
+    print('authToken $authToken');
 
     return Scaffold(
       appBar: PreferredSize(
@@ -67,10 +74,10 @@ class WidgetTree extends StatelessWidget {
               )),
               Expanded(
                   child: RightPanelPage(
-                userData: userDataPassed["userData"],
-                rootContext: context,
-                authToken: authToken,
-              ))
+                      userData: userDataPassed["userData"],
+                      rootContext: context,
+                      authToken: authToken,
+                      userInformation: whichScreenToDisplayInRightPanel))
             ],
           )),
       drawer: DrawerPage(

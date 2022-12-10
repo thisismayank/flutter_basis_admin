@@ -21,7 +21,6 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
   final String authToken;
   final String userId;
   final BuildContext rootContext;
-  @override
   Future<Widget> getActivatedUsersData() async {
     PrepaidCardData prepaidCardDataApi = PrepaidCardData();
     await prepaidCardDataApi.getAllUsersWhoActivatedPowerCard(
@@ -45,12 +44,16 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView(
+                clipBehavior: Clip.antiAlias,
                 children: [
-                  Center(
+                  Expanded(
                     child: DataTable(
-                        columnSpacing: 16,
+                        border: TableBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        headingRowHeight: 40,
+                        columnSpacing: 4,
                         headingRowColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 217, 236, 217)),
+                            const Color.fromARGB(131, 217, 236, 217)),
                         columns: [
                           DataColumn(label: Text('', style: titles)),
                           DataColumn(label: Text('Name', style: titles)),
@@ -59,7 +62,7 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
                                   child: Text(
                             'Email',
                             style: titles,
-                            softWrap: true,
+                            softWrap: false,
                           ))),
                         ],
                         rows: prepaidData.allUsersWhoActivatedCardList
@@ -85,9 +88,9 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
                                   DataCell(
                                       ConstrainedBox(
                                           constraints: const BoxConstraints(
-                                              maxWidth: 80),
+                                              maxWidth: 200),
                                           child: Text(
-                                              '${prepaidUserdData["firstName"]}',
+                                              '${prepaidUserdData["firstName"].substring(0, 1).toUpperCase()}${prepaidUserdData["firstName"].substring(1).toLowerCase()}',
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                               ))),

@@ -67,7 +67,8 @@ class PrepaidCardData {
     //   }
   }
 
-  void getUserDataForAdmin(userId, userInformation, authToken, context) async {
+  void getUserDataForAdmin(
+      userId, rootUserData, userInformation, authToken, context) async {
     var uri = Uri.parse(
         "https://api.getbasis.co/v6.4/admins/check/user/data?field=" +
             userInformation.toString());
@@ -94,10 +95,12 @@ class PrepaidCardData {
         responseData["results"]["reason"],
         responseData["results"]["nameCheck"]);
 
-    Navigator.pushNamed(context, "/search", arguments: {
+    Navigator.pushNamed(context, "/dashboard", arguments: {
       "userId": userId,
       "authToken": authToken,
-      "fetchedUserId": responseData["results"]["userId"]
+      "fetchedUserId": responseData["results"]["userId"],
+      "screen": 1,
+      "userData": rootUserData
     });
   }
 
