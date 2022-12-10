@@ -38,170 +38,25 @@ class _DashboardState extends State<Dashboard> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getSomeData();
+    getGlobalAnalyticsDataForAdmin();
   }
 
-  void getSomeData() async {
-    print("LLLLLAAAAAAAA");
+  void getGlobalAnalyticsDataForAdmin() async {
     PrepaidCardData prepaidCardData = PrepaidCardData();
     await prepaidCardData.getGlobalAnalyticsDataForAdmin(
         widget.authToken, widget.rootContext);
   }
 
   Widget build(BuildContext context) {
-    // final data = ModalRoute.of(context)?.settings.arguments as Map;
-    // String token = data["userData"]["token"] ?? "";
-
     if (widget.authToken.isEmpty) {
       Navigator.pop(context);
       Navigator.pushNamed(context, "/");
-    }
-    // String userId = data["userData"]["_id"];
-
-    // String authToken = '$userId,$token';
-    var searchController = TextEditingController();
-    void getAnalyticsDataForAdmin() async {
-      // print('aut ${widget.authToken}');
-      // print("here");
-      // var uri = Uri.parse(
-      //     "https://api.getbasis.co/v6.4/admins/global/analytics/data");
-      // print('ur $uri');
-      // var response = await http
-      //     .get(uri, headers: {"Authorization": 'Bearer ${widget.authToken}'});
-      // Map responseData = jsonDecode(response.body);
-      // print('res $responseData');
-
-      //   Provider.of<GlobalAnalytics>(context, listen: false)
-      //       .setGlobalDataForAdmin(
-      //     responseData["results"]["creditCardUserStatesAnalytics"]["activated"],
-      //     responseData["results"]["creditCardUserStatesAnalytics"]
-      //         ["yesterdayUsers"],
-      //     responseData["results"]["creditCardUserStatesAnalytics"]["inProgress"],
-      //     responseData["results"]["creditCardUserStatesAnalytics"]["manualCheck"],
-      //     responseData["results"]["creditCardUserStatesAnalytics"]
-      //         ["physicallyActivatedCards"],
-      //     responseData["results"]["rewardStatusAnalytics"]["redeemed"],
-      //     responseData["results"]["rewardStatusAnalytics"]["locked"],
-      //     responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
-      //         ["walletTransactions"],
-      //     responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
-      //         ["transactions"],
-      //     responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
-      //         ["cashbacks"],
-      //     responseData["results"]["creditCardUserStatesAnalytics"]["total"],
-      //     responseData["results"]["rewardStatusAnalytics"]["total"],
-      //     responseData["results"]["balanceTransactionsAndCashbacksAnalytics"]
-      //         ["total"],
-      //     responseData["results"]["inProgressExactStepAnalytics"]["basicDetails"],
-      //     responseData["results"]["inProgressExactStepAnalytics"]["pan"],
-      //     responseData["results"]["inProgressExactStepAnalytics"]["address"],
-      //     responseData["results"]["inProgressExactStepAnalytics"]["otp"],
-      //   );
-      //   print("ROUTING");
-      //   Navigator.pushNamed(context, "/global", arguments: {
-      //     "userData": widget.userId,
-      //     "authToken": widget.authToken
-      //   });
-    }
-
-    // void getUserDataForAdmin() async {
-    //   var uri = Uri.parse(
-    //       "https://api.getbasis.co/v6.4/admins/check/user/data?field=" +
-    //           searchController.text.toString());
-    //   var response = await http
-    //       .get(uri, headers: {"Authorization": 'Bearer ${widget.authToken}'});
-
-    //   Map responseData = jsonDecode(response.body);
-
-    //   Provider.of<UserData>(context, listen: false).setUserDataForAdmin(
-    //       responseData["results"]["userId"],
-    //       responseData["results"]["name"],
-    //       responseData["results"]["email"],
-    //       responseData["results"]["customerId"],
-    //       responseData["results"]["accountId"],
-    //       responseData["results"]["balance"],
-    //       responseData["results"]["cardActivatedDate"].toString(),
-    //       responseData["results"]["sourceOfSignUp"],
-    //       responseData["results"]["basisUserSince"].toString(),
-    //       responseData["results"]["totalMerchantTransactionsValue"],
-    //       responseData["results"]["totalWalletTransactionsValue"],
-    //       responseData["results"]["totalCashbackValue"],
-    //       responseData["results"]["cardId"],
-    //       responseData["results"]["creditCardState"],
-    //       responseData["results"]["reason"],
-    //       responseData["results"]["nameCheck"]);
-
-    //   Navigator.pushNamed(context, "/search", arguments: {
-    //     "userId": widget.userId,
-    //     "authToken": widget.authToken,
-    //     "fetchedUserId": responseData["results"]["userId"]
-    //   });
-    // }
-
-    void getPosts() async {
-      var uri = Uri.parse("https://api.getbasis.co/v7/posts");
-
-      var response = await http
-          .get(uri, headers: {"Authorization": 'Bearer ${widget.authToken}'});
-
-      Map responseData = jsonDecode(response.body);
-
-      Provider.of<Post>(context, listen: false).setAPost(
-          responseData["results"][0]["_id"],
-          responseData["results"][0]["body"],
-          responseData["results"][0]["createdAt"],
-          responseData["results"][0]["postOwnerUserId"],
-          responseData["results"][0]["userName"]);
-
-      Navigator.pushNamed(context, "/post");
-    }
-
-    void getMasterClassRegistrantsCSV() async {
-      var uri = Uri.parse(
-          'https://api.getbasis.co/v6.4/users/${widget.userId}/mail/masterclass/registrants');
-
-      var response = await http
-          .get(uri, headers: {"Authorization": 'Bearer ${widget.authToken}'});
-
-      Map responseData = jsonDecode(response.body);
-      // Fluttertoast.showToast(
-      //     msg: "Registrants List emailed successfully",
-      //     toastLength: Toast.LENGTH_LONG,
-      //     gravity: ToastGravity.BOTTOM,
-      //     timeInSecForIosWeb: 2,
-      //     backgroundColor: const Color(0xff36c182),
-      //     textColor: Colors.white,
-      //     fontSize: 16.0);
-    }
-
-    void accessBasisWebApp() {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  const WebViewPage("https://app.getbasis.co", "Basis")));
-    }
-
-    void accessPWA() async {
-      var uri =
-          Uri.parse("https://api.getbasis.co/v6.4/prepaidcards?isfromweb=true");
-      var response = await http
-          .get(uri, headers: {"Authorization": 'Bearer ${widget.authToken}'});
-
-      Map responseData = jsonDecode(response.body);
-
-      String pwaUrl = responseData["results"][0]["url"];
-
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => WebViewPage(pwaUrl, "Basis Power Card")));
     }
 
     return Consumer<User>(builder: (context, user, child) {
       return PrepaidCardUserAnalyticsPage(
           authToken: widget.authToken,
-          context: widget.rootContext,
+          rootContext: widget.rootContext,
           userId: widget.userId);
     });
   }

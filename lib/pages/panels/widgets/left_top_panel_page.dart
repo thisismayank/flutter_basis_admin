@@ -12,8 +12,8 @@ import 'package:flutter_application_6_provider/pages/user_authentication/widgets
 import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 import 'package:provider/provider.dart';
 
-class CenterPanelPage extends StatefulWidget {
-  const CenterPanelPage(
+class LeftTopPanelPage extends StatefulWidget {
+  const LeftTopPanelPage(
       {Key? key,
       required this.userData,
       required this.authToken,
@@ -25,11 +25,10 @@ class CenterPanelPage extends StatefulWidget {
 
   // final Array userData;
   @override
-  State<CenterPanelPage> createState() => _CenterPanelPageState();
+  State<LeftTopPanelPage> createState() => _LeftTopPanelPageState();
 }
 
-class _CenterPanelPageState extends State<CenterPanelPage> {
-  @override
+class _LeftTopPanelPageState extends State<LeftTopPanelPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -42,11 +41,8 @@ class _CenterPanelPageState extends State<CenterPanelPage> {
         widget.authToken, widget.rootContext);
   }
 
+  @override
   Widget build(BuildContext context) {
-    if (widget.authToken.isEmpty) {
-      Navigator.pop(context);
-      Navigator.pushNamed(context, "/");
-    }
     return Consumer<User>(builder: (context, user, child) {
       return Scaffold(
         backgroundColor: Color.fromARGB(255, 253, 251, 251),
@@ -55,7 +51,6 @@ class _CenterPanelPageState extends State<CenterPanelPage> {
             Container(
               color: Color(0xff26c182),
               width: 30,
-              height: 30,
               child: Container(
                 decoration: BoxDecoration(
                     color: Color.fromARGB(255, 255, 255, 255),
@@ -70,10 +65,9 @@ class _CenterPanelPageState extends State<CenterPanelPage> {
                   height: 600,
                   width: double.infinity,
                   child: PrepaidCardUserAnalyticsPage(
-                    rootContext: widget.rootContext,
-                    userId: widget.userData["_id"],
-                    authToken: widget.authToken,
-                  ),
+                      authToken: widget.authToken,
+                      rootContext: widget.rootContext,
+                      userId: widget.userData["_id"]),
                 ),
               ],
             ),

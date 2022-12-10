@@ -5,7 +5,9 @@ import 'package:flutter_application_6_provider/models/user_authentication.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/app_bar_widget.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/center_panel_page.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/drawer_page.dart';
+import 'package:flutter_application_6_provider/pages/panels/widgets/left_bottom_panel_page.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/left_panel_page.dart';
+import 'package:flutter_application_6_provider/pages/panels/widgets/left_top_panel_page.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/right_panel_page.dart';
 import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 import 'package:flutter_application_6_provider/models/user_prepaid_card_data.dart';
@@ -52,14 +54,28 @@ class _WidgetTreeState extends State<WidgetTree> {
                   rootContext: context,
                   authToken: authToken,
                 ),
-                SizedBox(width: 50, child: LeftPanelPage()),
+                // Column( children: [LeftTopPanelPage(
+                //   userData: userDataPassed["userData"],
+                //   rootContext: context,
+                //   authToken: authToken,
+                // ),LeftBottomPanelPage(
+                //   userData: userDataPassed["userData"],
+                //   rootContext: context,
+                //   authToken: authToken,
+                // )
+                // ]),
                 Expanded(
                     child: CenterPanelPage(
                   userData: userDataPassed["userData"],
                   rootContext: context,
                   authToken: authToken,
                 )),
-                Expanded(child: RightPanelPage())
+                Expanded(
+                    child: RightPanelPage(
+                  userData: userDataPassed["userData"],
+                  rootContext: context,
+                  authToken: authToken,
+                ))
               ],
             )),
         drawer: DrawerPage(

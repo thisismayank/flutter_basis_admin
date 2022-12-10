@@ -4,7 +4,15 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 
 class LeftPanelPage extends StatefulWidget {
-  const LeftPanelPage({Key? key}) : super(key: key);
+  const LeftPanelPage(
+      {Key? key,
+      required this.userData,
+      required this.authToken,
+      required this.rootContext})
+      : super(key: key);
+  final Map userData;
+  final BuildContext rootContext;
+  final String authToken;
 
   @override
   State<LeftPanelPage> createState() => _LeftPanelPageState();
@@ -13,20 +21,6 @@ class LeftPanelPage extends StatefulWidget {
 class _LeftPanelPageState extends State<LeftPanelPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        // resizeToAvoidBottomInset: false,
-        body: Stack(children: [
-      if (ResponsiveLayout.isComputer(context))
-        Container(
-          color: Color(0xff26c182),
-          width: 50,
-          child: Container(
-            decoration: BoxDecoration(
-                color: Color.fromARGB(255, 255, 255, 255),
-                borderRadius:
-                    const BorderRadius.only(topLeft: Radius.circular(50))),
-          ),
-        )
-    ]));
+    return Container();
   }
 }

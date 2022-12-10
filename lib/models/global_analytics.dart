@@ -20,6 +20,9 @@ class GlobalAnalytics extends ChangeNotifier {
   double ipAddress = 0.0;
   double ipOtp = 0.0;
 
+  List walletTransactions = [];
+  List merchantTransactions = [];
+
   void setGlobalDataForAdmin(
     String ccStateActivatedT,
     String ccYesterdayT,
@@ -56,6 +59,13 @@ class GlobalAnalytics extends ChangeNotifier {
     ipPan = double.parse(ipPanT);
     ipAddress = double.parse(ipAddressT);
     ipOtp = double.parse(ipOtpT);
+
+    notifyListeners();
+  }
+
+  void setBarChartData(List walletTransactionsT, List merchantTransactionsT) {
+    walletTransactions = walletTransactionsT;
+    merchantTransactions = merchantTransactionsT;
 
     notifyListeners();
   }

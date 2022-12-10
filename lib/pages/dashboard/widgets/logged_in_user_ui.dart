@@ -26,13 +26,20 @@ class LoggedInUserData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("WIDGET");
     var searchController = TextEditingController();
     PrepaidCardData prepaidCardData = PrepaidCardData();
 
     void getPrepaidDataOfUser() async {
-      PrepaidCardData prepaidCardData = PrepaidCardData();
+      // PrepaidCardData prepaidCardData = PrepaidCardData();
       prepaidCardData.getUserDataForAdmin(
           userId, searchController.text.toString(), authToken, rootContext);
+    }
+
+    void getBarChartData() async {
+      print("COME");
+      PrepaidCardData prepaidCardData = PrepaidCardData();
+      prepaidCardData.barGraphData(authToken, rootContext);
     }
 
     UserUtilsLib userUtils = UserUtilsLib();
@@ -108,24 +115,27 @@ class LoggedInUserData extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            if ((!ResponsiveLayout.isComputer(context)))
-              ElevatedButton.icon(
-                  onPressed: () {
-                    // getMasterClassRegistrantsCSV();
-                  },
-                  icon: const Icon(CupertinoIcons.rocket),
-                  label: const Text("Get Masterclass registrants")),
+            // if ((!ResponsiveLayout.isComputer(context)))
+            ElevatedButton.icon(
+                onPressed: () {
+                  getBarChartData();
+                },
+                icon: const Icon(CupertinoIcons.rocket),
+                label: const Text("Get Masterclass registrants")),
             const SizedBox(
               height: 16,
             ),
             const SizedBox(height: 8),
-            if ((!ResponsiveLayout.isComputer(context)))
-              ElevatedButton.icon(
-                  onPressed: () {
-                    // getAnalyticsDataForAdmin();
-                  },
-                  icon: const Icon(CupertinoIcons.chart_pie_fill),
-                  label: const Text("Get Global Analytics")),
+            // if ((!ResponsiveLayout.isComputer(context)))
+            ElevatedButton.icon(
+                onPressed: () {
+                  print("INSIDE");
+                  getBarChartData();
+
+                  // getAnalyticsDataForAdmin();
+                },
+                icon: const Icon(CupertinoIcons.chart_pie_fill),
+                label: const Text("Get Global Analytics")),
             const SizedBox(
               height: 16,
             ),

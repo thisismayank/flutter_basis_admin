@@ -16,16 +16,16 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
       {Key? key,
       required this.authToken,
       required this.userId,
-      required this.contextRoot})
+      required this.rootContext})
       : super(key: key);
   final String authToken;
   final String userId;
-  final BuildContext contextRoot;
+  final BuildContext rootContext;
   @override
   Future<Widget> getActivatedUsersData() async {
     PrepaidCardData prepaidCardDataApi = PrepaidCardData();
     await prepaidCardDataApi.getAllUsersWhoActivatedPowerCard(
-        authToken, contextRoot, 0, 200);
+        authToken, rootContext, 0, 200);
     return Container();
   }
 
@@ -81,7 +81,7 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
                                               prepaidUserdData["_id"],
                                               userId,
                                               authToken,
-                                              contextRoot)),
+                                              rootContext)),
                                   DataCell(
                                       ConstrainedBox(
                                           constraints: const BoxConstraints(
@@ -96,7 +96,7 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
                                               prepaidUserdData["_id"],
                                               userId,
                                               authToken,
-                                              contextRoot)),
+                                              rootContext)),
                                   DataCell(
                                       Text('${prepaidUserdData["email"]}',
                                           style: const TextStyle(
@@ -106,7 +106,7 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
                                               prepaidUserdData["_id"],
                                               userId,
                                               authToken,
-                                              contextRoot)),
+                                              rootContext)),
                                 ]))
                             .toList()),
                   )

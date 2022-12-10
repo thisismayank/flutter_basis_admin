@@ -43,7 +43,7 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                   items: [
                     PrepaidCardUserAnalyticsPage(
                         authToken: widget.authToken,
-                        context: context,
+                        rootContext: context,
                         userId: widget.userId),
                     TransactionssAnalytics(),
                     RewardsAnalytics(),

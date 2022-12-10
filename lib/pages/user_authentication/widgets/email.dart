@@ -89,7 +89,7 @@ class _EmailState extends State<Email> {
 
       Map responseData = jsonDecode(response.body);
 
-      print("res $responseData");
+      // print("res $responseData");
       Navigator.pushNamed(context, "/otp", arguments: {
         "email": emailController.text.toString(),
         "token": responseData["results"]["token"]
