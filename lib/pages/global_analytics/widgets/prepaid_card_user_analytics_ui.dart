@@ -76,7 +76,7 @@ class PrepaidCardUserAnalyticsPage extends StatelessWidget {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Container(),
+                            child: Center(child: CircularProgressIndicator()),
                           );
                         }
                       }))),
