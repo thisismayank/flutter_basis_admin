@@ -22,16 +22,17 @@ class WidgetTree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userDataPassed = ModalRoute.of(context)?.settings.arguments as Map;
-    print("userDataPassed $userDataPassed");
-    print("userDataPassed ${userDataPassed['screen']}");
 
     int whichScreenToDisplayInRightPanel =
-        userDataPassed.isNotEmpty && userDataPassed["screen"] == 1 ? 1 : 0;
-    print('whichScreenToDisplayInRightPanel $whichScreenToDisplayInRightPanel');
+        userDataPassed.isNotEmpty && userDataPassed["screen"] == 1
+            ? 1
+            : userDataPassed.isNotEmpty && userDataPassed["screen"] == 2
+                ? 2
+                : 0;
+
     String authToken = userDataPassed.isNotEmpty
         ? '${userDataPassed["userData"]["_id"]},${userDataPassed["userData"]["token"]}'
         : "";
-    print('authToken $authToken');
 
     return Scaffold(
       appBar: PreferredSize(

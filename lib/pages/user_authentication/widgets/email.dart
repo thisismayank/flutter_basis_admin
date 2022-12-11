@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_6_provider/models/user_authentication.dart';
 import 'package:http/http.dart' as http;
@@ -97,9 +98,27 @@ class _EmailState extends State<Email> {
     }
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
-        child: Center(
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+          alignment: Alignment.center,
+          margin: const EdgeInsets.all(8),
+          width: ResponsiveLayout.isComputer(context)
+              ? MediaQuery.of(context).size.width - 300
+              : MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: const [
+                BoxShadow(
+                    blurRadius: 4,
+                    offset: Offset(-4, 4),
+                    color: Color.fromARGB(0, 255, 255, 255)),
+                // BoxShadow(
+                //     blurRadius: 4,
+                //     offset: Offset(8, 8),
+                //     color: Color.fromARGB(48, 0, 0, 0))
+              ]),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -108,6 +127,10 @@ class _EmailState extends State<Email> {
                   child: Column(children: [
                 const Spacer(
                   flex: 2,
+                ),
+                Image.network(
+                  "https://res.cloudinary.com/basis-static/image/upload/v1609946823/logos/Basis_Green_Logo_2x.png",
+                  scale: 20,
                 ),
                 Image.network(
                   "https://res.cloudinary.com/basis-static/image/upload/v1659020646/dev/undraw_setup_wizard_re_nday_1.png",
@@ -130,9 +153,12 @@ class _EmailState extends State<Email> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: const Color.fromRGBO(230, 243, 243, 1)),
-                  child: SizedBox(
-                    width: 600,
+                  child: Container(
+                    width: ResponsiveLayout.isComputer(context)
+                        ? 600
+                        : MediaQuery.of(context).size.width - 100,
                     child: TextField(
+                      autofillHints: [AutofillHints.email],
                       autofocus: true,
                       controller: emailController,
                       onSubmitted: (String value) {
@@ -141,6 +167,21 @@ class _EmailState extends State<Email> {
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontWeight: FontWeight.w500),
                       decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.email_outlined,
+                          color: Color(0xff36c182),
+                        ),
+                        // suffixIcon: emailController.text.isNotEmpty
+                        //     ? IconButton(
+                        //         icon: const Icon(
+                        //           Icons.close,
+                        //           color: Color(0xff36c182),
+                        //         ),
+                        //         onPressed: () => emailController.clear(),
+                        //       )
+                        //     : Container(
+                        //         width: 0,
+                        //       ),
                         border: InputBorder.none,
                         hintText: "Please enter your email address",
                       ),
@@ -152,7 +193,11 @@ class _EmailState extends State<Email> {
                   height: 16,
                 ),
                 SizedBox(
-                  width: 300,
+                  width: ResponsiveLayout.isComputer(context)
+                      ? 300
+                      : MediaQuery.of(context).size.width > 500
+                          ? 300
+                          : MediaQuery.of(context).size.width - 200,
                   child: ElevatedButton.icon(
                       onPressed: () {
                         Provider.of<User>(context, listen: false).signIn(

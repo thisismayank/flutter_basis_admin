@@ -26,7 +26,7 @@ class _DrawerPageState extends State<DrawerPage> {
   Widget build(BuildContext context) {
     return Consumer<User>(builder: (context, user, child) {
       return Container(
-        width: 300,
+        width: 250,
         child: Drawer(
             backgroundColor: Color(0xff5ECD9B),
             child: LoggedInUserData(

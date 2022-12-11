@@ -7,6 +7,7 @@ import 'package:flutter_application_6_provider/models/user_authentication.dart';
 import 'package:flutter_application_6_provider/pages/dashboard/widgets/search_bar_for_user_data.dart';
 import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 import 'package:flutter_application_6_provider/utils/widgets/lib/user.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoggedInUserData extends StatelessWidget {
@@ -26,7 +27,6 @@ class LoggedInUserData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("WIDGET");
     var searchController = TextEditingController();
     PrepaidCardData prepaidCardData = PrepaidCardData();
 
@@ -128,7 +128,6 @@ class LoggedInUserData extends StatelessWidget {
             if ((!ResponsiveLayout.isComputer(context)))
               ElevatedButton.icon(
                   onPressed: () {
-                    print("INSIDE");
                     getBarChartData();
 
                     // getAnalyticsDataForAdmin();
@@ -145,6 +144,10 @@ class LoggedInUserData extends StatelessWidget {
             //         userId: userId,
             //         authToken: authToken,
             //         rootContext: rootContext))
+            if ((ResponsiveLayout.isComputer(context)))
+              Lottie.network(
+                "https://res.cloudinary.com/basis-static/raw/upload/v1668490322/Power%20Card/newAnimation.json",
+              ),
           ],
         ),
       ),

@@ -16,11 +16,13 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
       {Key? key,
       required this.authToken,
       required this.userId,
-      required this.rootContext})
+      required this.rootContext,
+      required this.userData})
       : super(key: key);
   final String authToken;
   final String userId;
   final BuildContext rootContext;
+  final Map userData;
   Future<Widget> getActivatedUsersData() async {
     PrepaidCardData prepaidCardDataApi = PrepaidCardData();
     await prepaidCardDataApi.getAllUsersWhoActivatedPowerCard(
@@ -82,6 +84,7 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
                                       onTap: () => userPrepaidCardData
                                           .getUserPrepaidData(
                                               prepaidUserdData["_id"],
+                                              userData,
                                               userId,
                                               authToken,
                                               rootContext)),
@@ -97,6 +100,7 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
                                       onTap: () => userPrepaidCardData
                                           .getUserPrepaidData(
                                               prepaidUserdData["_id"],
+                                              userData,
                                               userId,
                                               authToken,
                                               rootContext)),
@@ -107,6 +111,7 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
                                       onTap: () => userPrepaidCardData
                                           .getUserPrepaidData(
                                               prepaidUserdData["_id"],
+                                              userData,
                                               userId,
                                               authToken,
                                               rootContext)),

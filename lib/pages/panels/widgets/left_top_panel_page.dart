@@ -45,17 +45,17 @@ class _LeftTopPanelPageState extends State<LeftTopPanelPage> {
   Widget build(BuildContext context) {
     return Consumer<User>(builder: (context, user, child) {
       return Scaffold(
-        backgroundColor: Color.fromARGB(255, 253, 251, 251),
+        backgroundColor: const Color.fromARGB(255, 253, 251, 251),
         body: Stack(children: [
           if (ResponsiveLayout.isComputer(context))
             Container(
-              color: Color(0xff26c182),
+              color: const Color(0xff26c182),
               width: 30,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 255, 255, 255),
                     borderRadius:
-                        const BorderRadius.only(topLeft: Radius.circular(50))),
+                        BorderRadius.only(topLeft: Radius.circular(50))),
               ),
             ),
           SingleChildScrollView(
@@ -65,6 +65,7 @@ class _LeftTopPanelPageState extends State<LeftTopPanelPage> {
                   height: 600,
                   width: double.infinity,
                   child: PrepaidCardUserAnalyticsPage(
+                      userData: {},
                       authToken: widget.authToken,
                       rootContext: widget.rootContext,
                       userId: widget.userData["_id"]),

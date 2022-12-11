@@ -56,7 +56,11 @@ void main() {
               userId: "",
               authToken: "",
             ),
-        "/prepaid": (context) => const PrepaidDataTable(),
+        "/prepaid": (context) => PrepaidDataTable(
+            authToken: '',
+            userData: {},
+            userInformation: 0,
+            rootContext: context),
         // "/prepaid/activated": (context) => const PrepaidCardActivatedDataTable()
       },
     ),

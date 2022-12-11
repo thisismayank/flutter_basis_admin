@@ -25,23 +25,25 @@ class SearchBarForUserData extends StatelessWidget {
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Color.fromARGB(255, 125, 203, 168)),
+          color: const Color.fromARGB(255, 125, 203, 168)),
       child: TextField(
         autofocus: true,
         controller: searchController,
         textAlign: TextAlign.center,
         onSubmitted: (String value) {
-          // getUserDataForAdmin();
+          prepaidCardData.getUserDataForAdmin(userId, userData,
+              searchController.text.toString(), authToken, rootContext);
         },
         decoration: InputDecoration(
           // icon: Icon(Icons.search),
           border: InputBorder.none,
-          hintText: "Search using userId, email, cstId, acId",
+          hintText: "Search for user prepaid data",
+          hintStyle: const TextStyle(color: Colors.white),
           // ),
           suffixIcon: IconButton(
             icon: const Icon(
               Icons.search,
-              color: Colors.black87,
+              color: Colors.white,
             ),
             onPressed: () {
               prepaidCardData.getUserDataForAdmin(userId, userData,

@@ -7,6 +7,7 @@ import 'package:flutter_application_6_provider/pages/global_analytics/widgets/tr
 import 'package:flutter_application_6_provider/pages/panels/widgets/bar_chart.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/bar_graph_wrapper.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_activated_state_list_table_ui.dart';
+import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_list_table.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/search_results.dart';
 
 class RightPanelPage extends StatefulWidget {
@@ -48,7 +49,6 @@ class _RightPanelPageState extends State<RightPanelPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('WIDGET INFO ${widget.userInformation}');
     return Scaffold(
       // backgroundColor: Colors.red,
       body: widget.userInformation == 1
@@ -57,41 +57,53 @@ class _RightPanelPageState extends State<RightPanelPage> {
               rootContext: widget.rootContext,
               authToken: widget.authToken,
               userInformation: widget.userInformation)
-          : Column(
-              children: [
-                Flexible(
-                  flex: 2,
-                  child: Row(
-                    children: const [
-                      Expanded(child: TransactionssAnalytics()),
-                      Expanded(child: RewardsAnalytics()),
-                    ],
-                  ),
+          : widget.userInformation == 2
+              ? PrepaidDataTable(
+                  userData: widget.userData,
+                  rootContext: widget.rootContext,
+                  authToken: widget.authToken,
+                  userInformation: widget.userInformation)
+              : Column(
+                  children: [
+                    Flexible(
+                      flex: 2,
+                      child: Row(
+                        children: const [
+                          Flexible(
+                              flex: 2,
+                              fit: FlexFit.tight,
+                              child: TransactionssAnalytics()),
+                          Flexible(
+                              flex: 1,
+                              fit: FlexFit.tight,
+                              child: RewardsAnalytics()),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    Flexible(
+                        flex: 3,
+                        child:
+                            // Container()
+                            FutureBuilder<Widget?>(
+                                future: getBarGraphData(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return BarGraphWrapper(
+                                      rootContext: widget.rootContext,
+                                      userId: widget.userData["_id"],
+                                      authToken: widget.authToken,
+                                    );
+                                  } else {
+                                    return const CircularProgressIndicator(
+                                      color: Colors.green,
+                                    );
+                                  }
+                                }))
+                  ],
                 ),
-                const SizedBox(
-                  height: 32,
-                ),
-                Flexible(
-                    flex: 3,
-                    child:
-                        // Container()
-                        FutureBuilder<Widget?>(
-                            future: getBarGraphData(),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                return BarGraphWrapper(
-                                  rootContext: widget.rootContext,
-                                  userId: widget.userData["_id"],
-                                  authToken: widget.authToken,
-                                );
-                              } else {
-                                return const CircularProgressIndicator(
-                                  color: Colors.green,
-                                );
-                              }
-                            }))
-              ],
-            ),
     );
   }
 }

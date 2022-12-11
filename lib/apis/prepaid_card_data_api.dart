@@ -104,7 +104,7 @@ class PrepaidCardData {
     });
   }
 
-  void getPrepaidStoreData(userId, authToken, context) async {
+  void getPrepaidStoreData(userId, rootUserData, authToken, context) async {
     var uri =
         Uri.parse("https://api.getbasis.co/v6.4/admins/prepaid/user/data");
     var response =
@@ -114,10 +114,12 @@ class PrepaidCardData {
     Provider.of<PrepaidDataStore>(context, listen: false)
         .setDataToPrepaidStore(responseData["results"]);
 
-    Navigator.pushNamed(context, "/prepaid", arguments: {
+    Navigator.pushNamed(context, "/dashboard", arguments: {
       "authToken": authToken,
       "userId": userId,
-      "context": context
+      "context": context,
+      "screen": 2,
+      "userData": rootUserData
     });
   }
 
@@ -183,7 +185,6 @@ class PrepaidCardData {
 
   Future<Map> barGraphData(authToken, context) async {
     try {
-      print("HEEEE $authToken");
       var uri = Uri.parse(
           "https://api.getbasis.co/v7/admins/transactions/merchant/wallet/weekly");
       var response =

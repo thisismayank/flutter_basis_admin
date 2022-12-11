@@ -5,6 +5,7 @@ import 'package:flutter_application_6_provider/apis/prepaid_card_data_api.dart';
 
 import 'package:flutter_application_6_provider/models/global_analytics.dart';
 import 'package:flutter_application_6_provider/pages/dashboard/widgets/ppc_user_stats_pie_chart.dart';
+import 'package:flutter_application_6_provider/pages/panels/widgets/in_progress_users_bar_chart.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_activated_state_list_table_ui.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_list_table.dart';
 import 'package:flutter_application_6_provider/models/prepaid_user_data_list.dart';
@@ -17,12 +18,14 @@ class PrepaidCardUserAnalyticsPage extends StatefulWidget {
       {Key? key,
       required this.authToken,
       required this.rootContext,
-      required this.userId})
+      required this.userId,
+      required this.userData})
       : super(key: key);
 
   final String authToken;
   final BuildContext rootContext;
   final String userId;
+  final Map userData;
 
   @override
   State<PrepaidCardUserAnalyticsPage> createState() =>
@@ -44,24 +47,40 @@ class _PrepaidCardUserAnalyticsPageState
       return Expanded(
         child: Column(
           children: [
-            const Spacer(
-              flex: 1,
-            ),
+            // const Spacer(
+            //   flex: 1,
+            // ),
             Flexible(
-              flex: 4,
+              flex: 3,
               child: Container(
-                padding: EdgeInsets.all(32),
-                child: PpcUserStatsPieChart(
-                    authToken: widget.authToken,
-                    userId: widget.userId,
-                    rootContext: widget.rootContext),
+                // padding: EdgeInsets.all(32),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: PpcUserStatsPieChart(
+                          userData: widget.userData,
+                          authToken: widget.authToken,
+                          userId: widget.userId,
+                          rootContext: widget.rootContext),
+                    ),
+                    Expanded(
+                      child: analyticsData.ipBasicDetails > 0
+                          ? InProgressUsersBarChart(
+                              basicDetails: analyticsData.ipBasicDetails,
+                              pan: analyticsData.ipPan,
+                              address: analyticsData.ipAddress,
+                              otp: analyticsData.ipOtp)
+                          : Container(),
+                    )
+                  ],
+                ),
               ),
             ),
-            const Spacer(
-              flex: 2,
-            ),
+            // const Spacer(
+            //   flex: 1,
+            // ),
             Flexible(
-              flex: 10,
+              flex: 5,
               child: Container(
                 margin: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
@@ -78,6 +97,7 @@ class _PrepaidCardUserAnalyticsPageState
                           color: Color.fromARGB(48, 0, 0, 0))
                     ]),
                 child: PrepaidCardActivatedDataTable(
+                    userData: widget.userData,
                     authToken: widget.authToken,
                     userId: widget.userId,
                     rootContext: widget.rootContext),

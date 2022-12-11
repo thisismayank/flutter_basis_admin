@@ -10,7 +10,7 @@ import 'package:flutter_application_6_provider/models/user_prepaid_card_data.dar
 
 class UserPrepaidCardData {
   Future<Map> getUserPrepaidData(
-      selectedUserId, userId, authToken, context) async {
+      selectedUserId, rootUserData, userId, authToken, context) async {
     var uri = Uri.parse(
         "https://api.getbasis.co/v6.4/admins/check/user/data?field=" +
             selectedUserId.toString());
@@ -37,10 +37,12 @@ class UserPrepaidCardData {
         responseData["results"]["reason"],
         responseData["results"]["nameCheck"]);
 
-    Navigator.pushNamed(context, "/search", arguments: {
+    Navigator.pushNamed(context, "/dashboard", arguments: {
       "userId": userId,
       "authToken": authToken,
-      "fetchedUserId": responseData["results"]["userId"]
+      "fetchedUserId": responseData["results"]["userId"],
+      "screen": 1,
+      "userData": rootUserData
     });
     return responseData;
   }

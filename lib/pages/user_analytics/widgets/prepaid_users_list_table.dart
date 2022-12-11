@@ -11,7 +11,17 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 class PrepaidDataTable extends StatelessWidget {
-  const PrepaidDataTable({Key? key}) : super(key: key);
+  const PrepaidDataTable(
+      {Key? key,
+      required this.userData,
+      required this.authToken,
+      required this.rootContext,
+      required this.userInformation})
+      : super(key: key);
+  final Map userData;
+  final BuildContext rootContext;
+  final String authToken;
+  final int userInformation;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +33,7 @@ class PrepaidDataTable extends StatelessWidget {
     void getUserDataForAdmin(selectedUserId) async {
       UserPrepaidCardData userPrepaidCardData = UserPrepaidCardData();
       userPrepaidCardData.getUserPrepaidData(
-          selectedUserId, userId, authToken, contextRoot);
+          selectedUserId, userData, userId, authToken, contextRoot);
     }
 
     TextStyle titles = const TextStyle(
@@ -34,6 +44,7 @@ class PrepaidDataTable extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             title: const Text('Users from the last 24 hours'),
+            toolbarHeight: 40,
             backgroundColor: const Color(0xff36c182),
           ),
           body: ListView(
@@ -69,7 +80,8 @@ class PrepaidDataTable extends StatelessWidget {
                                                   ? FontWeight.normal
                                                   : FontWeight.bold)),
                                   onTap: () => getUserDataForAdmin(
-                                      prepaidUserdData["userId"])),
+                                        prepaidUserdData["userId"],
+                                      )),
                               DataCell(
                                   Text('${prepaidUserdData["phoneNumber"]}',
                                       style: TextStyle(

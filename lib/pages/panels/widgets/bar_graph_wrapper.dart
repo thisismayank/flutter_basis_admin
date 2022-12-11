@@ -43,7 +43,6 @@ class _BarGraphWrapperState extends State<BarGraphWrapper> {
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalAnalytics>(builder: (context, barGraphData, child) {
-      print('wrapper $barGraphData');
       return BarChartSample2(
           walletTransactions: barGraphData.walletTransactions,
           merchantTransactions: barGraphData.merchantTransactions,

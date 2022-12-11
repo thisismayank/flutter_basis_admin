@@ -31,7 +31,6 @@ class BarChartSample2State extends State<BarChartSample2> {
   @override
   void initState() {
     super.initState();
-    // print("wall merch ${widget.merchantTransactions}");
 
     final barGroup1 = makeGroupData(
         0, widget.walletTransactions[0], widget.merchantTransactions[0]);
@@ -65,9 +64,6 @@ class BarChartSample2State extends State<BarChartSample2> {
 
   @override
   Widget build(BuildContext context) {
-    print("merchant ${widget.merchantTransactions}");
-    print("wallet ${widget.walletTransactions}");
-
     return Container(
       margin: EdgeInsets.all(16),
       decoration: BoxDecoration(

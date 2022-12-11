@@ -68,10 +68,10 @@ class _CenterPanelPageState extends State<CenterPanelPage> {
             height: MediaQuery.of(context).size.height - 140,
             // child: Expanded(
             child: PrepaidCardUserAnalyticsPage(
-              rootContext: widget.rootContext,
-              userId: widget.userData["_id"],
-              authToken: widget.authToken,
-            ),
+                rootContext: widget.rootContext,
+                userId: widget.userData["_id"],
+                authToken: widget.authToken,
+                userData: widget.userData),
             // ),
           ))
         ]),

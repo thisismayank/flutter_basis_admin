@@ -57,7 +57,8 @@ class _DashboardState extends State<Dashboard> {
       return PrepaidCardUserAnalyticsPage(
           authToken: widget.authToken,
           rootContext: widget.rootContext,
-          userId: widget.userId);
+          userId: widget.userId,
+          userData: {});
     });
   }
 }

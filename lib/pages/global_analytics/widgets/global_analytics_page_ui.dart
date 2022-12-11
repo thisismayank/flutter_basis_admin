@@ -42,6 +42,7 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                 child: CarouselSlider(
                   items: [
                     PrepaidCardUserAnalyticsPage(
+                        userData: {},
                         authToken: widget.authToken,
                         rootContext: context,
                         userId: widget.userId),
