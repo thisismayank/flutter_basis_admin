@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_6_provider/models/global_analytics.dart';
+import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 import 'package:provider/provider.dart';
 
 class BarChartSample2 extends StatefulWidget {
@@ -215,6 +216,7 @@ class BarChartSample2State extends State<BarChartSample2> {
     );
 
     return SideTitleWidget(
+      angle: ResponsiveLayout.isPhone(context) ? 100 : 0,
       axisSide: meta.axisSide,
       space: 16, //margin top
       child: text,
