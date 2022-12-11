@@ -45,13 +45,7 @@ class _EmailState extends State<Email> {
       //   var response =
       //       await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
       //   Map responseData = jsonDecode(response.body);
-      //   print(responseData["results"]["user"]["creditCardState"]);
-      //   print(responseData["results"]["user"]["firstName"]);
-      //   print(responseData["results"]["user"]["lastName"]);
-      //   print(responseData["results"]["user"]["_id"]);
-      //   print(responseData["results"]["user"]["avatar"]);
 
-      //   // print(responseData["results"]["user"]["token"]);
       //   if (token != "") {
       Provider.of<User>(context, listen: false).setUserData(
           userId.toString(),
@@ -90,7 +84,6 @@ class _EmailState extends State<Email> {
 
       Map responseData = jsonDecode(response.body);
 
-      // print("res $responseData");
       Navigator.pushNamed(context, "/otp", arguments: {
         "email": emailController.text.toString(),
         "token": responseData["results"]["token"]

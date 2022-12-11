@@ -3,8 +3,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class LineChartSample2 extends StatefulWidget {
-  const LineChartSample2(
+class LineChartSample2 extends StatelessWidget {
+  LineChartSample2(
       {Key? key,
       required this.userDataCounts,
       required this.xAxisTitle,
@@ -17,12 +17,7 @@ class LineChartSample2 extends StatefulWidget {
   final List userDataCounts;
   final List xAxisTitle;
 
-  @override
-  State<LineChartSample2> createState() => _LineChartSample2State();
-}
-
-class _LineChartSample2State extends State<LineChartSample2> {
-  List<Color> gradientColors = [
+  final List<Color> gradientColors = [
     const Color(0xff23b6e6),
     const Color(0xff02d39a),
   ];
@@ -78,13 +73,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     List titles = <String>[
       "",
-      widget.xAxisTitle[0],
-      widget.xAxisTitle[1],
-      widget.xAxisTitle[2],
-      widget.xAxisTitle[3],
+      xAxisTitle[0],
+      xAxisTitle[1],
+      xAxisTitle[2],
+      xAxisTitle[3],
     ];
 
-    if (value < widget.numberofMonths + 1) {
+    if (value < numberofMonths + 1) {
       final Widget text = Text(
         titles[value.toInt()],
         style: const TextStyle(
@@ -134,17 +129,17 @@ class _LineChartSample2State extends State<LineChartSample2> {
         border: Border.all(color: const Color(0xff37434d)),
       ),
       minX: 0,
-      maxX: widget.numberofMonths + 2,
+      maxX: numberofMonths + 2,
       minY: 0,
-      maxY: widget.maxYCoordinate,
+      maxY: maxYCoordinate,
       lineBarsData: [
         LineChartBarData(
           spots: [
             const FlSpot(0, 0),
-            FlSpot(1, widget.userDataCounts[0]),
-            FlSpot(2, widget.userDataCounts[1]),
-            FlSpot(3, widget.userDataCounts[2]),
-            FlSpot(4, widget.userDataCounts[3])
+            FlSpot(1, userDataCounts[0]),
+            FlSpot(2, userDataCounts[1]),
+            FlSpot(3, userDataCounts[2]),
+            FlSpot(4, userDataCounts[3])
           ],
           isCurved: true,
           gradient: LinearGradient(

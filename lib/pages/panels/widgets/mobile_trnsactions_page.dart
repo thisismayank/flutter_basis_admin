@@ -35,7 +35,7 @@ class _MobileTransactionsPageState extends State<MobileTransactionsPage> {
   }
 
   // void getBarChartData() async {
-  //   print("COME");
+
   //   PrepaidCardData prepaidCardData = PrepaidCardData();
   //   prepaidCardData.barGraphData(widget.authToken, widget.rootContext);
   // }

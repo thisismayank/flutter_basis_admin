@@ -29,9 +29,10 @@ class PrepaidCardUserAnalyticsPage extends StatelessWidget {
   final BuildContext rootContext;
   final String userId;
   final Map userData;
-  Future<Widget> getLineGraphData() async {
+  Future<Widget> getLineGraphData(double analyticsData) async {
     PrepaidCardData prepaidCardData = PrepaidCardData();
-    await prepaidCardData.getLineGraphData(authToken, rootContext);
+    await prepaidCardData.getLineGraphData(
+        authToken, rootContext, analyticsData);
 
     return Container();
   }
@@ -58,7 +59,7 @@ class PrepaidCardUserAnalyticsPage extends StatelessWidget {
               // padding: EdgeInsets.all(32),
               child: Expanded(
                   child: FutureBuilder<Widget?>(
-                      future: getLineGraphData(),
+                      future: getLineGraphData(analyticsData.numberOfMonths),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return LineGraphWrapper(

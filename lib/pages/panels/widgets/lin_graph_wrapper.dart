@@ -24,6 +24,9 @@ class LineGraphWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalAnalytics>(builder: (context, barGraphData, child) {
+      // print("barGra ${barGraphData.xAxisTitlesLine}");
+      // print("bargggg ${xAxisTitle}");
+
       return LineChartSample2(
           userDataCounts: userDataCounts,
           maxYCoordinate: maxYCoordinate,

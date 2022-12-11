@@ -35,7 +35,7 @@ class _RightPanelPageState extends State<RightPanelPage> {
   }
 
   // void getBarChartData() async {
-  //   print("COME");
+
   //   PrepaidCardData prepaidCardData = PrepaidCardData();
   //   prepaidCardData.barGraphData(widget.authToken, widget.rootContext);
   // }
@@ -49,7 +49,6 @@ class _RightPanelPageState extends State<RightPanelPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("RIGHT PANEL PAGE ${widget.userInformation}");
     return Scaffold(
       // backgroundColor: Colors.red,
       body: widget.userInformation == 1

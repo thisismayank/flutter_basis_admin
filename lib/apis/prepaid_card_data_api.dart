@@ -32,7 +32,7 @@ class PrepaidCardData {
     var response =
         await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
     Map responseData = jsonDecode(response.body);
-    print("responseData $responseData");
+
     Provider.of<GlobalAnalytics>(context, listen: false).setGlobalDataForAdmin(
       responseData["results"]["creditCardUserStatesAnalytics"]["activated"],
       responseData["results"]["creditCardUserStatesAnalytics"]["rejected"],
@@ -209,29 +209,34 @@ class PrepaidCardData {
       );
       return responseData;
     } catch (error) {
-      print("Here $error");
+      print("ERROR barGraphData $error");
       throw error;
     }
   }
 
-  Future<Map> getLineGraphData(authToken, context) async {
+  Future<Map> getLineGraphData(authToken, context, analyticsData) async {
     try {
-      var uri = Uri.parse(
-          "https://api.getbasis.co/v7/admins/prepaid/activated/users/monthly");
-      var response =
-          await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
+      if (analyticsData == 0) {
+        var uri = Uri.parse(
+            "https://api.getbasis.co/v7/admins/prepaid/activated/users/monthly");
+        var response = await http
+            .get(uri, headers: {"Authorization": 'Bearer $authToken'});
 
-      Map responseData = jsonDecode(response.body);
+        Map responseData = jsonDecode(response.body);
 
-      Provider.of<GlobalAnalytics>(context, listen: false).setLineChartData(
-        responseData["results"]["prepaidCardListOfUserCounts"],
-        responseData["results"]["numberOfMonths"],
-        responseData["results"]["xAxisTitles"],
-        responseData["results"]["maxYCoordinate"],
-      );
-      return responseData;
+        Provider.of<GlobalAnalytics>(context, listen: false).setLineChartData(
+          responseData["results"]["prepaidCardListOfUserCounts"],
+          responseData["results"]["numberOfMonths"],
+          responseData["results"]["xAxisTitles"],
+          responseData["results"]["maxYCoordinate"],
+        );
+
+        return responseData;
+      } else {
+        return {};
+      }
     } catch (error) {
-      print("Here $error");
+      print("ERROR getLineGraphData $error");
       throw error;
     }
   }
