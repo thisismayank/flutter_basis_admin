@@ -46,78 +46,74 @@ class PrepaidCardActivatedDataTable extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView(
-                clipBehavior: Clip.antiAlias,
                 children: [
-                  Expanded(
-                    child: DataTable(
-                        border: TableBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        headingRowHeight: 40,
-                        columnSpacing: 4,
-                        headingRowColor: MaterialStateProperty.all(
-                            const Color.fromARGB(131, 217, 236, 217)),
-                        columns: [
-                          DataColumn(label: Text('', style: titles)),
-                          DataColumn(label: Text('Name', style: titles)),
-                          DataColumn(
-                              label: Expanded(
-                                  child: Text(
-                            'Email',
-                            style: titles,
-                            softWrap: false,
-                          ))),
-                        ],
-                        rows: prepaidData.allUsersWhoActivatedCardList
-                            .map((prepaidUserdData) => DataRow(cells: [
-                                  DataCell(
-                                      CircleAvatar(
-                                        radius: 15,
-                                        child: Text(
-                                            '${prepaidUserdData["firstName"].substring(0, 1).toUpperCase()}',
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white)),
-                                        backgroundColor: Colors.primaries[
-                                            Random().nextInt(
-                                                Colors.primaries.length)],
-                                      ),
-                                      onTap: () => userPrepaidCardData
-                                          .getUserPrepaidData(
-                                              prepaidUserdData["_id"],
-                                              userData,
-                                              userId,
-                                              authToken,
-                                              rootContext)),
-                                  DataCell(
-                                      ConstrainedBox(
-                                          constraints: const BoxConstraints(
-                                              maxWidth: 200),
-                                          child: Text(
-                                              '${prepaidUserdData["firstName"].substring(0, 1).toUpperCase()}${prepaidUserdData["firstName"].substring(1).toLowerCase()}',
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ))),
-                                      onTap: () => userPrepaidCardData
-                                          .getUserPrepaidData(
-                                              prepaidUserdData["_id"],
-                                              userData,
-                                              userId,
-                                              authToken,
-                                              rootContext)),
-                                  DataCell(
-                                      Text('${prepaidUserdData["email"]}',
+                  DataTable(
+                      border:
+                          TableBorder(borderRadius: BorderRadius.circular(20)),
+                      headingRowHeight: 40,
+                      columnSpacing: 4,
+                      headingRowColor: MaterialStateProperty.all(
+                          const Color.fromARGB(131, 217, 236, 217)),
+                      columns: [
+                        DataColumn(label: Text('', style: titles)),
+                        DataColumn(label: Text('Name', style: titles)),
+                        DataColumn(
+                            label: Expanded(
+                                child: Text(
+                          'Email',
+                          style: titles,
+                          softWrap: false,
+                        ))),
+                      ],
+                      rows: prepaidData.allUsersWhoActivatedCardList
+                          .map((prepaidUserdData) => DataRow(cells: [
+                                DataCell(
+                                    CircleAvatar(
+                                      radius: 15,
+                                      child: Text(
+                                          '${prepaidUserdData["firstName"].substring(0, 1).toUpperCase()}',
                                           style: const TextStyle(
-                                              fontWeight: FontWeight.normal)),
-                                      onTap: () => userPrepaidCardData
-                                          .getUserPrepaidData(
-                                              prepaidUserdData["_id"],
-                                              userData,
-                                              userId,
-                                              authToken,
-                                              rootContext)),
-                                ]))
-                            .toList()),
-                  )
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white)),
+                                      backgroundColor: Colors.primaries[Random()
+                                          .nextInt(Colors.primaries.length)],
+                                    ),
+                                    onTap: () =>
+                                        userPrepaidCardData.getUserPrepaidData(
+                                            prepaidUserdData["_id"],
+                                            userData,
+                                            userId,
+                                            authToken,
+                                            rootContext)),
+                                DataCell(
+                                    ConstrainedBox(
+                                        constraints:
+                                            const BoxConstraints(maxWidth: 200),
+                                        child: Text(
+                                            '${prepaidUserdData["firstName"].substring(0, 1).toUpperCase()}${prepaidUserdData["firstName"].substring(1).toLowerCase()}',
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ))),
+                                    onTap: () =>
+                                        userPrepaidCardData.getUserPrepaidData(
+                                            prepaidUserdData["_id"],
+                                            userData,
+                                            userId,
+                                            authToken,
+                                            rootContext)),
+                                DataCell(
+                                    Text('${prepaidUserdData["email"]}',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.normal)),
+                                    onTap: () =>
+                                        userPrepaidCardData.getUserPrepaidData(
+                                            prepaidUserdData["_id"],
+                                            userData,
+                                            userId,
+                                            authToken,
+                                            rootContext)),
+                              ]))
+                          .toList())
                 ],
               );
             } else {

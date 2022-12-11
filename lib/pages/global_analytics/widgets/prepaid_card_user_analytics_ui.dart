@@ -44,67 +44,65 @@ class _PrepaidCardUserAnalyticsPageState
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalAnalytics>(builder: (context, analyticsData, child) {
-      return Expanded(
-        child: Column(
-          children: [
-            // const Spacer(
-            //   flex: 1,
-            // ),
-            Flexible(
-              flex: 3,
-              child: Container(
-                // padding: EdgeInsets.all(32),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: PpcUserStatsPieChart(
-                          userData: widget.userData,
-                          authToken: widget.authToken,
-                          userId: widget.userId,
-                          rootContext: widget.rootContext),
-                    ),
-                    Expanded(
-                      child: analyticsData.ipBasicDetails > 0
-                          ? InProgressUsersBarChart(
-                              basicDetails: analyticsData.ipBasicDetails,
-                              pan: analyticsData.ipPan,
-                              address: analyticsData.ipAddress,
-                              otp: analyticsData.ipOtp)
-                          : Container(),
-                    )
-                  ],
-                ),
+      return Column(
+        children: [
+          // const Spacer(
+          //   flex: 1,
+          // ),
+          Flexible(
+            flex: 3,
+            child: Container(
+              // padding: EdgeInsets.all(32),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: PpcUserStatsPieChart(
+                        userData: widget.userData,
+                        authToken: widget.authToken,
+                        userId: widget.userId,
+                        rootContext: widget.rootContext),
+                  ),
+                  Expanded(
+                    child: analyticsData.ipBasicDetails > 0
+                        ? InProgressUsersBarChart(
+                            basicDetails: analyticsData.ipBasicDetails,
+                            pan: analyticsData.ipPan,
+                            address: analyticsData.ipAddress,
+                            otp: analyticsData.ipOtp)
+                        : Container(),
+                  )
+                ],
               ),
             ),
-            // const Spacer(
-            //   flex: 1,
-            // ),
-            Flexible(
-              flex: 5,
-              child: Container(
-                margin: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                          blurRadius: 4,
-                          offset: Offset(-4, 4),
-                          color: Color.fromARGB(0, 255, 255, 255)),
-                      BoxShadow(
-                          blurRadius: 4,
-                          offset: Offset(8, 8),
-                          color: Color.fromARGB(48, 0, 0, 0))
-                    ]),
-                child: PrepaidCardActivatedDataTable(
-                    userData: widget.userData,
-                    authToken: widget.authToken,
-                    userId: widget.userId,
-                    rootContext: widget.rootContext),
-              ),
+          ),
+          // const Spacer(
+          //   flex: 1,
+          // ),
+          Flexible(
+            flex: 5,
+            child: Container(
+              margin: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                        blurRadius: 4,
+                        offset: Offset(-4, 4),
+                        color: Color.fromARGB(0, 255, 255, 255)),
+                    BoxShadow(
+                        blurRadius: 4,
+                        offset: Offset(8, 8),
+                        color: Color.fromARGB(48, 0, 0, 0))
+                  ]),
+              child: PrepaidCardActivatedDataTable(
+                  userData: widget.userData,
+                  authToken: widget.authToken,
+                  userId: widget.userId,
+                  rootContext: widget.rootContext),
             ),
-          ],
-        ),
+          ),
+        ],
       );
     });
   }
