@@ -10,8 +10,8 @@ import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prep
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_list_table.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/search_results.dart';
 
-class RightPanelPage extends StatefulWidget {
-  const RightPanelPage(
+class MobileTransactionsPage extends StatefulWidget {
+  const MobileTransactionsPage(
       {Key? key,
       required this.userData,
       required this.authToken,
@@ -23,10 +23,10 @@ class RightPanelPage extends StatefulWidget {
   final String authToken;
   final int userInformation;
   @override
-  State<RightPanelPage> createState() => _RightPanelPageState();
+  State<MobileTransactionsPage> createState() => _MobileTransactionsPageState();
 }
 
-class _RightPanelPageState extends State<RightPanelPage> {
+class _MobileTransactionsPageState extends State<MobileTransactionsPage> {
   @override
   void initState() {
     // TODO: implement initState
@@ -49,41 +49,25 @@ class _RightPanelPageState extends State<RightPanelPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("RIGHT PANEL PAGE ${widget.userInformation}");
     return Scaffold(
-      // backgroundColor: Colors.red,
-      body: widget.userInformation == 1
-          ? SearchResults(
-              userData: widget.userData,
-              rootContext: widget.rootContext,
-              authToken: widget.authToken,
-              userInformation: widget.userInformation)
-          : widget.userInformation == 2
-              ? PrepaidDataTable(
-                  userData: widget.userData,
-                  rootContext: widget.rootContext,
-                  authToken: widget.authToken,
-                  userInformation: widget.userInformation)
-              : Column(
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: Row(
-                        children: const [
-                          Flexible(
-                              flex: 2,
-                              fit: FlexFit.tight,
-                              child: TransactionssAnalytics()),
-                          Flexible(
-                              flex: 1,
-                              fit: FlexFit.tight,
-                              child: RewardsAnalytics()),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 32,
-                    ),
+        // backgroundColor: Colors.red,
+        body: widget.userInformation == 1
+            ? SearchResults(
+                userData: widget.userData,
+                rootContext: widget.rootContext,
+                authToken: widget.authToken,
+                userInformation: widget.userInformation)
+            : widget.userInformation == 2
+                ? PrepaidDataTable(
+                    userData: widget.userData,
+                    rootContext: widget.rootContext,
+                    authToken: widget.authToken,
+                    userInformation: widget.userInformation)
+                : Column(children: [
+                    const Flexible(
+                        flex: 2,
+                        fit: FlexFit.tight,
+                        child: TransactionssAnalytics()),
                     Flexible(
                         flex: 3,
                         child:
@@ -103,8 +87,6 @@ class _RightPanelPageState extends State<RightPanelPage> {
                                     );
                                   }
                                 }))
-                  ],
-                ),
-    );
+                  ]));
   }
 }

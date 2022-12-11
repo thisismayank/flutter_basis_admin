@@ -52,24 +52,24 @@ class InProgressUsersBarChartState extends State<InProgressUsersBarChart> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
-      height: 200,
-      margin: const EdgeInsets.all(8),
+      width: MediaQuery.of(context).size.width - 50,
+      height: MediaQuery.of(context).size.height - 600,
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
-                blurRadius: 4,
-                offset: Offset(-4, 4),
-                color: Color.fromARGB(0, 255, 255, 255)),
-            BoxShadow(
-                blurRadius: 6,
-                offset: Offset(8, 8),
-                color: Color.fromARGB(48, 0, 0, 0))
-          ]),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        // boxShadow: const [
+        //   BoxShadow(
+        //       blurRadius: 4,
+        //       offset: Offset(-4, 4),
+        //       color: Color.fromARGB(0, 255, 255, 255)),
+        //   BoxShadow(
+        //       blurRadius: 6,
+        //       offset: Offset(8, 8),
+        //       color: Color.fromARGB(48, 0, 0, 0))
+        // ]
+      ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(4, 16, 4, 4),
+        padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -84,9 +84,6 @@ class InProgressUsersBarChartState extends State<InProgressUsersBarChart> {
                   ),
                 ],
               ),
-            ),
-            const SizedBox(
-              height: 8,
             ),
             Expanded(
               child: BarChart(
@@ -104,7 +101,7 @@ class InProgressUsersBarChartState extends State<InProgressUsersBarChart> {
                         sideTitles: SideTitles(
                           showTitles: true,
                           getTitlesWidget: bottomTitles,
-                          reservedSize: 40,
+                          reservedSize: 30,
                         ),
                       ),
                       leftTitles: AxisTitles(
@@ -163,7 +160,7 @@ class InProgressUsersBarChartState extends State<InProgressUsersBarChart> {
       return Container();
     }
     return SideTitleWidget(
-      angle: 100,
+      // angle: 100,
       axisSide: meta.axisSide,
       space: 0,
       child: Text(text, style: style),
@@ -183,7 +180,7 @@ class InProgressUsersBarChartState extends State<InProgressUsersBarChart> {
     );
 
     return SideTitleWidget(
-      angle: 100,
+      // angle: 100,
       axisSide: meta.axisSide,
       space: 16, //margin top
       child: text,

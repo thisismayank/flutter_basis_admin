@@ -6,7 +6,7 @@ import 'package:flutter_application_6_provider/models/global_analytics.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/bar_chart.dart';
 import 'package:provider/provider.dart';
 
-class BarGraphWrapper extends StatefulWidget {
+class BarGraphWrapper extends StatelessWidget {
   const BarGraphWrapper(
       {Key? key,
       required this.userId,
@@ -16,29 +16,6 @@ class BarGraphWrapper extends StatefulWidget {
   final String userId;
   final BuildContext rootContext;
   final String authToken;
-
-  @override
-  State<BarGraphWrapper> createState() => _BarGraphWrapperState();
-}
-
-class _BarGraphWrapperState extends State<BarGraphWrapper> {
-  bool barGraphGlobalData = false;
-  @override
-
-  // void getBarChartData() async {
-  //   print("COME");
-  //   PrepaidCardData prepaidCardData = PrepaidCardData();
-  //   prepaidCardData.barGraphData(widget.authToken, widget.rootContext);
-  // }
-
-  // Future<Widget> getBarGraphData() async {
-  //   print("barGraphGlobalData $barGraphGlobalData");
-  //   if (!barGraphGlobalData) {
-  //     PrepaidCardData prepaidCardData = PrepaidCardData();
-  //     await prepaidCardData.barGraphData(widget.authToken, widget.rootContext);
-  //   }
-  //   return Container();
-  // }
 
   @override
   Widget build(BuildContext context) {

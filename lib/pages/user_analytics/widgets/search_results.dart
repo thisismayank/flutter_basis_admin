@@ -39,11 +39,16 @@ class _SearchResultsState extends State<SearchResults> {
 
   @override
   Widget build(BuildContext context) {
+    print("widget data  ${widget.userData}");
+    print("widget data aut ${widget.authToken}");
+
     final passedData = ModalRoute.of(context)?.settings.arguments as Map;
+    print("passed data search ${passedData["userId"]}");
+    print("passed data selectedUserId ${passedData["selectedUserId"]}");
 
     String authToken = passedData["authToken"];
     String userId = passedData["userId"];
-    String fetchedUserId = passedData["fetchedUserId"];
+    String fetchedUserId = passedData["selectedUserId"];
 
     var nameController = TextEditingController();
 

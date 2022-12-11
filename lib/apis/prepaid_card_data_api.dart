@@ -32,8 +32,10 @@ class PrepaidCardData {
     var response =
         await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
     Map responseData = jsonDecode(response.body);
+    print("responseData $responseData");
     Provider.of<GlobalAnalytics>(context, listen: false).setGlobalDataForAdmin(
       responseData["results"]["creditCardUserStatesAnalytics"]["activated"],
+      responseData["results"]["creditCardUserStatesAnalytics"]["rejected"],
       responseData["results"]["creditCardUserStatesAnalytics"]
           ["yesterdayUsers"],
       responseData["results"]["creditCardUserStatesAnalytics"]["inProgress"],
@@ -95,12 +97,16 @@ class PrepaidCardData {
         responseData["results"]["reason"],
         responseData["results"]["nameCheck"]);
 
-    Navigator.pushNamed(context, "/dashboard", arguments: {
-      "userId": userId,
+    String route =
+        ResponsiveLayout.isComputer(context) ? "/dashboard" : "/search";
+
+    Navigator.pushNamed(context, route, arguments: {
       "authToken": authToken,
-      "fetchedUserId": responseData["results"]["userId"],
+      "userId": userId,
+      "context": context,
       "screen": 1,
-      "userData": rootUserData
+      "userData": rootUserData,
+      "selectedUserId": responseData["results"]["userId"]
     });
   }
 
@@ -114,7 +120,10 @@ class PrepaidCardData {
     Provider.of<PrepaidDataStore>(context, listen: false)
         .setDataToPrepaidStore(responseData["results"]);
 
-    Navigator.pushNamed(context, "/dashboard", arguments: {
+    String route =
+        ResponsiveLayout.isComputer(context) ? "/dashboard" : "/prepaid";
+
+    Navigator.pushNamed(context, route, arguments: {
       "authToken": authToken,
       "userId": userId,
       "context": context,
@@ -195,6 +204,28 @@ class PrepaidCardData {
       Provider.of<GlobalAnalytics>(context, listen: false).setBarChartData(
         responseData["results"]["merchantTransactions"],
         responseData["results"]["walletTransactions"],
+        responseData["results"]["xAxisTitles"],
+        responseData["results"]["maxYCoordinate"],
+      );
+      return responseData;
+    } catch (error) {
+      print("Here $error");
+      throw error;
+    }
+  }
+
+  Future<Map> getLineGraphData(authToken, context) async {
+    try {
+      var uri = Uri.parse(
+          "https://api.getbasis.co/v7/admins/prepaid/activated/users/monthly");
+      var response =
+          await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
+
+      Map responseData = jsonDecode(response.body);
+
+      Provider.of<GlobalAnalytics>(context, listen: false).setLineChartData(
+        responseData["results"]["prepaidCardListOfUserCounts"],
+        responseData["results"]["numberOfMonths"],
         responseData["results"]["xAxisTitles"],
         responseData["results"]["maxYCoordinate"],
       );

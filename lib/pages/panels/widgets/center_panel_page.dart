@@ -6,6 +6,9 @@ import 'package:flutter_application_6_provider/models/user_authentication.dart';
 import 'package:flutter_application_6_provider/pages/dashboard/widgets/dashboard.dart';
 import 'package:flutter_application_6_provider/pages/global_analytics/widgets/global_analytics_page_ui.dart';
 import 'package:flutter_application_6_provider/pages/global_analytics/widgets/prepaid_card_user_analytics_ui.dart';
+import 'package:flutter_application_6_provider/pages/global_analytics/widgets/rewards_analytics_ui.dart';
+import 'package:flutter_application_6_provider/pages/global_analytics/widgets/transactions_analytics_ui.dart';
+import 'package:flutter_application_6_provider/pages/panels/widgets/mobile_trnsactions_page.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_activated_state_list_table_ui.dart';
 import 'package:flutter_application_6_provider/pages/user_authentication/widgets/email.dart';
 import 'package:flutter_application_6_provider/pages/user_authentication/widgets/otp.dart';
@@ -67,11 +70,28 @@ class _CenterPanelPageState extends State<CenterPanelPage> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height - 140,
             // child: Expanded(
-            child: PrepaidCardUserAnalyticsPage(
-                rootContext: widget.rootContext,
-                userId: widget.userData["_id"],
-                authToken: widget.authToken,
-                userData: widget.userData),
+            child: ResponsiveLayout.isComputer(context)
+                ? PrepaidCardUserAnalyticsPage(
+                    rootContext: widget.rootContext,
+                    userId: widget.userData["_id"],
+                    authToken: widget.authToken,
+                    userData: widget.userData)
+                : PageView(
+                    controller: PageController(initialPage: 0),
+                    children: [
+                        PrepaidCardUserAnalyticsPage(
+                            rootContext: widget.rootContext,
+                            userId: widget.userData["_id"],
+                            authToken: widget.authToken,
+                            userData: widget.userData),
+                        MobileTransactionsPage(
+                          rootContext: widget.rootContext,
+                          authToken: widget.authToken,
+                          userData: widget.userData,
+                          userInformation: 0,
+                        ),
+                        RewardsAnalytics()
+                      ]),
             // ),
           ))
         ]),

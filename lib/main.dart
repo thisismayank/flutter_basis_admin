@@ -46,12 +46,16 @@ void main() {
         "/otp": (context) => const OTP(),
         "/dashboard": (context) => const WidgetTree(),
         "/post": (context) => const PostCard(),
-        "/search": (context) => SearchResults(
-              authToken: '',
-              userData: {},
-              userInformation: 0,
-              rootContext: context,
-            ),
+        "/search": (context) {
+          final passedData = ModalRoute.of(context)?.settings.arguments as Map;
+
+          return SearchResults(
+            authToken: passedData["authToken"],
+            userData: passedData,
+            userInformation: 0,
+            rootContext: context,
+          );
+        },
         "/global": (context) => const GlobalAnalyticsPage(
               userId: "",
               authToken: "",

@@ -230,7 +230,11 @@ class BarChartSample2State extends State<BarChartSample2> {
         BarChartRodData(
             toY: y1,
             color: leftBarColor,
-            width: x < 5 ? 7 : width,
+            width: x < 5
+                ? 7
+                : x == 5
+                    ? 10
+                    : width,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(5),
               topRight: Radius.circular(5),
@@ -239,7 +243,11 @@ class BarChartSample2State extends State<BarChartSample2> {
           BarChartRodData(
               toY: y2,
               color: rightBarColor,
-              width: x < 5 ? 7 : width,
+              width: x < 5
+                  ? 7
+                  : x == 5
+                      ? 10
+                      : width,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(5),
                 topRight: Radius.circular(5),

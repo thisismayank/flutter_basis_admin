@@ -77,10 +77,11 @@ class _AppBarWidgetState extends State<AppBarWidget> {
               iconSize: 30,
               color: Colors.white,
               icon: const Icon(Icons.menu)),
-        const SizedBox(
-          width: 30,
-        ),
-        const Spacer(),
+        if (ResponsiveLayout.isComputer(context))
+          const SizedBox(
+            width: 30,
+          ),
+        if (ResponsiveLayout.isComputer(context)) const Spacer(),
         Expanded(
           child: SearchBarForUserData(
               userData: widget.userData,
@@ -106,32 +107,34 @@ class _AppBarWidgetState extends State<AppBarWidget> {
         //         ),
         //       ))
         // ]),
-        if (!ResponsiveLayout.isPhone((context)))
-          Container(
-            margin: const EdgeInsets.all(16),
-            height: double.infinity,
-            decoration: const BoxDecoration(boxShadow: [
-              BoxShadow(
-                  color: Color.fromARGB(213, 255, 255, 255),
-                  offset: Offset(0, 0),
-                  spreadRadius: 1,
-                  blurRadius: 10)
-            ], shape: BoxShape.circle),
-            child: Stack(
-              children: [
-                CircleAvatar(
-                  backgroundColor: const Color.fromARGB(0, 255, 255, 255),
-                  radius: 50,
-                  child: Lottie.network(
-                    "https://res.cloudinary.com/basis-static/raw/upload/v1661928856/Power%20Card/card_going_up.json",
-                  ),
+        // if (!ResponsiveLayout.isPhone((context)))
+        Container(
+          margin: ResponsiveLayout.isComputer(context)
+              ? const EdgeInsets.all(16)
+              : EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+          height: double.infinity,
+          decoration: const BoxDecoration(boxShadow: [
+            BoxShadow(
+                color: Color.fromARGB(213, 255, 255, 255),
+                offset: Offset(0, 0),
+                spreadRadius: 1,
+                blurRadius: 10)
+          ], shape: BoxShape.circle),
+          child: Stack(
+            children: [
+              CircleAvatar(
+                backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+                radius: ResponsiveLayout.isComputer(context) ? 50 : 30,
+                child: Lottie.network(
+                  "https://res.cloudinary.com/basis-static/raw/upload/v1661928856/Power%20Card/card_going_up.json",
                 ),
-                Positioned.fill(
-                    child: Lottie.network(
-                        "https://res.cloudinary.com/basis-static/raw/upload/v1666247927/Power%20Card/confetti.json"))
-              ],
-            ),
-          )
+              ),
+              Positioned.fill(
+                  child: Lottie.network(
+                      "https://res.cloudinary.com/basis-static/raw/upload/v1666247927/Power%20Card/confetti.json"))
+            ],
+          ),
+        )
       ]),
     );
   }

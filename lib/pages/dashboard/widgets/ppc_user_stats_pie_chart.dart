@@ -132,8 +132,8 @@ class PpcUserStatsPieChart extends StatelessWidget {
             //     // });
             //   },
             // ),
-            centerSpaceRadius: 60,
-            startDegreeOffset: -30,
+            centerSpaceRadius: 70,
+            startDegreeOffset: -70,
             sections: [
               PieChartSectionData(
                   color: const Color(0xFFF2BC5E),
@@ -152,9 +152,9 @@ class PpcUserStatsPieChart extends StatelessWidget {
                   title:
                       'Physically Activated \n ${analyticsData.ccPhysicallyActivated.toInt()}',
                   titleStyle: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      backgroundColor: Colors.white),
                   titlePositionPercentageOffset: 0.99,
                   radius: 40),
               PieChartSectionData(
@@ -170,13 +170,23 @@ class PpcUserStatsPieChart extends StatelessWidget {
                 radius: 30,
               ),
               PieChartSectionData(
-                  color: Color.fromARGB(255, 187, 62, 62),
+                  color: Color.fromARGB(255, 252, 38, 23),
+                  value: analyticsData.ccStateRejected,
+                  title: 'Rejected \n ${analyticsData.ccStateRejected.toInt()}',
+                  titleStyle: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      backgroundColor: Colors.white),
+                  titlePositionPercentageOffset: 0.99,
+                  radius: 20),
+              PieChartSectionData(
+                  color: Color.fromARGB(255, 64, 187, 62),
                   value: analyticsData.ccStateManualCheck,
                   title: 'Manual\n ${analyticsData.ccStateManualCheck.toInt()}',
                   titleStyle: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      backgroundColor: Colors.white),
                   titlePositionPercentageOffset: 0.99,
                   radius: 60),
             ])),
@@ -191,17 +201,25 @@ class PpcUserStatsPieChart extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'Users\n${analyticsData.totalStates.toInt()}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Tooltip(
+                  message:
+                      "Total users who have started and are eligible for the flow\n activated + manual +in progress",
+                  child: Text(
+                    'Total Users\n${analyticsData.totalStates.toInt()}',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
-                Text(
-                  '+${analyticsData.ccYesterday}',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 10,
-                      color: Colors.red),
+                Tooltip(
+                  message:
+                      "Number of users who activated their card\n in the past 24 hours",
+                  child: Text(
+                    '+${analyticsData.ccYesterday}',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 10,
+                        color: Colors.red),
+                  ),
                 ),
               ],
             ),

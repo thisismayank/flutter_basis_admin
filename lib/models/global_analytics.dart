@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 class GlobalAnalytics extends ChangeNotifier {
   double ccStateActivated = 0.0;
+  double ccStateRejected = 0.0;
   double ccYesterday = 0.0;
   double ccStateInProgress = 0.0;
   double ccStateManualCheck = 0.0;
@@ -25,8 +26,14 @@ class GlobalAnalytics extends ChangeNotifier {
   List xAxisTitles = [];
   double maxYCoordinate = 0.0;
 
+  List prepaidCardListOfUserCounts = [];
+  double numberOfMonths = 0.0;
+  List xAxisTitlesLine = [];
+  double maxYCoordinateLine = 0.0;
+
   void setGlobalDataForAdmin(
     String ccStateActivatedT,
+    String ccStateRejectedT,
     String ccYesterdayT,
     String ccStateInProgressT,
     String ccStateManualCheckT,
@@ -45,6 +52,7 @@ class GlobalAnalytics extends ChangeNotifier {
     String ipOtpT,
   ) {
     ccStateActivated = double.parse(ccStateActivatedT);
+    ccStateRejected = double.parse(ccStateRejectedT);
     ccYesterday = double.parse(ccYesterdayT);
     ccStateInProgress = double.parse(ccStateInProgressT);
     ccStateManualCheck = double.parse(ccStateManualCheckT);
@@ -71,6 +79,16 @@ class GlobalAnalytics extends ChangeNotifier {
     merchantTransactions = merchantTransactionsT;
     xAxisTitles = xAxisTitlesT;
     maxYCoordinate = maxYCoordinateT;
+
+    notifyListeners();
+  }
+
+  void setLineChartData(List prepaidCardListOfUserCountsT,
+      double numberOfMonthsT, List xAxisTitlesT, double maxYCoordinateT) {
+    prepaidCardListOfUserCounts = prepaidCardListOfUserCountsT;
+    numberOfMonths = numberOfMonthsT;
+    xAxisTitlesLine = xAxisTitlesT;
+    maxYCoordinateLine = maxYCoordinateT;
 
     notifyListeners();
   }

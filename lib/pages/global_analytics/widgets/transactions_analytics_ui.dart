@@ -36,7 +36,7 @@ class TransactionssAnalytics extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           backgroundColor: Color.fromARGB(164, 255, 255, 255)),
                       titlePositionPercentageOffset: 0.99,
-                      radius: 60),
+                      radius: 55),
                   PieChartSectionData(
                       color: const Color(0xFFEE2727),
                       value: analyticsData.txnTransactions,
@@ -59,7 +59,7 @@ class TransactionssAnalytics extends StatelessWidget {
                 //       fontWeight: FontWeight.bold, fontSize: 20),
                 // ),
                 Text(
-                  'Transactions\n₹${analyticsData.totalTransactions}',
+                  'Total \nCredit/Debit\n\n₹ ${analyticsData.totalTransactions}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
