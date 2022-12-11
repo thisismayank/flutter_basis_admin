@@ -57,16 +57,6 @@ class WidgetTree extends StatelessWidget {
                 rootContext: context,
                 authToken: authToken,
               ),
-              // Column( children: [LeftTopPanelPage(
-              //   userData: userDataPassed["userData"],
-              //   rootContext: context,
-              //   authToken: authToken,
-              // ),LeftBottomPanelPage(
-              //   userData: userDataPassed["userData"],
-              //   rootContext: context,
-              //   authToken: authToken,
-              // )
-              // ]),
               Expanded(
                   child: CenterPanelPage(
                 userData: userDataPassed["userData"],

@@ -98,129 +98,125 @@ class _EmailState extends State<Email> {
     }
 
     return Scaffold(
-      body: Center(
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
-          alignment: Alignment.center,
-          margin: const EdgeInsets.all(8),
-          width: ResponsiveLayout.isComputer(context)
-              ? MediaQuery.of(context).size.width - 300
-              : MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(
-                    blurRadius: 4,
-                    offset: Offset(-4, 4),
-                    color: Color.fromARGB(0, 255, 255, 255)),
-                // BoxShadow(
-                //     blurRadius: 4,
-                //     offset: Offset(8, 8),
-                //     color: Color.fromARGB(48, 0, 0, 0))
-              ]),
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                  child: Column(children: [
-                const Spacer(
-                  flex: 2,
-                ),
-                Image.network(
-                  "https://res.cloudinary.com/basis-static/image/upload/v1609946823/logos/Basis_Green_Logo_2x.png",
-                  scale: 20,
-                ),
-                Image.network(
-                  "https://res.cloudinary.com/basis-static/image/upload/v1659020646/dev/undraw_setup_wizard_re_nday_1.png",
-                  scale: 0.8,
-                ),
+      body: Container(
+        padding: ResponsiveLayout.isComputer(context)
+            ? const EdgeInsets.fromLTRB(24, 8, 24, 8)
+            : const EdgeInsets.all(0),
+        alignment: Alignment.center,
+        margin: const EdgeInsets.all(8),
+        width: ResponsiveLayout.isComputer(context)
+            ? MediaQuery.of(context).size.width - 300
+            : MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: const [
+              BoxShadow(
+                  blurRadius: 4,
+                  offset: Offset(-4, 4),
+                  color: Color.fromARGB(0, 255, 255, 255)),
+              // BoxShadow(
+              //     blurRadius: 4,
+              //     offset: Offset(8, 8),
+              //     color: Color.fromARGB(48, 0, 0, 0))
+            ]),
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+                child: Column(children: [
+              const Spacer(
+                flex: 2,
+              ),
+              Image.network(
+                "https://res.cloudinary.com/basis-static/image/upload/v1609946823/logos/Basis_Green_Logo_2x.png",
+                scale: 20,
+              ),
+              Image.network(
+                "https://res.cloudinary.com/basis-static/image/upload/v1659020646/dev/undraw_setup_wizard_re_nday_1.png",
+                scale: 0.8,
+              ),
 
-                const Spacer(
-                  flex: 3,
-                ),
-                // const Text(
-                //   "Enter your email address",
-                //   style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
-                // ),
-                // GoogleSignInWidget(),
-                const SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: const Color.fromRGBO(230, 243, 243, 1)),
-                  child: Container(
-                    width: ResponsiveLayout.isComputer(context)
-                        ? 600
-                        : MediaQuery.of(context).size.width - 100,
-                    child: TextField(
-                      autofillHints: [AutofillHints.email],
-                      autofocus: true,
-                      controller: emailController,
-                      onSubmitted: (String value) {
-                        submitEmail();
-                      },
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                      decoration: const InputDecoration(
+              const Spacer(
+                flex: 3,
+              ),
+              // const Text(
+              //   "Enter your email address",
+              //   style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
+              // ),
+              // GoogleSignInWidget(),
+              const SizedBox(
+                height: 16,
+              ),
+              Container(
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: const Color.fromRGBO(230, 243, 243, 1)),
+                child: Container(
+                  width: ResponsiveLayout.isComputer(context)
+                      ? 600
+                      : MediaQuery.of(context).size.width - 100,
+                  child: TextField(
+                    autofillHints: [AutofillHints.email],
+                    autofocus: true,
+                    controller: emailController,
+                    onSubmitted: (String value) {
+                      submitEmail();
+                    },
+                    textAlign: ResponsiveLayout.isComputer(context)
+                        ? TextAlign.center
+                        : TextAlign.left,
+                    textAlignVertical: TextAlignVertical.center,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                    decoration: const InputDecoration(
                         prefixIcon: Icon(
                           Icons.email_outlined,
                           color: Color(0xff36c182),
                         ),
-                        // suffixIcon: emailController.text.isNotEmpty
-                        //     ? IconButton(
-                        //         icon: const Icon(
-                        //           Icons.close,
-                        //           color: Color(0xff36c182),
-                        //         ),
-                        //         onPressed: () => emailController.clear(),
-                        //       )
-                        //     : Container(
+                        // suffixIcon: Container(
                         //         width: 0,
                         //       ),
                         border: InputBorder.none,
                         hintText: "Please enter your email address",
-                      ),
-                    ),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 0)),
                   ),
                 ),
+              ),
 
-                const SizedBox(
-                  height: 16,
-                ),
-                SizedBox(
-                  width: ResponsiveLayout.isComputer(context)
-                      ? 300
-                      : MediaQuery.of(context).size.width > 500
-                          ? 300
-                          : MediaQuery.of(context).size.width - 200,
-                  child: ElevatedButton.icon(
-                      onPressed: () {
-                        Provider.of<User>(context, listen: false).signIn(
-                            emailController.text.toString(),
-                            passwordController.text.toString());
+              const SizedBox(
+                height: 16,
+              ),
+              SizedBox(
+                width: ResponsiveLayout.isComputer(context)
+                    ? 300
+                    : MediaQuery.of(context).size.width > 500
+                        ? 300
+                        : MediaQuery.of(context).size.width - 200,
+                child: ElevatedButton.icon(
+                    onPressed: () {
+                      Provider.of<User>(context, listen: false).signIn(
+                          emailController.text.toString(),
+                          passwordController.text.toString());
 
-                        submitEmail();
-                        // Navigator.pushNamed(context, "/dashboard");
-                      },
-                      style: ElevatedButton.styleFrom(
-                          minimumSize: const Size.fromHeight(40),
-                          primary: const Color(0xff36c182)),
-                      icon: const Icon(Icons.login),
-                      label: const Text("Continue")),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                const Text("Need help? Contact support@getbasis.co"),
-                const Spacer(flex: 2)
-              ]))
-            ],
-          ),
+                      submitEmail();
+                      // Navigator.pushNamed(context, "/dashboard");
+                    },
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(40),
+                        primary: const Color(0xff36c182)),
+                    icon: const Icon(Icons.login),
+                    label: const Text("Continue")),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              const Text("Need help? Contact support@getbasis.co"),
+              const Spacer(flex: 2)
+            ]))
+          ],
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -12,8 +13,9 @@ class OTP extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = ModalRoute.of(context)?.settings.arguments as Map;
-
+    final data = ModalRoute.of(context)?.settings.arguments != null
+        ? ModalRoute.of(context)?.settings.arguments as Map
+        : {};
     var otpController = TextEditingController();
 
     void verifyOtp(email, token) async {
@@ -55,11 +57,18 @@ class OTP extends StatelessWidget {
           arguments: {"userData": responseData["results"]["user"]});
     }
 
-    return Consumer<User>(builder: (context, user, _) {
-      return Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
-          child: Center(
+    if (data.isEmpty) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Navigator.pop(context, "/");
+      });
+      return Container();
+    } else {
+      return Consumer<User>(builder: (context, user, _) {
+        return Scaffold(
+          body: Padding(
+            padding: ResponsiveLayout.isComputer(context)
+                ? const EdgeInsets.fromLTRB(24, 8, 24, 8)
+                : const EdgeInsets.all(0),
             child: Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.all(8),
@@ -108,7 +117,7 @@ class OTP extends StatelessWidget {
                       const Text(
                         "Enter the OTP received via email",
                       ),
-                      Spacer(flex: 1),
+                      const Spacer(flex: 1),
                       Container(
                           padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
                           decoration: BoxDecoration(
@@ -124,11 +133,19 @@ class OTP extends StatelessWidget {
                               onSubmitted: (String value) {
                                 verifyOtp(data["email"], data["token"]);
                               },
-                              textAlign: TextAlign.center,
+                              textAlign: ResponsiveLayout.isComputer(context)
+                                  ? TextAlign.center
+                                  : TextAlign.left,
+                              textAlignVertical: TextAlignVertical.center,
                               decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Enter OTP",
-                              ),
+                                  prefixIcon: Icon(
+                                    Icons.mobile_friendly,
+                                    color: Color(0xff36c182),
+                                  ),
+                                  border: InputBorder.none,
+                                  hintText: "Enter OTP",
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 0)),
                             ),
                           )),
                       const SizedBox(
@@ -159,8 +176,8 @@ class OTP extends StatelessWidget {
               ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      });
+    }
   }
 }

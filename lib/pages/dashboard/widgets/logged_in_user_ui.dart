@@ -113,41 +113,11 @@ class LoggedInUserData extends StatelessWidget {
                   letterSpacing: 2.0,
                   fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
-            if ((!ResponsiveLayout.isComputer(context)))
-              ElevatedButton.icon(
-                  onPressed: () {
-                    getBarChartData();
-                  },
-                  icon: const Icon(CupertinoIcons.rocket),
-                  label: const Text("Get Masterclass registrants")),
-            const SizedBox(
-              height: 16,
-            ),
-            const SizedBox(height: 8),
-            if ((!ResponsiveLayout.isComputer(context)))
-              ElevatedButton.icon(
-                  onPressed: () {
-                    getBarChartData();
 
-                    // getAnalyticsDataForAdmin();
-                  },
-                  icon: const Icon(CupertinoIcons.chart_pie_fill),
-                  label: const Text("Get Global Analytics")),
-            const SizedBox(
-              height: 16,
-            ),
-            // if ((!ResponsiveLayout.isComputer(context)))
-            // SingleChildScrollView(
-            //     physics: const BouncingScrollPhysics(),
-            //     child: SearchBarForUserData(
-            //         userId: userId,
-            //         authToken: authToken,
-            //         rootContext: rootContext))
-            if ((ResponsiveLayout.isComputer(context)))
-              Lottie.network(
+            // if ((ResponsiveLayout.isComputer(context)))
+            Lottie.network(
                 "https://res.cloudinary.com/basis-static/raw/upload/v1668490322/Power%20Card/newAnimation.json",
-              ),
+                repeat: ResponsiveLayout.isComputer(context) ? false : true),
           ],
         ),
       ),
@@ -156,9 +126,12 @@ class LoggedInUserData extends StatelessWidget {
               onPressed: () {
                 // accessPWA();
               },
-              backgroundColor: const Color(0xff5ECD9B),
-              icon: const Icon(Icons.credit_card),
-              label: const Text("Go to Power Card"),
+              backgroundColor: Colors.white,
+              icon: const Icon(Icons.credit_card, color: Color(0xff36c182)),
+              label: const Text(
+                "Go to Power Card",
+                style: TextStyle(color: Color(0xff36c182)),
+              ),
             )
           : Container(),
     );
