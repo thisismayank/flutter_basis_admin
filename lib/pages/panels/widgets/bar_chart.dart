@@ -34,19 +34,19 @@ class BarChartSample2State extends State<BarChartSample2> {
     super.initState();
 
     final barGroup1 = makeGroupData(
-        0, widget.walletTransactions[0], widget.merchantTransactions[0]);
+        0, widget.walletTransactions[2], widget.merchantTransactions[2]);
     final barGroup2 = makeGroupData(
-        1, widget.walletTransactions[1], widget.merchantTransactions[1]);
+        1, widget.walletTransactions[3], widget.merchantTransactions[3]);
     final barGroup3 = makeGroupData(
-        2, widget.walletTransactions[2], widget.merchantTransactions[2]);
+        2, widget.walletTransactions[4], widget.merchantTransactions[4]);
     final barGroup4 = makeGroupData(
-        3, widget.walletTransactions[3], widget.merchantTransactions[3]);
+        3, widget.walletTransactions[5], widget.merchantTransactions[5]);
     final barGroup5 = makeGroupData(
-        4, widget.walletTransactions[4], widget.merchantTransactions[4]);
+        4, widget.walletTransactions[6], widget.merchantTransactions[6]);
     final barGroup6 = makeGroupData(
-        5, widget.walletTransactions[5], widget.merchantTransactions[5]);
+        5, widget.walletTransactions[7], widget.merchantTransactions[7]);
     final barGroup7 = makeGroupData(
-        6, widget.walletTransactions[6], widget.merchantTransactions[6]);
+        6, widget.walletTransactions[8], widget.merchantTransactions[8]);
 
     final items = [
       barGroup1,
