@@ -83,12 +83,12 @@ class GlobalAnalytics extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setLineChartData(List prepaidCardListOfUserCountsT,
-      double numberOfMonthsT, List xAxisTitlesT, double maxYCoordinateT) {
+  void setLineChartData(List prepaidCardListOfUserCountsT, int numberOfMonthsT,
+      List xAxisTitlesT, int maxYCoordinateT) {
     prepaidCardListOfUserCounts = prepaidCardListOfUserCountsT;
-    numberOfMonths = numberOfMonthsT;
+    numberOfMonths = numberOfMonthsT.toDouble();
     xAxisTitlesLine = xAxisTitlesT;
-    maxYCoordinateLine = maxYCoordinateT;
+    maxYCoordinateLine = maxYCoordinateT.toDouble();
 
     notifyListeners();
   }

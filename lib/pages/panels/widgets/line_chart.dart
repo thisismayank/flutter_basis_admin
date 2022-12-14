@@ -2,6 +2,8 @@
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_6_provider/models/global_analytics.dart';
+import 'package:provider/provider.dart';
 
 class LineChartSample2 extends StatelessWidget {
   LineChartSample2(
@@ -56,7 +58,7 @@ class LineChartSample2 extends StatelessWidget {
                     backgroundColor: const Color.fromARGB(11, 255, 255, 255)),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Flexible(
@@ -136,10 +138,10 @@ class LineChartSample2 extends StatelessWidget {
         LineChartBarData(
           spots: [
             const FlSpot(0, 0),
-            FlSpot(1, userDataCounts[0]),
-            FlSpot(2, userDataCounts[1]),
-            FlSpot(3, userDataCounts[2]),
-            FlSpot(4, userDataCounts[3])
+            FlSpot(1, userDataCounts[0].toDouble()),
+            FlSpot(2, userDataCounts[1].toDouble()),
+            FlSpot(3, userDataCounts[2].toDouble()),
+            FlSpot(4, userDataCounts[3].toDouble())
           ],
           isCurved: true,
           gradient: LinearGradient(

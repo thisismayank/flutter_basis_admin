@@ -62,12 +62,7 @@ class PrepaidCardUserAnalyticsPage extends StatelessWidget {
                       future: getLineGraphData(analyticsData.numberOfMonths),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return LineGraphWrapper(
-                              userDataCounts:
-                                  analyticsData.prepaidCardListOfUserCounts,
-                              maxYCoordinate: analyticsData.maxYCoordinateLine,
-                              xAxisTitle: analyticsData.xAxisTitlesLine,
-                              numberofMonths: analyticsData.numberOfMonths);
+                          return const LineGraphWrapper();
                         } else {
                           return Container(
                             width: MediaQuery.of(context).size.width - 50,
@@ -76,7 +71,8 @@ class PrepaidCardUserAnalyticsPage extends StatelessWidget {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Center(child: CircularProgressIndicator()),
+                            child: const Center(
+                                child: CircularProgressIndicator()),
                           );
                         }
                       }))),

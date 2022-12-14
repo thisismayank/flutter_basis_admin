@@ -90,7 +90,7 @@ class _CenterPanelPageState extends State<CenterPanelPage> {
                           userData: widget.userData,
                           userInformation: 0,
                         ),
-                        RewardsAnalytics()
+                        const RewardsAnalytics()
                       ]),
             // ),
           ))

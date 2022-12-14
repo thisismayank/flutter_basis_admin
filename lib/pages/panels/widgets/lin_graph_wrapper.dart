@@ -9,18 +9,10 @@ import 'package:flutter_application_6_provider/pages/panels/widgets/line_chart.d
 import 'package:provider/provider.dart';
 
 class LineGraphWrapper extends StatelessWidget {
-  const LineGraphWrapper(
-      {Key? key,
-      required this.userDataCounts,
-      required this.xAxisTitle,
-      required this.numberofMonths,
-      required this.maxYCoordinate})
-      : super(key: key);
+  const LineGraphWrapper({
+    Key? key,
+  }) : super(key: key);
 
-  final double numberofMonths;
-  final double maxYCoordinate;
-  final List userDataCounts;
-  final List xAxisTitle;
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalAnalytics>(builder: (context, barGraphData, child) {
@@ -28,10 +20,10 @@ class LineGraphWrapper extends StatelessWidget {
       // print("bargggg ${xAxisTitle}");
 
       return LineChartSample2(
-          userDataCounts: userDataCounts,
-          maxYCoordinate: maxYCoordinate,
-          xAxisTitle: xAxisTitle,
-          numberofMonths: numberofMonths);
+          userDataCounts: barGraphData.prepaidCardListOfUserCounts,
+          maxYCoordinate: barGraphData.maxYCoordinateLine.toDouble(),
+          xAxisTitle: barGraphData.xAxisTitlesLine,
+          numberofMonths: barGraphData.numberOfMonths.toDouble());
     });
   }
 }
