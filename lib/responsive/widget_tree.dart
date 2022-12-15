@@ -42,7 +42,9 @@ class WidgetTree extends StatelessWidget {
           authToken: authToken,
           userId: userDataPassed["userData"]["_id"],
         ),
-        preferredSize: const Size(double.infinity, 100),
+        preferredSize: ResponsiveLayout.isComputer(context)
+            ? const Size(double.infinity, 100)
+            : const Size(0, 70),
       ),
       body: ResponsiveLayout(
           phone: CenterPanelPage(

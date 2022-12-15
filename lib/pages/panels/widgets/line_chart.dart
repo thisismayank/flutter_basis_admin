@@ -26,26 +26,14 @@ class LineChartSample2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width - 50,
-      height: MediaQuery.of(context).size.height - 600,
-      margin: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        // boxShadow: const [
-        //   BoxShadow(
-        //       blurRadius: 4,
-        //       offset: Offset(-4, 4),
-        //       color: Color.fromARGB(0, 255, 255, 255)),
-        //   BoxShadow(
-        //       blurRadius: 6,
-        //       offset: Offset(8, 8),
-        //       color: Color.fromARGB(48, 0, 0, 0))
-        // ]
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+    return AspectRatio(
+      aspectRatio: 16 / 9,
+      child: Container(
+        margin: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: Column(
           children: [
             const Flexible(

@@ -65,11 +65,7 @@ class _CenterPanelPageState extends State<CenterPanelPage> {
                         BorderRadius.only(topLeft: Radius.circular(50))),
               ),
             ),
-          SingleChildScrollView(
-              child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height - 140,
-            // child: Expanded(
+          Expanded(
             child: ResponsiveLayout.isComputer(context)
                 ? PrepaidCardUserAnalyticsPage(
                     rootContext: widget.rootContext,
@@ -93,7 +89,7 @@ class _CenterPanelPageState extends State<CenterPanelPage> {
                         const RewardsAnalytics()
                       ]),
             // ),
-          ))
+          )
         ]),
       );
     });

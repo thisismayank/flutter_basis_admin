@@ -28,12 +28,13 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // color: Colors.red,
       color: const Color(0xff5ECD9B),
       child: Row(children: [
         if (ResponsiveLayout.isComputer(context))
           Container(
-            margin: const EdgeInsets.all(16),
-            height: double.infinity,
+            margin: const EdgeInsets.all(0),
+            // height: double.infinity,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(50)),
               boxShadow: [
@@ -70,13 +71,15 @@ class _AppBarWidgetState extends State<AppBarWidget> {
             ),
           )
         else
-          IconButton(
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              iconSize: 30,
-              color: Colors.white,
-              icon: const Icon(Icons.menu)),
+          Container(
+            child: IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                iconSize: 30,
+                color: Colors.white,
+                icon: const Icon(Icons.menu)),
+          ),
         if (ResponsiveLayout.isComputer(context))
           const SizedBox(
             width: 30,
@@ -89,29 +92,10 @@ class _AppBarWidgetState extends State<AppBarWidget> {
               authToken: widget.authToken,
               rootContext: widget.rootContext),
         ),
-        // Stack(children: [
-        //   IconButton(
-        //       color: Colors.white,
-        //       iconSize: 30,
-        //       onPressed: () {},
-        //       icon: Icon(Icons.notifications_none_outlined)),
-        //   const Positioned(
-        //       right: 6,
-        //       top: 6,
-        //       child: CircleAvatar(
-        //         backgroundColor: Colors.pink,
-        //         radius: 8,
-        //         child: Text(
-        //           "3",
-        //           style: TextStyle(fontSize: 10, color: Colors.white),
-        //         ),
-        //       ))
-        // ]),
-        // if (!ResponsiveLayout.isPhone((context)))
         Container(
           margin: ResponsiveLayout.isComputer(context)
               ? const EdgeInsets.all(16)
-              : EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+              : EdgeInsets.symmetric(vertical: 0, horizontal: 0),
           height: double.infinity,
           decoration: const BoxDecoration(boxShadow: [
             BoxShadow(
@@ -121,13 +105,18 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                 blurRadius: 10)
           ], shape: BoxShape.circle),
           child: Stack(
+            fit: StackFit.passthrough,
             children: [
               CircleAvatar(
                 backgroundColor: const Color.fromARGB(0, 255, 255, 255),
-                radius: ResponsiveLayout.isComputer(context) ? 50 : 30,
-                child: Lottie.network(
-                  "https://res.cloudinary.com/basis-static/raw/upload/v1661928856/Power%20Card/card_going_up.json",
-                ),
+                radius: ResponsiveLayout.isComputer(context) ? 50 : 20,
+                child: ResponsiveLayout.isComputer(context)
+                    ? Lottie.network(
+                        "https://res.cloudinary.com/basis-static/raw/upload/v1661928856/Power%20Card/card_going_up.json",
+                      )
+                    : Lottie.network(
+                        "https://res.cloudinary.com/basis-static/raw/upload/v1661928856/Power%20Card/card_going_up.json",
+                        height: 40),
               ),
               Positioned.fill(
                   child: Lottie.network(

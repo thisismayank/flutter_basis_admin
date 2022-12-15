@@ -66,7 +66,9 @@ class BarChartSample2State extends State<BarChartSample2> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(16),
+      margin: ResponsiveLayout.isComputer(context)
+          ? EdgeInsets.all(16)
+          : EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),

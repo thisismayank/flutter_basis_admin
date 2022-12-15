@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_6_provider/apis/prepaid_card_data_api.dart';
 import 'package:flutter_application_6_provider/models/user_authentication.dart';
+import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 
 class SearchBarForUserData extends StatelessWidget {
   const SearchBarForUserData(
@@ -22,7 +23,9 @@ class SearchBarForUserData extends StatelessWidget {
     var searchController = TextEditingController();
     PrepaidCardData prepaidCardData = PrepaidCardData();
     return Container(
-      padding: const EdgeInsets.all(5),
+      padding: ResponsiveLayout.isComputer(context)
+          ? const EdgeInsets.all(5)
+          : const EdgeInsets.all(0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: const Color.fromARGB(255, 125, 203, 168)),
