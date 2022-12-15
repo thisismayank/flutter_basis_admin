@@ -124,6 +124,7 @@ class _SearchResultsState extends State<SearchResults> {
                   cardTemplate(user.id, Icons.perm_identity, true),
                   cardTemplate(user.name, Icons.note, true),
                   cardTemplate(user.email, Icons.email, true),
+                  cardTemplate(user.phoneNumber, Icons.email, true),
                   user.customerId == ""
                       ? Container()
                       : cardTemplate(user.customerId, Icons.woman, true),

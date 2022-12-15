@@ -83,6 +83,7 @@ class PrepaidCardData {
         responseData["results"]["userId"],
         responseData["results"]["name"],
         responseData["results"]["email"],
+        responseData["results"]["phoneNumber"],
         responseData["results"]["customerId"],
         responseData["results"]["accountId"],
         responseData["results"]["balance"],
@@ -202,8 +203,8 @@ class PrepaidCardData {
       Map responseData = jsonDecode(response.body);
 
       Provider.of<GlobalAnalytics>(context, listen: false).setBarChartData(
-        responseData["results"]["merchantTransactions"],
         responseData["results"]["walletTransactions"],
+        responseData["results"]["merchantTransactions"],
         responseData["results"]["xAxisTitles"],
         responseData["results"]["maxYCoordinate"],
       );

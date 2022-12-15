@@ -23,6 +23,7 @@ class UserPrepaidCardData {
         responseData["results"]["userId"],
         responseData["results"]["name"],
         responseData["results"]["email"],
+        responseData["results"]["phoneNumber"],
         responseData["results"]["customerId"],
         responseData["results"]["accountId"],
         responseData["results"]["balance"],

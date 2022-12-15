@@ -5,6 +5,7 @@ class UserData extends ChangeNotifier {
   String id = "";
   String name = "";
   String email = "";
+  String phoneNumber = "";
   String customerId = "";
   String accountId = "";
   double balance = 0.0;
@@ -23,6 +24,7 @@ class UserData extends ChangeNotifier {
       String idT,
       String nameT,
       String emailT,
+      String phoneNumberT,
       String customerIdT,
       String accountIdT,
       String balanceT,
@@ -39,6 +41,7 @@ class UserData extends ChangeNotifier {
     id = idT;
     name = nameT;
     email = emailT;
+    phoneNumber = phoneNumberT;
     customerId = customerIdT;
     accountId = accountIdT;
     cardId = cardIdT;

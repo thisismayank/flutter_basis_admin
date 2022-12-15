@@ -74,11 +74,11 @@ class GlobalAnalytics extends ChangeNotifier {
   }
 
   void setBarChartData(List walletTransactionsT, List merchantTransactionsT,
-      List xAxisTitlesT, double maxYCoordinateT) {
+      List xAxisTitlesT, int maxYCoordinateT) {
     walletTransactions = walletTransactionsT;
     merchantTransactions = merchantTransactionsT;
     xAxisTitles = xAxisTitlesT;
-    maxYCoordinate = maxYCoordinateT;
+    maxYCoordinate = maxYCoordinateT.toDouble();
 
     notifyListeners();
   }

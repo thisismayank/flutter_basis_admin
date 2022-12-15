@@ -33,20 +33,20 @@ class BarChartSample2State extends State<BarChartSample2> {
   void initState() {
     super.initState();
 
-    final barGroup1 = makeGroupData(
-        0, widget.walletTransactions[2], widget.merchantTransactions[2]);
-    final barGroup2 = makeGroupData(
-        1, widget.walletTransactions[3], widget.merchantTransactions[3]);
-    final barGroup3 = makeGroupData(
-        2, widget.walletTransactions[4], widget.merchantTransactions[4]);
-    final barGroup4 = makeGroupData(
-        3, widget.walletTransactions[5], widget.merchantTransactions[5]);
-    final barGroup5 = makeGroupData(
-        4, widget.walletTransactions[6], widget.merchantTransactions[6]);
-    final barGroup6 = makeGroupData(
-        5, widget.walletTransactions[7], widget.merchantTransactions[7]);
-    final barGroup7 = makeGroupData(
-        6, widget.walletTransactions[8], widget.merchantTransactions[8]);
+    final barGroup1 = makeGroupData(0, widget.walletTransactions[2].toDouble(),
+        widget.merchantTransactions[2].toDouble());
+    final barGroup2 = makeGroupData(1, widget.walletTransactions[3].toDouble(),
+        widget.merchantTransactions[3].toDouble());
+    final barGroup3 = makeGroupData(2, widget.walletTransactions[4].toDouble(),
+        widget.merchantTransactions[4].toDouble());
+    final barGroup4 = makeGroupData(3, widget.walletTransactions[5].toDouble(),
+        widget.merchantTransactions[5].toDouble());
+    final barGroup5 = makeGroupData(4, widget.walletTransactions[6].toDouble(),
+        widget.merchantTransactions[6].toDouble());
+    final barGroup6 = makeGroupData(5, widget.walletTransactions[7].toDouble(),
+        widget.merchantTransactions[7].toDouble());
+    final barGroup7 = makeGroupData(6, widget.walletTransactions[8].toDouble(),
+        widget.merchantTransactions[8].toDouble());
 
     final items = [
       barGroup1,
@@ -134,7 +134,7 @@ class BarChartSample2State extends State<BarChartSample2> {
             Expanded(
               child: BarChart(
                 BarChartData(
-                    maxY: widget.maxYCoordinate,
+                    maxY: widget.maxYCoordinate.toDouble(),
                     titlesData: FlTitlesData(
                       show: true,
                       rightTitles: AxisTitles(
