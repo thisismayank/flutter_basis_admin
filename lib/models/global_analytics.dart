@@ -31,6 +31,13 @@ class GlobalAnalytics extends ChangeNotifier {
   List xAxisTitlesLine = [];
   double maxYCoordinateLine = 0.0;
 
+  List monthlyWalletLoadData = [];
+  double totalCountOfUsersWhoLoadedWallets = 0.0;
+  List monthlyMerchantTransactionsData = [];
+  double totalCountOfUsersWhoDidMerchantTransactions = 0.0;
+  List xAxisTitlesLineD = [];
+  double maxYCoordinateLineD = 0.0;
+
   void setGlobalDataForAdmin(
     String ccStateActivatedT,
     String ccStateRejectedT,
@@ -79,6 +86,25 @@ class GlobalAnalytics extends ChangeNotifier {
     merchantTransactions = merchantTransactionsT;
     xAxisTitles = xAxisTitlesT;
     maxYCoordinate = maxYCoordinateT.toDouble();
+
+    notifyListeners();
+  }
+
+  void setDoubleLineChartData(
+      List monthlyWalletLoadDataT,
+      int totalCountOfUsersWhoLoadedWalletsT,
+      List monthlyMerchantTransactionsDataT,
+      int totalCountOfUsersWhoDidMerchantTransactionsT,
+      List xAxisTitlesT,
+      int maxYCoordinateT) {
+    monthlyWalletLoadData = monthlyWalletLoadDataT;
+    totalCountOfUsersWhoLoadedWallets =
+        totalCountOfUsersWhoLoadedWalletsT.toDouble();
+    monthlyMerchantTransactionsData = monthlyMerchantTransactionsDataT;
+    totalCountOfUsersWhoDidMerchantTransactions =
+        totalCountOfUsersWhoDidMerchantTransactionsT.toDouble();
+    xAxisTitlesLineD = xAxisTitlesT;
+    maxYCoordinateLineD = maxYCoordinateT.toDouble();
 
     notifyListeners();
   }

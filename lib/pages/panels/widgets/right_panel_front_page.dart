@@ -6,6 +6,7 @@ import 'package:flutter_application_6_provider/pages/global_analytics/widgets/re
 import 'package:flutter_application_6_provider/pages/global_analytics/widgets/transactions_analytics_ui.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/bar_chart.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/bar_graph_wrapper.dart';
+import 'package:flutter_application_6_provider/pages/panels/widgets/line_double_chart_wrapper.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_activated_state_list_table_ui.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_list_table.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/search_results.dart';
@@ -44,6 +45,14 @@ class _RightPanelFrontPageState extends State<RightPanelFrontPage> {
     PrepaidCardData prepaidCardData = PrepaidCardData();
     await prepaidCardData.barGraphData(widget.authToken, widget.rootContext);
 
+    return Container();
+  }
+
+  Future<Widget> getLineDoubleGraphData() async {
+    PrepaidCardData prepaidCardData = PrepaidCardData();
+
+    await prepaidCardData.getLineDoubleChartData(
+        widget.authToken, widget.rootContext);
     return Container();
   }
 
@@ -96,6 +105,21 @@ class _RightPanelFrontPageState extends State<RightPanelFrontPage> {
                                       userId: widget.userData["_id"],
                                       authToken: widget.authToken,
                                     );
+                                  } else {
+                                    return const CircularProgressIndicator(
+                                      color: Colors.green,
+                                    );
+                                  }
+                                })),
+                    Flexible(
+                        flex: 3,
+                        child:
+                            // Container()
+                            FutureBuilder<Widget?>(
+                                future: getLineDoubleGraphData(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return const LineDoubleChartWrapper();
                                   } else {
                                     return const CircularProgressIndicator(
                                       color: Colors.green,

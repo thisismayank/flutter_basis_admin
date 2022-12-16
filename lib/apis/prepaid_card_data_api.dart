@@ -201,10 +201,36 @@ class PrepaidCardData {
           await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
 
       Map responseData = jsonDecode(response.body);
+      print("RES $responseData");
 
       Provider.of<GlobalAnalytics>(context, listen: false).setBarChartData(
         responseData["results"]["walletTransactions"],
         responseData["results"]["merchantTransactions"],
+        responseData["results"]["xAxisTitles"],
+        responseData["results"]["maxYCoordinate"],
+      );
+      return responseData;
+    } catch (error) {
+      print("ERROR barGraphData $error");
+      throw error;
+    }
+  }
+
+  Future<Map> getLineDoubleChartData(authToken, context) async {
+    try {
+      var uri = Uri.parse(
+          "https://api.getbasis.co/v7/admins/prepaid/transactions/grouped/monthly");
+      var response =
+          await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
+
+      Map responseData = jsonDecode(response.body);
+      print("RES $responseData");
+      Provider.of<GlobalAnalytics>(context, listen: false)
+          .setDoubleLineChartData(
+        responseData["results"]["monthlyWalletLoadData"],
+        responseData["results"]["totalCountOfUsersWhoLoadedWallets"],
+        responseData["results"]["monthlyMerchantTransactionsData"],
+        responseData["results"]["totalCountOfUsersWhoDidMerchantTransactions"],
         responseData["results"]["xAxisTitles"],
         responseData["results"]["maxYCoordinate"],
       );
