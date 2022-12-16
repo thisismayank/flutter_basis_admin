@@ -2,6 +2,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class LineDoubleChartSample2 extends StatelessWidget {
+  final Color walletDataColor = const Color(0xff5ecd98);
+  final Color merchantDataColor = const Color(0xff91a5ec);
   const LineDoubleChartSample2(
       {Key? key,
       required this.monthlyWalletLoadData,
@@ -100,7 +102,7 @@ class LineDoubleChartSample2 extends StatelessWidget {
 
   LineChartBarData get lineChartBarData1_1 => LineChartBarData(
         isCurved: true,
-        color: const Color(0xff4af699),
+        color: walletDataColor,
         barWidth: 8,
         isStrokeCapRound: true,
         dotData: FlDotData(show: true),
@@ -115,7 +117,7 @@ class LineDoubleChartSample2 extends StatelessWidget {
 
   LineChartBarData get lineChartBarData1_2 => LineChartBarData(
         isCurved: true,
-        color: const Color(0xffaa4cfc),
+        color: merchantDataColor,
         barWidth: 8,
         isStrokeCapRound: true,
         dotData: FlDotData(show: true),
@@ -145,29 +147,82 @@ class LineDoubleChartSample2 extends StatelessWidget {
                 const SizedBox(
                   height: 12,
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    Text(
-                      'Shop ',
-                      style: TextStyle(
-                        color: Color(0xff827daa),
-                        fontSize: 16,
+                Center(
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Count Of Users Who Transacted",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 70, 183, 132),
+                            fontWeight: FontWeight.bold),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      'Unfold  2018',
-                      style: TextStyle(
-                        color: Color(0xff827daa),
-                        fontSize: 16,
+                      const SizedBox(
+                        height: 8,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                height: 10,
+                                width: 10,
+                                color: walletDataColor,
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                'Merchant Txns',
+                                style: TextStyle(
+                                    color: walletDataColor, fontSize: 14),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                '$totalCountOfUsersWhoLoadedWallets',
+                                style: TextStyle(
+                                    color: walletDataColor, fontSize: 14),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                height: 10,
+                                width: 10,
+                                color: merchantDataColor,
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                'Wallet Txns',
+                                style: TextStyle(
+                                    color: merchantDataColor, fontSize: 14),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                '$totalCountOfUsersWhoDidMerchantTransactions',
+                                style: TextStyle(
+                                    color: merchantDataColor, fontSize: 14),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
-                  height: 12,
+                  height: 24,
                 ),
                 Expanded(
                   child: Padding(

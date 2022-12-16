@@ -9,6 +9,7 @@ import 'package:flutter_application_6_provider/pages/global_analytics/widgets/pr
 import 'package:flutter_application_6_provider/pages/global_analytics/widgets/rewards_analytics_ui.dart';
 import 'package:flutter_application_6_provider/pages/global_analytics/widgets/transactions_analytics_ui.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/mobile_trnsactions_page.dart';
+import 'package:flutter_application_6_provider/pages/panels/widgets/right_panel_front_page.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_activated_state_list_table_ui.dart';
 import 'package:flutter_application_6_provider/pages/user_authentication/widgets/email.dart';
 import 'package:flutter_application_6_provider/pages/user_authentication/widgets/otp.dart';
@@ -81,7 +82,7 @@ class _LeftPanelFrontPageState extends State<LeftPanelFrontPage> {
                             userId: widget.userData["_id"],
                             authToken: widget.authToken,
                             userData: widget.userData),
-                        MobileTransactionsPage(
+                        RightPanelFrontPage(
                           rootContext: widget.rootContext,
                           authToken: widget.authToken,
                           userData: widget.userData,

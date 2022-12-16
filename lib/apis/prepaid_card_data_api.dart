@@ -201,7 +201,6 @@ class PrepaidCardData {
           await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
 
       Map responseData = jsonDecode(response.body);
-      print("RES $responseData");
 
       Provider.of<GlobalAnalytics>(context, listen: false).setBarChartData(
         responseData["results"]["walletTransactions"],
@@ -211,7 +210,6 @@ class PrepaidCardData {
       );
       return responseData;
     } catch (error) {
-      print("ERROR barGraphData $error");
       throw error;
     }
   }
@@ -224,7 +222,7 @@ class PrepaidCardData {
           await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
 
       Map responseData = jsonDecode(response.body);
-      print("RES $responseData");
+
       Provider.of<GlobalAnalytics>(context, listen: false)
           .setDoubleLineChartData(
         responseData["results"]["monthlyWalletLoadData"],

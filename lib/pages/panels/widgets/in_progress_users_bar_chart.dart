@@ -58,7 +58,7 @@ class InProgressUsersBarChartState extends State<InProgressUsersBarChart> {
         borderRadius: BorderRadius.circular(20),
       ),
       alignment: Alignment.center,
-      padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
+      // padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
       child: AspectRatio(
         aspectRatio: 16 / 9,
         child: Column(
@@ -79,7 +79,7 @@ class InProgressUsersBarChartState extends State<InProgressUsersBarChart> {
             Expanded(
               child: BarChart(
                 BarChartData(
-                    maxY: 300,
+                    maxY: widget.basicDetails + 50,
                     titlesData: FlTitlesData(
                       show: true,
                       rightTitles: AxisTitles(
@@ -122,7 +122,7 @@ class InProgressUsersBarChartState extends State<InProgressUsersBarChart> {
                       //     strokeWidth: 0.8,
                       //   );
                       // },
-                      show: true,
+                      // show: true,
                       drawVerticalLine: false,
                       horizontalInterval: 100,
                     )),

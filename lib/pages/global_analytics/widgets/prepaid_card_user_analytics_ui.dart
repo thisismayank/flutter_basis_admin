@@ -12,6 +12,7 @@ import 'package:flutter_application_6_provider/pages/panels/widgets/line_chart.d
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_activated_state_list_table_ui.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_list_table.dart';
 import 'package:flutter_application_6_provider/models/prepaid_user_data_list.dart';
+import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 import 'package:provider/provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
@@ -53,19 +54,20 @@ class PrepaidCardUserAnalyticsPage extends StatelessWidget {
                 child: Column(
                   // shrinkWrap: true,
                   children: [
+                    const Spacer(flex: 1),
                     Flexible(
-                      flex: 2,
+                      flex: 4,
                       child: PpcUserStatsPieChart(
                           userData: userData,
                           authToken: authToken,
                           userId: userId,
                           rootContext: rootContext),
                     ),
-                    // const Spacer(
-                    //   flex: 1,
-                    // ),
+                    const Spacer(
+                      flex: 1,
+                    ),
                     Flexible(
-                      flex: 2,
+                      flex: 6,
                       child: FutureBuilder<Widget?>(
                           future:
                               getLineGraphData(analyticsData.numberOfMonths),
@@ -74,7 +76,9 @@ class PrepaidCardUserAnalyticsPage extends StatelessWidget {
                               return const LineGraphWrapper();
                             } else {
                               return Container(
-                                width: MediaQuery.of(context).size.width - 50,
+                                width: ResponsiveLayout.isComputer(context)
+                                    ? MediaQuery.of(context).size.width
+                                    : MediaQuery.of(context).size.width - 50,
                                 height:
                                     MediaQuery.of(context).size.height - 650,
                                 decoration: BoxDecoration(
@@ -87,12 +91,11 @@ class PrepaidCardUserAnalyticsPage extends StatelessWidget {
                             }
                           }),
                     ),
-                    // const Spacer(
-                    //   flex: 1,
-                    // ),
-
+                    const Spacer(
+                      flex: 1,
+                    ),
                     Flexible(
-                      flex: 2,
+                      flex: 6,
                       child: analyticsData.ipBasicDetails > 0
                           ? Container(
                               // height: 200,
@@ -112,6 +115,9 @@ class PrepaidCardUserAnalyticsPage extends StatelessWidget {
                               ),
                               child: Container(),
                             ),
+                    ),
+                    Spacer(
+                      flex: 1,
                     )
                   ],
                 ),

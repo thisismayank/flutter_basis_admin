@@ -70,18 +70,19 @@ class BarChartSample2State extends State<BarChartSample2> {
           ? EdgeInsets.all(16)
           : EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
-                blurRadius: 4,
-                offset: Offset(-4, 4),
-                color: Color.fromARGB(0, 255, 255, 255)),
-            BoxShadow(
-                blurRadius: 6,
-                offset: Offset(8, 8),
-                color: Color.fromARGB(48, 0, 0, 0))
-          ]),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        // boxShadow: const [
+        //   BoxShadow(
+        //       blurRadius: 4,
+        //       offset: Offset(-4, 4),
+        //       color: Color.fromARGB(0, 255, 255, 255)),
+        //   BoxShadow(
+        //       blurRadius: 6,
+        //       offset: Offset(8, 8),
+        //       color: Color.fromARGB(48, 0, 0, 0))
+        // ]
+      ),
       child: Padding(
         padding: EdgeInsets.fromLTRB(4, 16, 4, 4),
         child: Column(

@@ -10,6 +10,7 @@ import 'package:flutter_application_6_provider/pages/panels/widgets/line_double_
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_activated_state_list_table_ui.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_list_table.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/search_results.dart';
+import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 
 class RightPanelFrontPage extends StatefulWidget {
   const RightPanelFrontPage(
@@ -35,12 +36,6 @@ class _RightPanelFrontPageState extends State<RightPanelFrontPage> {
     // getBarChartData();
   }
 
-  // void getBarChartData() async {
-
-  //   PrepaidCardData prepaidCardData = PrepaidCardData();
-  //   prepaidCardData.barGraphData(widget.authToken, widget.rootContext);
-  // }
-
   Future<Widget> getBarGraphData() async {
     PrepaidCardData prepaidCardData = PrepaidCardData();
     await prepaidCardData.barGraphData(widget.authToken, widget.rootContext);
@@ -59,75 +54,88 @@ class _RightPanelFrontPageState extends State<RightPanelFrontPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.red,
-      body: widget.userInformation == 1
-          ? SearchResults(
-              userData: widget.userData,
-              rootContext: widget.rootContext,
-              authToken: widget.authToken,
-              userInformation: widget.userInformation)
-          : widget.userInformation == 2
-              ? PrepaidDataTable(
-                  userData: widget.userData,
-                  rootContext: widget.rootContext,
-                  authToken: widget.authToken,
-                  userInformation: widget.userInformation)
-              : Column(
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: Row(
-                        children: const [
-                          Flexible(
-                              flex: 2,
-                              fit: FlexFit.tight,
-                              child: TransactionssAnalytics()),
-                          Flexible(
-                              flex: 1,
-                              fit: FlexFit.tight,
-                              child: RewardsAnalytics()),
-                        ],
-                      ),
+        // backgroundColor: Colors.red,
+        body: widget.userInformation == 1
+            ? SearchResults(
+                userData: widget.userData,
+                rootContext: widget.rootContext,
+                authToken: widget.authToken,
+                userInformation: widget.userInformation)
+            : widget.userInformation == 2
+                ? PrepaidDataTable(
+                    userData: widget.userData,
+                    rootContext: widget.rootContext,
+                    authToken: widget.authToken,
+                    userInformation: widget.userInformation)
+                : SingleChildScrollView(
+                    child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                        minHeight: 200,
+                        maxHeight: MediaQuery.of(context).size.height - 10),
+                    child: Column(
+                      children: [
+                        // SizedBox(
+                        //   height: 30,
+                        // ),
+                        const Spacer(flex: 1),
+                        Flexible(
+                          flex: 4,
+                          child: Row(
+                            children: [
+                              const Flexible(
+                                  flex: 2,
+                                  fit: FlexFit.tight,
+                                  child: TransactionssAnalytics()),
+                              ResponsiveLayout.isComputer(context)
+                                  ? const Flexible(
+                                      flex: 1,
+                                      fit: FlexFit.tight,
+                                      child: RewardsAnalytics())
+                                  : Container(),
+                            ],
+                          ),
+                        ),
+                        // const SizedBox(
+                        //   height: 32,
+                        // ),
+                        const Spacer(flex: 1),
+                        Flexible(
+                            flex: 6,
+                            child:
+                                // Container()
+                                FutureBuilder<Widget?>(
+                                    future: getBarGraphData(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        return BarGraphWrapper(
+                                          rootContext: widget.rootContext,
+                                          userId: widget.userData["_id"],
+                                          authToken: widget.authToken,
+                                        );
+                                      } else {
+                                        return const CircularProgressIndicator(
+                                          color: Colors.green,
+                                        );
+                                      }
+                                    })),
+                        Flexible(
+                            flex: 6,
+                            child:
+                                // Container()
+                                FutureBuilder<Widget?>(
+                                    future: getLineDoubleGraphData(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        return const LineDoubleChartWrapper();
+                                      } else {
+                                        return const CircularProgressIndicator(
+                                          color: Colors.green,
+                                        );
+                                      }
+                                    })),
+                        const Spacer(flex: 1)
+                      ],
                     ),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    Flexible(
-                        flex: 3,
-                        child:
-                            // Container()
-                            FutureBuilder<Widget?>(
-                                future: getBarGraphData(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return BarGraphWrapper(
-                                      rootContext: widget.rootContext,
-                                      userId: widget.userData["_id"],
-                                      authToken: widget.authToken,
-                                    );
-                                  } else {
-                                    return const CircularProgressIndicator(
-                                      color: Colors.green,
-                                    );
-                                  }
-                                })),
-                    Flexible(
-                        flex: 3,
-                        child:
-                            // Container()
-                            FutureBuilder<Widget?>(
-                                future: getLineDoubleGraphData(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return const LineDoubleChartWrapper();
-                                  } else {
-                                    return const CircularProgressIndicator(
-                                      color: Colors.green,
-                                    );
-                                  }
-                                }))
-                  ],
-                ),
-    );
+                  )));
   }
 }
