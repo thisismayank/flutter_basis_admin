@@ -3,12 +3,13 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_6_provider/models/user_authentication.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/app_bar_widget.dart';
-import 'package:flutter_application_6_provider/pages/panels/widgets/center_panel_page.dart';
+import 'package:flutter_application_6_provider/pages/panels/widgets/left_panel_front_page.dart';
+import 'package:flutter_application_6_provider/pages/panels/widgets/left_panel_wrapper_page.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/drawer_page.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/left_bottom_panel_page.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/left_panel_page.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/left_top_panel_page.dart';
-import 'package:flutter_application_6_provider/pages/panels/widgets/right_panel_page.dart';
+import 'package:flutter_application_6_provider/pages/panels/widgets/right_panel_wrapper_page.dart';
 import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 import 'package:flutter_application_6_provider/models/user_prepaid_card_data.dart';
 
@@ -47,7 +48,7 @@ class WidgetTree extends StatelessWidget {
             : const Size(0, 70),
       ),
       body: ResponsiveLayout(
-          phone: CenterPanelPage(
+          phone: LeftPanelFrontPage(
             userData: userDataPassed["userData"],
             rootContext: context,
             authToken: authToken,
@@ -60,17 +61,20 @@ class WidgetTree extends StatelessWidget {
                 authToken: authToken,
               ),
               Expanded(
-                  child: CenterPanelPage(
+                  child: LeftPanelWrapper(
                 userData: userDataPassed["userData"],
                 rootContext: context,
                 authToken: authToken,
+                panelInformation: 1,
               )),
               Expanded(
-                  child: RightPanelPage(
-                      userData: userDataPassed["userData"],
-                      rootContext: context,
-                      authToken: authToken,
-                      userInformation: whichScreenToDisplayInRightPanel))
+                  child: RightPanelWrapperPage(
+                userData: userDataPassed["userData"],
+                rootContext: context,
+                authToken: authToken,
+                userInformation: whichScreenToDisplayInRightPanel,
+                panelInformation: 1,
+              ))
             ],
           )),
       drawer: DrawerPage(

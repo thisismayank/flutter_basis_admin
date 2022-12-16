@@ -16,16 +16,18 @@ import 'package:flutter_application_6_provider/pages/user_authentication/widgets
 import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 import 'package:provider/provider.dart';
 
-class CenterPanelPage extends StatelessWidget {
-  const CenterPanelPage(
+class LeftPanelWrapper extends StatelessWidget {
+  const LeftPanelWrapper(
       {Key? key,
       required this.userData,
       required this.authToken,
-      required this.rootContext})
+      required this.rootContext,
+      required this.panelInformation})
       : super(key: key);
   final Map userData;
   final BuildContext rootContext;
   final String authToken;
+  final int panelInformation;
 
   @override
   Widget build(BuildContext context) {

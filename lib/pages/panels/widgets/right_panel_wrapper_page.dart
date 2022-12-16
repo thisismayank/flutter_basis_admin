@@ -11,18 +11,20 @@ import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prep
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_list_table.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/search_results.dart';
 
-class RightPanelPage extends StatelessWidget {
-  const RightPanelPage(
+class RightPanelWrapperPage extends StatelessWidget {
+  const RightPanelWrapperPage(
       {Key? key,
       required this.userData,
       required this.authToken,
       required this.rootContext,
-      required this.userInformation})
+      required this.userInformation,
+      required this.panelInformation})
       : super(key: key);
   final Map userData;
   final BuildContext rootContext;
   final String authToken;
   final int userInformation;
+  final int panelInformation;
 
   @override
   Widget build(BuildContext context) {
