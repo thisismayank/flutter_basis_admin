@@ -49,7 +49,8 @@ class UserPrepaidCardData {
   }
 
   Future<int> getRejectedUserCount(from, to, userId, authToken, context) async {
-    var uri = Uri.parse("http://localhost:3000/v7/admins/rejected/users/count");
+    var uri =
+        Uri.parse("https://api.getbasis.co/v7/admins/rejected/users/count");
     var response = await http.post(
       uri,
       headers: {"Authorization": 'Bearer $authToken'},

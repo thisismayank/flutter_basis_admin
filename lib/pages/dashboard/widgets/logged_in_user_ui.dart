@@ -115,6 +115,7 @@ class LoggedInUserData extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             // if ((ResponsiveLayout.isComputer(context)))
+            const SizedBox(height: 16),
 
             RejectedUserCountPicker(
               authToken: authToken,
