@@ -43,30 +43,34 @@ class MapWrapper extends StatelessWidget {
       // body: Container(),
       body: ResponsiveLayout(
         phone: Container(),
-        computer: FutureBuilder(
-            future: getGeoData(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Consumer<GlobalAnalytics>(
-                    builder: ((context, mapData, child) {
-                  return Padding(
-                    padding: const EdgeInsets.all(.0),
-                    child: RightPanelBackPage(
-                        geoData: mapData.geoData,
-                        refreshTime: mapData.refreshTime,
-                        cityToTransactionData:
-                            mapData.cityToTransactionAmountData),
-                  );
-                }));
-              } else {
-                return Container();
-              }
-            }),
-      ),
-      drawer: DrawerPage(
-        userData: userData["userData"],
-        rootContext: context,
-        authToken: authToken,
+        computer: Row(children: [
+          DrawerPage(
+            userData: userData["userData"],
+            rootContext: context,
+            authToken: authToken,
+          ),
+          Expanded(
+            child: FutureBuilder(
+                future: getGeoData(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Consumer<GlobalAnalytics>(
+                        builder: ((context, mapData, child) {
+                      return Padding(
+                        padding: const EdgeInsets.all(.0),
+                        child: RightPanelBackPage(
+                            geoData: mapData.geoData,
+                            refreshTime: mapData.refreshTime,
+                            cityToTransactionData:
+                                mapData.cityToTransactionAmountData),
+                      );
+                    }));
+                  } else {
+                    return Container();
+                  }
+                }),
+          )
+        ]),
       ),
     );
   }
