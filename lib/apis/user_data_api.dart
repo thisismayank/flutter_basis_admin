@@ -47,4 +47,17 @@ class UserPrepaidCardData {
     });
     return responseData;
   }
+
+  Future<int> getRejectedUserCount(from, to, userId, authToken, context) async {
+    var uri = Uri.parse("http://localhost:3000/v7/admins/rejected/users/count");
+    var response = await http.post(
+      uri,
+      headers: {"Authorization": 'Bearer $authToken'},
+      body: {'from': from, 'to': to},
+    );
+
+    Map responseData = jsonDecode(response.body);
+
+    return responseData["results"];
+  }
 }

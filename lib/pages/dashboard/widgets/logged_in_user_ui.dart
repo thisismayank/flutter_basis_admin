@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_6_provider/apis/prepaid_card_data_api.dart';
 import 'package:flutter_application_6_provider/models/user_authentication.dart';
+import 'package:flutter_application_6_provider/pages/dashboard/widgets/rejected_user_count_picker.dart';
 import 'package:flutter_application_6_provider/pages/dashboard/widgets/search_bar_for_user_data.dart';
 import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 import 'package:flutter_application_6_provider/utils/widgets/lib/user.dart';
@@ -69,9 +70,8 @@ class LoggedInUserData extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text("Name",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 190, 190, 190),
-                            letterSpacing: 2.0)),
+                        style:
+                            TextStyle(color: Colors.grey, letterSpacing: 2.0)),
                     Text(
                       user.firstName + " " + user.lastName,
                       style: const TextStyle(
@@ -113,8 +113,14 @@ class LoggedInUserData extends StatelessWidget {
                   letterSpacing: 2.0,
                   fontWeight: FontWeight.bold),
             ),
-
+            const SizedBox(height: 16),
             // if ((ResponsiveLayout.isComputer(context)))
+
+            RejectedUserCountPicker(
+              authToken: authToken,
+              rootContext: rootContext,
+              userId: userId,
+            ),
             Lottie.network(
                 "https://res.cloudinary.com/basis-static/raw/upload/v1668490322/Power%20Card/newAnimation.json",
                 repeat: ResponsiveLayout.isComputer(context) ? false : true),

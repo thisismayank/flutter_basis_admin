@@ -27,7 +27,6 @@ class MapWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print("userDataHere $userData");
     return Scaffold(
       appBar: PreferredSize(
         child: AppBarWidget(

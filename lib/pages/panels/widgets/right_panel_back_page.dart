@@ -42,7 +42,7 @@ class RightPanelBackPage extends StatelessWidget {
       ));
       // return Container();
     });
-    // print('listadata $listData');
+
     return SingleChildScrollView(
       child: Container(
         // color: Colors.green,

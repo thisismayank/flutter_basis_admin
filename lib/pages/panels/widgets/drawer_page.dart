@@ -19,7 +19,6 @@ class DrawerPage extends StatelessWidget {
   final String authToken;
 
   Widget build(BuildContext context) {
-    // print('here ${userData}');
     return Consumer<User>(builder: (context, user, child) {
       return Container(
         width: 250,
