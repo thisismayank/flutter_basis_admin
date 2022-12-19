@@ -82,10 +82,14 @@ class _RightPanelFrontPageState extends State<RightPanelFrontPage> {
                           flex: 4,
                           child: Row(
                             children: [
-                              const Flexible(
+                              Flexible(
                                   flex: 2,
                                   fit: FlexFit.tight,
-                                  child: TransactionssAnalytics()),
+                                  child: TransactionssAnalytics(
+                                    rootContext: widget.rootContext,
+                                    authToken: widget.authToken,
+                                    userData: widget.userData,
+                                  )),
                               ResponsiveLayout.isComputer(context)
                                   ? const Flexible(
                                       flex: 1,

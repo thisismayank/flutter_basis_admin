@@ -214,6 +214,25 @@ class PrepaidCardData {
     }
   }
 
+  Future<Map> getGeoData(authToken, context) async {
+    try {
+      var uri = Uri.parse("https://api.getbasis.co/v7/admins/geo/count/users");
+      var response =
+          await http.get(uri, headers: {"Authorization": 'Bearer $authToken'});
+
+      Map responseData = jsonDecode(response.body);
+
+      Provider.of<GlobalAnalytics>(context, listen: false).setGeoData(
+        responseData["results"]["stateToPpcActivationCount"],
+        responseData["results"]["refreshTime"],
+        responseData["results"]["cityToTransactionAmount"],
+      );
+      return responseData;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   Future<Map> getLineDoubleChartData(authToken, context) async {
     try {
       var uri = Uri.parse(

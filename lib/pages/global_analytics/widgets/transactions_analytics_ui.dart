@@ -4,8 +4,15 @@ import 'package:provider/provider.dart';
 import 'package:flutter_application_6_provider/models/global_analytics.dart';
 
 class TransactionssAnalytics extends StatelessWidget {
-  const TransactionssAnalytics({Key? key}) : super(key: key);
-
+  const TransactionssAnalytics(
+      {Key? key,
+      required this.rootContext,
+      required this.authToken,
+      required this.userData})
+      : super(key: key);
+  final String authToken;
+  final BuildContext rootContext;
+  final Map userData;
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalAnalytics>(builder: (context, analyticsData, child) {
@@ -58,11 +65,19 @@ class TransactionssAnalytics extends StatelessWidget {
                 //   style: TextStyle(
                 //       fontWeight: FontWeight.bold, fontSize: 20),
                 // ),
-                Text(
-                  'Total \nCredit/Debit\n\n₹ ${analyticsData.totalTransactions}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                GestureDetector(
+                  onTap: (() => Navigator.pushNamed(rootContext, "/map",
+                          arguments: {
+                            "authToken": authToken,
+                            "rootContext": rootContext,
+                            "userData": userData
+                          })),
+                  child: Text(
+                    'Total \nCredit/Debit\n\n₹ ${analyticsData.totalTransactions}',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 )
               ],

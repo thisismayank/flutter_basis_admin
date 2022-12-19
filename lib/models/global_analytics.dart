@@ -37,7 +37,9 @@ class GlobalAnalytics extends ChangeNotifier {
   double totalCountOfUsersWhoDidMerchantTransactions = 0.0;
   List xAxisTitlesLineD = [];
   double maxYCoordinateLineD = 0.0;
-
+  List geoData = [];
+  Map cityToTransactionAmountData = {};
+  String refreshTime = "";
   void setGlobalDataForAdmin(
     String ccStateActivatedT,
     String ccStateRejectedT,
@@ -115,6 +117,16 @@ class GlobalAnalytics extends ChangeNotifier {
     numberOfMonths = numberOfMonthsT.toDouble();
     xAxisTitlesLine = xAxisTitlesT;
     maxYCoordinateLine = maxYCoordinateT.toDouble();
+
+    notifyListeners();
+  }
+
+  void setGeoData(
+      List geoDataT, String refreshTimeT, Map cityToTransactionAmountDataT) {
+    geoData = geoDataT;
+    cityToTransactionAmountData = cityToTransactionAmountDataT;
+
+    refreshTime = refreshTimeT;
 
     notifyListeners();
   }

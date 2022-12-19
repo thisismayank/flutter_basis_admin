@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_6_provider/apis/prepaid_card_data_api.dart';
 import 'package:flutter_application_6_provider/pages/global_analytics/widgets/rewards_analytics_ui.dart';
 import 'package:flutter_application_6_provider/pages/global_analytics/widgets/transactions_analytics_ui.dart';
+import 'package:flutter_application_6_provider/pages/panels/widgets/right_panel_back_page.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/right_panel_front_page.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/bar_chart.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/bar_graph_wrapper.dart';
@@ -33,5 +34,6 @@ class RightPanelWrapperPage extends StatelessWidget {
         authToken: authToken,
         rootContext: rootContext,
         userInformation: userInformation);
+    // return MyHomePage();
   }
 }

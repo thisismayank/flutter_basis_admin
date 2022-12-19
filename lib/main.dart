@@ -3,6 +3,7 @@ import 'package:flutter_application_6_provider/pages/dashboard/widgets/dashboard
 import 'package:flutter_application_6_provider/models/global_analytics.dart';
 import 'package:flutter_application_6_provider/pages/global_analytics/widgets/prepaid_card_user_analytics_ui.dart';
 import 'package:flutter_application_6_provider/pages/global_analytics/widgets/global_analytics_page_ui.dart';
+import 'package:flutter_application_6_provider/pages/panels/widgets/map_wrapper.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_activated_state_list_table_ui.dart';
 import 'package:flutter_application_6_provider/pages/user_authentication/widgets/email.dart';
 import 'package:flutter_application_6_provider/pages/user_authentication/widgets/otp.dart';
@@ -54,6 +55,15 @@ void main() {
             userData: passedData,
             userInformation: 0,
             rootContext: context,
+          );
+        },
+        "/map": (context) {
+          final passedData = ModalRoute.of(context)?.settings.arguments as Map;
+
+          return MapWrapper(
+            authToken: passedData["authToken"],
+            rootContext: context,
+            userData: passedData,
           );
         },
         "/global": (context) => const GlobalAnalyticsPage(

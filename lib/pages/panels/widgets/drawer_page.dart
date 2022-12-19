@@ -7,7 +7,7 @@ import 'package:flutter_application_6_provider/pages/dashboard/widgets/logged_in
 import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 import 'package:provider/provider.dart';
 
-class DrawerPage extends StatefulWidget {
+class DrawerPage extends StatelessWidget {
   const DrawerPage(
       {Key? key,
       required this.userData,
@@ -17,22 +17,18 @@ class DrawerPage extends StatefulWidget {
   final Map userData;
   final BuildContext rootContext;
   final String authToken;
-  @override
-  State<DrawerPage> createState() => _DrawerPageState();
-}
 
-class _DrawerPageState extends State<DrawerPage> {
-  @override
   Widget build(BuildContext context) {
+    // print('here ${userData}');
     return Consumer<User>(builder: (context, user, child) {
       return Container(
         width: 250,
         child: Drawer(
             backgroundColor: Color(0xff5ECD9B),
             child: LoggedInUserData(
-                userId: widget.userData["_id"],
-                authToken: widget.authToken,
-                rootContext: widget.rootContext,
+                userId: userData["_id"],
+                authToken: authToken,
+                rootContext: rootContext,
                 user: user,
                 backgroundColor: Color(0xff5ECD9B))),
       );

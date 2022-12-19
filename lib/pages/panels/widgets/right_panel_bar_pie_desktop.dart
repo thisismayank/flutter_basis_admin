@@ -35,9 +35,15 @@ class RightPanelPageWithBarPieChartOnDesktop extends StatelessWidget {
         Flexible(
           flex: 2,
           child: Row(
-            children: const [
+            children: [
               Flexible(
-                  flex: 2, fit: FlexFit.tight, child: TransactionssAnalytics()),
+                  flex: 2,
+                  fit: FlexFit.tight,
+                  child: TransactionssAnalytics(
+                    authToken: authToken,
+                    rootContext: rootContext,
+                    userData: {},
+                  )),
               Flexible(flex: 1, fit: FlexFit.tight, child: RewardsAnalytics()),
             ],
           ),

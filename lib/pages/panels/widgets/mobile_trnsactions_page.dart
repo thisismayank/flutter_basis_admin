@@ -64,10 +64,14 @@ class _MobileTransactionsPageState extends State<MobileTransactionsPage> {
                     authToken: widget.authToken,
                     userInformation: widget.userInformation)
                 : Column(children: [
-                    const Flexible(
+                    Flexible(
                         flex: 2,
                         fit: FlexFit.tight,
-                        child: TransactionssAnalytics()),
+                        child: TransactionssAnalytics(
+                          rootContext: widget.rootContext,
+                          authToken: widget.authToken,
+                          userData: {},
+                        )),
                     Flexible(
                         flex: 3,
                         child:

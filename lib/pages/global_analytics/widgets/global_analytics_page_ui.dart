@@ -46,7 +46,11 @@ class _GlobalAnalyticsPageState extends State<GlobalAnalyticsPage> {
                         authToken: widget.authToken,
                         rootContext: context,
                         userId: widget.userId),
-                    TransactionssAnalytics(),
+                    TransactionssAnalytics(
+                      rootContext: context,
+                      authToken: widget.authToken,
+                      userData: {},
+                    ),
                     RewardsAnalytics(),
                   ],
                   options: CarouselOptions(

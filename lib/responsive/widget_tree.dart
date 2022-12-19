@@ -9,6 +9,8 @@ import 'package:flutter_application_6_provider/pages/panels/widgets/drawer_page.
 import 'package:flutter_application_6_provider/pages/panels/widgets/left_bottom_panel_page.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/left_panel_page.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/left_top_panel_page.dart';
+import 'package:flutter_application_6_provider/pages/panels/widgets/map_wrapper.dart';
+import 'package:flutter_application_6_provider/pages/panels/widgets/right_panel_back_page.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/right_panel_wrapper_page.dart';
 import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 import 'package:flutter_application_6_provider/models/user_prepaid_card_data.dart';
@@ -60,6 +62,11 @@ class WidgetTree extends StatelessWidget {
                 rootContext: context,
                 authToken: authToken,
               ),
+              // Expanded(
+              //     child: MapWrapper(
+              //   rootContext: context,
+              //   authToken: authToken,
+              // ))
               Expanded(
                   child: LeftPanelWrapper(
                 userData: userDataPassed["userData"],
