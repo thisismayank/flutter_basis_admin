@@ -168,7 +168,7 @@ class LineDoubleChartSample2 extends StatelessWidget {
                               Container(
                                 height: 10,
                                 width: 10,
-                                color: walletDataColor,
+                                color: merchantDataColor,
                               ),
                               const SizedBox(
                                 width: 8,
@@ -176,15 +176,15 @@ class LineDoubleChartSample2 extends StatelessWidget {
                               Text(
                                 'Merchant Txns',
                                 style: TextStyle(
-                                    color: walletDataColor, fontSize: 14),
+                                    color: merchantDataColor, fontSize: 14),
                               ),
                               const SizedBox(
                                 width: 8,
                               ),
                               Text(
-                                '$totalCountOfUsersWhoLoadedWallets',
+                                '$totalCountOfUsersWhoDidMerchantTransactions',
                                 style: TextStyle(
-                                    color: walletDataColor, fontSize: 14),
+                                    color: merchantDataColor, fontSize: 14),
                               ),
                             ],
                           ),
@@ -196,7 +196,7 @@ class LineDoubleChartSample2 extends StatelessWidget {
                               Container(
                                 height: 10,
                                 width: 10,
-                                color: merchantDataColor,
+                                color: walletDataColor,
                               ),
                               const SizedBox(
                                 width: 8,
@@ -204,15 +204,15 @@ class LineDoubleChartSample2 extends StatelessWidget {
                               Text(
                                 'Wallet Txns',
                                 style: TextStyle(
-                                    color: merchantDataColor, fontSize: 14),
+                                    color: walletDataColor, fontSize: 14),
                               ),
                               const SizedBox(
                                 width: 8,
                               ),
                               Text(
-                                '$totalCountOfUsersWhoDidMerchantTransactions',
+                                '$totalCountOfUsersWhoLoadedWallets',
                                 style: TextStyle(
-                                    color: merchantDataColor, fontSize: 14),
+                                    color: walletDataColor, fontSize: 14),
                               ),
                             ],
                           )
