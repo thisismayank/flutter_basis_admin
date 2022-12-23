@@ -21,8 +21,8 @@ class BarChartSample2 extends StatefulWidget {
 }
 
 class BarChartSample2State extends State<BarChartSample2> {
-  final Color leftBarColor = const Color(0xff5ecd98);
-  final Color rightBarColor = const Color(0xff91a5ec);
+  final Color rightBarColor = const Color(0xff5ecd98);
+  final Color leftBarColor = const Color(0xff91a5ec);
   final double width = 15;
 
   late List<BarChartGroupData> rawBarGroups;
@@ -98,14 +98,14 @@ class BarChartSample2State extends State<BarChartSample2> {
                       Container(
                         height: 10,
                         width: 10,
-                        color: leftBarColor,
+                        color: rightBarColor,
                       ),
                       const SizedBox(
                         width: 8,
                       ),
                       Text(
                         'Merchant Txns',
-                        style: TextStyle(color: leftBarColor, fontSize: 16),
+                        style: TextStyle(color: rightBarColor, fontSize: 16),
                       ),
                     ],
                   ),
@@ -117,14 +117,14 @@ class BarChartSample2State extends State<BarChartSample2> {
                       Container(
                         height: 10,
                         width: 10,
-                        color: rightBarColor,
+                        color: leftBarColor,
                       ),
                       const SizedBox(
                         width: 8,
                       ),
                       Text(
                         'Wallet Txns',
-                        style: TextStyle(color: rightBarColor, fontSize: 16),
+                        style: TextStyle(color: leftBarColor, fontSize: 16),
                       ),
                     ],
                   )
