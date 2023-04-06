@@ -79,7 +79,7 @@ class InProgressUsersBarChartState extends State<InProgressUsersBarChart> {
             Expanded(
               child: BarChart(
                 BarChartData(
-                    maxY: widget.basicDetails + 50,
+                    maxY: widget.pan + 50,
                     titlesData: FlTitlesData(
                       show: true,
                       rightTitles: AxisTitles(
@@ -144,10 +144,12 @@ class InProgressUsersBarChartState extends State<InProgressUsersBarChart> {
 
     if (value == 0) {
       text = "0";
-    } else if (value == 100) {
-      text = '100';
-    } else if (value == 200) {
-      text = '200';
+    } else if (value == 300) {
+      text = '300';
+    } else if (value == 600) {
+      text = '600';
+    } else if (value == 1000) {
+      text = '1k';
     } else {
       return Container();
     }

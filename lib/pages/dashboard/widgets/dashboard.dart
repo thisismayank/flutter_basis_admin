@@ -54,11 +54,11 @@ class _DashboardState extends State<Dashboard> {
     }
 
     return Consumer<User>(builder: (context, user, child) {
-      return PrepaidCardUserAnalyticsPage(
-          authToken: widget.authToken,
-          rootContext: widget.rootContext,
-          userId: widget.userId,
-          userData: {});
+      // return PrepaidCardUserAnalyticsPage(
+      //     authToken: widget.authToken,
+      //     rootContext: widget.rootContext,
+      //     userId: widget.userId,
+      //     userData: {});
     });
   }
 }

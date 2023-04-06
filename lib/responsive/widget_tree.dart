@@ -25,7 +25,7 @@ class WidgetTree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userDataPassed = ModalRoute.of(context)?.settings.arguments as Map;
-
+    
     int whichScreenToDisplayInRightPanel =
         userDataPassed.isNotEmpty && userDataPassed["screen"] == 1
             ? 1

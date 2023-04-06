@@ -49,14 +49,14 @@ class PrepaidCardUserAnalyticsPage extends StatelessWidget {
                 maxHeight: MediaQuery.of(context).size.height - 10),
             child: IntrinsicHeight(
               child: Container(
-                margin: const EdgeInsets.only(top: 8),
+                margin: const EdgeInsets.only(top: 4),
                 // color: Colors.green,
                 child: Column(
                   // shrinkWrap: true,
                   children: [
                     const Spacer(flex: 1),
                     Flexible(
-                      flex: 4,
+                      flex: 5,
                       child: PpcUserStatsPieChart(
                           userData: userData,
                           authToken: authToken,

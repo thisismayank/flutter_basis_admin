@@ -39,7 +39,7 @@ class PpcUserStatsPieChart extends StatelessWidget {
           PieChart(PieChartData(
               centerSpaceRadius: ResponsiveLayout.isComputer(context) ? 70 : 60,
               startDegreeOffset:
-                  ResponsiveLayout.isComputer(context) ? -70 : 40,
+                  ResponsiveLayout.isComputer(context) ? -45 : 40,
               sections: [
                 PieChartSectionData(
                     color: const Color(0xFFF2BC5E),
@@ -97,7 +97,7 @@ class PpcUserStatsPieChart extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         backgroundColor: Colors.white),
                     titlePositionPercentageOffset: 0.99,
-                    radius: ResponsiveLayout.isComputer(context) ? 60 : 80),
+                    radius: ResponsiveLayout.isComputer(context) ? 50 : 80),
               ])),
           Positioned.fill(
               child: Center(

@@ -10,9 +10,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class OTP extends StatelessWidget {
   const OTP({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    
     final data = ModalRoute.of(context)?.settings.arguments != null
         ? ModalRoute.of(context)?.settings.arguments as Map
         : {};
@@ -20,6 +20,8 @@ class OTP extends StatelessWidget {
 
     void verifyOtp(email, token) async {
       var uri = Uri.parse("https://api.getbasis.co/v6.4/users/email/verify");
+      // print('data $data');
+
       var response = await http.put(uri, body: {
         "email": data["email"].toString(),
         "token": data["token"].toString(),
@@ -27,6 +29,7 @@ class OTP extends StatelessWidget {
       });
       Map responseData = jsonDecode(response.body);
 
+      // print('responseData ${responseData["results"]["user"]["email"]}');
       Provider.of<User>(context, listen: false).setUserData(
         responseData["results"]["user"]["_id"],
         responseData["results"]["user"]["firstName"],
@@ -36,8 +39,12 @@ class OTP extends StatelessWidget {
         responseData["results"]["user"]["creditCardState"],
         responseData["results"]["user"]["email"],
       );
-
+      // Navigator.pushNamed(context, "/dashboard",
+      //     arguments: {"userData": responseData["results"]["user"]});
+      try{
       final sharedPreferenceInstance = await SharedPreferences.getInstance();
+      print("OTP sharedPreferenceInstance $sharedPreferenceInstance");
+
       await sharedPreferenceInstance.setString(
           "userId", responseData["results"]["user"]["_id"]);
       await sharedPreferenceInstance.setString(
@@ -52,18 +59,24 @@ class OTP extends StatelessWidget {
           "lastName", responseData["results"]["user"]["lastName"]);
       await sharedPreferenceInstance.setString(
           "email", responseData["results"]["user"]["email"]);
-
+      }catch(error){
+        print("ERROR SECOND $error");
+      }
       Navigator.pushNamed(context, "/dashboard",
           arguments: {"userData": responseData["results"]["user"]});
     }
 
     if (data.isEmpty) {
+      
       SchedulerBinding.instance.addPostFrameCallback((_) {
-        Navigator.pop(context, "/");
+        Navigator.popAndPushNamed(context, "/");
       });
       return Container();
     } else {
+      
       return Consumer<User>(builder: (context, user, _) {
+        
+
         return Scaffold(
           body: Center(
             child: Padding(

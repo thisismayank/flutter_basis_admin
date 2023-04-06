@@ -52,6 +52,9 @@ class LineDoubleChartSample2 extends StatelessWidget {
       xAxisTitle[1],
       xAxisTitle[2],
       xAxisTitle[3],
+      xAxisTitle[4],
+      xAxisTitle[5],
+      xAxisTitle[6],
     ];
 
     if (value < xAxisTitle.length + 1) {
@@ -111,7 +114,10 @@ class LineDoubleChartSample2 extends StatelessWidget {
           FlSpot(1, monthlyWalletLoadData[0].toDouble()),
           FlSpot(2, monthlyWalletLoadData[1].toDouble()),
           FlSpot(3, monthlyWalletLoadData[2].toDouble()),
-          FlSpot(4, monthlyWalletLoadData[3].toDouble())
+          FlSpot(4, monthlyWalletLoadData[3].toDouble()),
+          FlSpot(5, monthlyWalletLoadData[4].toDouble()),
+          FlSpot(6, monthlyWalletLoadData[5].toDouble()),
+          FlSpot(7, monthlyWalletLoadData[6].toDouble()),
         ],
       );
 
@@ -126,7 +132,10 @@ class LineDoubleChartSample2 extends StatelessWidget {
           FlSpot(1, monthlyMerchantTransactionsData[0].toDouble()),
           FlSpot(2, monthlyMerchantTransactionsData[1].toDouble()),
           FlSpot(3, monthlyMerchantTransactionsData[2].toDouble()),
-          FlSpot(4, monthlyMerchantTransactionsData[3].toDouble())
+          FlSpot(4, monthlyMerchantTransactionsData[3].toDouble()),
+          FlSpot(5, monthlyMerchantTransactionsData[4].toDouble()),
+          FlSpot(6, monthlyMerchantTransactionsData[5].toDouble()),
+          FlSpot(7, monthlyMerchantTransactionsData[6].toDouble()),
         ],
       );
 
