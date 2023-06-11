@@ -53,7 +53,7 @@ class _RejectedUserCountPickerState extends State<RejectedUserCountPicker> {
         InkWell(
           child: Container(
             decoration: BoxDecoration(
-                color: const Color(0xff5ECD9B),
+                color: Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: const [
                   BoxShadow(
@@ -69,11 +69,13 @@ class _RejectedUserCountPickerState extends State<RejectedUserCountPicker> {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Row(
                 children: const [
-                  Icon(Icons.calendar_month_outlined,
-                      color: Color.fromARGB(255, 219, 219, 219)),
+                  Icon(
+                    Icons.calendar_month_outlined,
+                    color: Color(0xff5ECD9B),
+                  ),
                   Text(" Rejected Count",
                       style: TextStyle(
-                          color: Color.fromARGB(255, 219, 219, 219),
+                          color: Color(0xff5ECD9B),
                           letterSpacing: 2.0,
                           fontWeight: FontWeight.w500)),
                 ],

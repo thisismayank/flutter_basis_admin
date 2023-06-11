@@ -1,8 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_6_provider/models/minty.dart';
+import 'package:flutter_application_6_provider/models/quiz.dart';
 import 'package:flutter_application_6_provider/pages/dashboard/widgets/dashboard.dart';
 import 'package:flutter_application_6_provider/models/global_analytics.dart';
+import 'package:flutter_application_6_provider/pages/dashboard/widgets/quiz_data_wrapper.dart';
 import 'package:flutter_application_6_provider/pages/global_analytics/widgets/prepaid_card_user_analytics_ui.dart';
 import 'package:flutter_application_6_provider/pages/global_analytics/widgets/global_analytics_page_ui.dart';
+import 'package:flutter_application_6_provider/pages/minty/chat_messages_wrapper.dart';
+import 'package:flutter_application_6_provider/pages/minty/list_chats.dart';
 import 'package:flutter_application_6_provider/pages/panels/widgets/map_wrapper.dart';
 import 'package:flutter_application_6_provider/pages/user_analytics/widgets/prepaid_users_activated_state_list_table_ui.dart';
 import 'package:flutter_application_6_provider/pages/user_authentication/widgets/email.dart';
@@ -38,7 +45,9 @@ void main() {
       ChangeNotifierProvider(create: (_) => Post()),
       ChangeNotifierProvider(create: (_) => UserData()),
       ChangeNotifierProvider(create: (_) => GlobalAnalytics()),
-      ChangeNotifierProvider(create: (_) => PrepaidDataStore())
+      ChangeNotifierProvider(create: (_) => PrepaidDataStore()),
+      ChangeNotifierProvider(create: (_) => MintyDataStore()),
+      ChangeNotifierProvider(create: (_) => QuizDataStore())
     ],
     child: MaterialApp(
       initialRoute: "/",
@@ -46,6 +55,24 @@ void main() {
         "/": (context) => const Email(),
         "/otp": (context) => const OTP(),
         "/dashboard": (context) => const WidgetTree(),
+        "/quiz": (context) => const QuizDataWrapper(),
+
+        "/minty": (context) => const ListChats(),
+        "/minty/messages": (context) {
+          final passedData = ModalRoute.of(context)?.settings.arguments as Map;
+          // List finalPassedData = jsonDecode(passedData["messages"]);
+          // print('passedData $finalPassedData');
+          return ChatMessagesWrapper(messages: passedData);
+        },
+        // "/minty": (context) {
+
+        //   return ListChats(
+        //     // authToken: passedData["authToken"],
+        //     authToken:
+        //         "61607e002aaecb208788c0e0,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjA3ZTAwMmFhZWNiMjA4Nzg4YzBlMCIsImlhdCI6MTY4MDE2NjM0NCwiZXhwIjoxNjgyNzU4MzQ0fQ.PBScOUXYLMR3QTVXLQh7GsXjnqbLGe2zo20BdrhBdbc",
+        //     rootContext: context,
+        //   );
+        // },
         "/post": (context) => const PostCard(),
         "/search": (context) {
           final passedData = ModalRoute.of(context)?.settings.arguments as Map;

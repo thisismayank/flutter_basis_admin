@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_6_provider/apis/prepaid_card_data_api.dart';
 import 'package:flutter_application_6_provider/models/user_authentication.dart';
+import 'package:flutter_application_6_provider/pages/dashboard/widgets/quiz_data_button.dart';
 import 'package:flutter_application_6_provider/pages/dashboard/widgets/rejected_user_count_picker.dart';
 import 'package:flutter_application_6_provider/pages/dashboard/widgets/search_bar_for_user_data.dart';
+import 'package:flutter_application_6_provider/pages/minty/chat_button.dart';
+import 'package:flutter_application_6_provider/pages/minty/list_chats.dart';
 import 'package:flutter_application_6_provider/responsive/responsive_layout.dart';
 import 'package:flutter_application_6_provider/utils/widgets/lib/user.dart';
 import 'package:lottie/lottie.dart';
@@ -102,7 +105,7 @@ class LoggedInUserData extends StatelessWidget {
                   letterSpacing: 2.0,
                   fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             const Text("Credit Card State",
                 style: TextStyle(color: Colors.grey, letterSpacing: 2.0)),
             Text(
@@ -113,15 +116,21 @@ class LoggedInUserData extends StatelessWidget {
                   letterSpacing: 2.0,
                   fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             // if ((ResponsiveLayout.isComputer(context)))
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
 
             RejectedUserCountPicker(
               authToken: authToken,
               rootContext: rootContext,
               userId: userId,
             ),
+            ChatButtons(authToken: authToken, rootContext: rootContext),
+            const SizedBox(height: 8),
+
+            DailyQuizDataButton(
+                userId: userId, authToken: authToken, rootContext: rootContext),
+
             Lottie.network(
                 "https://res.cloudinary.com/basis-static/raw/upload/v1668490322/Power%20Card/newAnimation.json",
                 repeat: ResponsiveLayout.isComputer(context) ? false : true),

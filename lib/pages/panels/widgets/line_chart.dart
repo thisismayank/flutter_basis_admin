@@ -26,7 +26,7 @@ class LineChartSample2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('xAxixTITLE $xAxisTitle');
+    print('xAxixTITLE yaha pe $xAxisTitle');
     return AspectRatio(
       aspectRatio: 16 / 9,
       child: Container(
@@ -72,6 +72,8 @@ class LineChartSample2 extends StatelessWidget {
       xAxisTitle[5],
       xAxisTitle[6],
       xAxisTitle[7],
+      xAxisTitle[8],
+      xAxisTitle[9],
     ];
 
     if (value < numberofMonths + 1) {
@@ -138,7 +140,9 @@ class LineChartSample2 extends StatelessWidget {
             FlSpot(5, userDataCounts[4].toDouble()),
             FlSpot(6, userDataCounts[5].toDouble()),
             FlSpot(7, userDataCounts[6].toDouble()),
-            FlSpot(8, userDataCounts[7].toDouble())
+            FlSpot(8, userDataCounts[7].toDouble()),
+            FlSpot(9, userDataCounts[8].toDouble()),
+            FlSpot(10, userDataCounts[9].toDouble())
           ],
           isCurved: true,
           gradient: LinearGradient(
